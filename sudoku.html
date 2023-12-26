@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>My Blog</title>
+    <style>
+      code {
+       display: block;
+        background-color: #f5f5f5;
+        padding: 10px;
+        font-family: monospace;
+      }
+      a {
+        color: #f7f7f7;
+        text-decoration: none;
+      }
+      body {
+        background-color: #f7f7f7;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+      header {
+        background-color: #333;
+        color: #fff;
+        padding: 30px;
+        text-align: center;
+      }
+      h1 {
+        margin: 0;
+        font-size: 36px;
+      }
+      .container {
+        
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 30px;
+        color: #333 /* Schriftfarbe in den Containern */
+    }
+      .post {
+        background-color: #fff;
+        border: 1px solid #ccc;
+        margin-bottom: 30px;
+        padding: 30px;
+        position: relative;
+      }
+      .post h2 {
+        margin-top: 0;
+      }
+      .post p {
+        margin-top: 0;
+        font-size: 18px;
+      }
+      .post img {
+        display: none;
+        position: absolute;
+        top: 50%;
+        right: -400px;
+        transform: translateY(-50%);
+        z-index: 1;
+        max-height: 175px;
+        max-width: 225px;
+      }
+      .post:hover img {
+        display: block;
+        animation: slide-in 0.5s forwards;
+      }
+      @keyframes slide-in {
+        from {
+          right: -400px;
+        }
+        to {
+          right: -200px;
+        }
+      }
+      footer {
+        background-color: #333;
+        color: #fff;
+        padding: 30px;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Sudoku</h1>
+      <p>This is an article about an algorithm that automatically solves a sudoku, that can be handed over as an image or an array.</p>
+    </header>
+    
+    <div class="container">
+      <h2>Problem Solving</h2>
+      <p style="text-align: justify;">Sudoku is a puzzle game where you fill in a 9x9 grid with numbers so that each row, 
+        column, and 3x3 section contain all of the digits from 1 to 9. The goal is to fill in the grid so that there are no 
+        repeating numbers in any row, column, or section. To play, the most popular way is to start by looking for empty 
+        squares with the fewest possible options for the number that can be placed there. Then, use logic to eliminate 
+        possibilities and fill in the square. This process will be repeated until the entire grid is filled in. <br> Anyway, 
+        an efficiant algorithm should be oriented towards that, but in a more strict way. Time and space complexity as well as 
+        Scalability won't have a big impact, because in most cases the input will be a 9x9 array, so we can neglect that and 
+        focus on Readability and maintainability of the code and most important: Accurany!</p>
+      
+      <br>
+      <br>
+
+      <h2>The code implemented in python</h2>
+      <p style="text-align: justify;">I'd like to start with the main method, before we get to the help method. 
+        The goal is to get through a 9 row x 9 col array (= input) and fill in the missing numbers in a correct way. 
+        To check every spot in the array we need to implement two for loops and in every position arr[row_i][col_i] 
+        we check if the value is unoccupied (= 0). <br> If there is one a third for loop starts with the goal to fill in the 
+        right value (= num) for every unoccupied value (= arr[row_i][col_i]). <br> First we check if the potential right value 
+        can be placed in the unoccupied field (is_num_possible(row_i, col_i, num, arr)). If that is so, the unoccupied spot 
+        is now occupied (with num) and the recursion starts. Its most likely that the first num that was filled in isn't the 
+        right one. So in the recursion the programm finds no number 1-9 that can be placed in the free spot. <br>Now the 
+        recursion returns and the current position will be unocuppied for now. The algortihm returns to the latest number it 
+        filled in and tries another number for the spot. More general you could say it checks every possibility in an 
+        ordered sequence. Only if every spot has been taken, the algorithm will skip the third for loop and returns 
+        the first solution (or print the sudoku).</p>
+
+      <br>
+      <br>
+      <pre>
+      <code>
+        def solve_sudoku(arr):
+          for row_i in range(9):
+              for col_i in range(9):
+                  if arr[row_i][col_i] == 0:
+                      for num in range(1, 10):
+                          if is_num_possible(row_i, col_i, num, arr):
+                              arr[row_i][col_i] = num
+                              solve_sudoku(arr)
+                              arr[row_i][col_i] = 0
+                     return
+         print_sudoku(arr)
+         
+      </code>
+      </pre>
+      
+      <p style="text-align: justify;">This is the part, where a paper and a pencil helps for sure. As an input we get the 
+        current position (row, col) we would like to fill an certain number (= num) in. You can split the method in three 
+        parts, whenever any part returns False, the method ends. First we check if any number in the same col equals our num. 
+        <br>If not we keep going and check the exect same think with the numbers in the same row. If there is no match we can 
+        keep going and come to the last part. In this part we determine the first spot in the 3x3 section. This is the starting 
+        point of a double for loop in which we check if any of the numbers in the section is equal to our input. If not we can 
+        safely return true :)</p>
+      
+      
+      
+      <pre>
+      <code>
+        def is_num_possible(row, col, num, arr):
+          for row_i in range(9):
+            if arr[row_i][col] is num:
+               return False
+          for col_i in range(9):
+            if arr[row][col_i] is num:
+              return False
+          upper_left_row = (row // 3) * 3
+          upper_left_col = (col // 3) * 3
+          for row_i in range(3):
+            for col_i in range(3):
+              if arr[upper_left_row + row_i][upper_left_col + col_i] == num:
+                return False
+          return True
+      </code>
+      </pre>
+
+
+      </div>
+    <footer>
+      <a href="blog.html"><p>&copy; 2023 CZ Blog. All Rights reserved</p></a>
+    </footer>
+  </body>
+</html>
