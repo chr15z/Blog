@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sudoku</title>
+    <title>Home</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -116,61 +116,7 @@
             width: 55%;
         }
 
-        .input {
-            background-color: white;
-            padding: 16px;
-            box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.1);
-            border-radius: 16px;
-            margin-top: 32px;
-            display: block;
-            align-items: center;
-            text-align: center;
-        }
-
-        .button {
-            display: inline-block;
-            padding: 10px 20px;
-            cursor: pointer;
-            border: none;
-            border-radius: 5px;
-            background-color: darkgray;
-            transition: background-color 0.4s;
-            display: block;
-        }
-
-        .button:hover {
-            /* Hover-Stil für die Buttons */
-            background-color: #45a049;
-            /* Dunkleres Grün */
-        }
-
-        .input div {
-            margin-top: 0px;
-            margin-bottom: 8px;
-        }
-
-        .inputs-container {
-            display: grid;
-            grid-template-columns: repeat(9, 20px);
-            /* 9 Spalten */
-            grid-auto-rows: 20px;
-            /* Automatische Höhe für die Reihen */
-            gap: 2px;
-            /* Abstand zwischen den Zellen */
-        }
-
-        .inputs-container input {
-            box-sizing: border-box;
-            /* Größe inklusive Padding und Border */
-            border: 1px solid black;
-            /* Rahmen um jedes Eingabefeld */
-            padding: 0;
-            margin: 0;
-            font-size: 14px;
-            text-align: center;
-        }
-
-        .comment {
+        .tsp {
             display: flex;
             text-align: justify;
             background-color: white;
@@ -179,6 +125,25 @@
             border-radius: 16px;
             justify-content: space-between;
             margin-top: 32px;
+        }
+
+        .tsp div {
+            width: 55%;
+        }
+
+        .third {
+            display: flex;
+            text-align: justify;
+            background-color: white;
+            padding: 16px;
+            box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.1);
+            border-radius: 16px;
+            justify-content: space-between;
+            margin-top: 32px;
+        }
+
+        .third div {
+            width: 55%;
         }
 
         .footer {
@@ -230,53 +195,21 @@
                 <img src="img/sudoku1.crdownload" width="250" height="250">
             </div>
 
-            <div class="input">
-                <h2>Enter a Sudoku to be solved</h2>
-                <div style="display: flex; align-items: center; text-align: center;">
-                    <div class="inputs-container"></div>
-
-                    <script src="input.js"></script>
-
-                    <div style="margin-left: 16px;">
-
-                        <a href="sudoku.html" style="text-decoration: none;"><button class="button"
-                                style="margin-bottom: 8px;">
-                                <img src="img/refresh.svg" width="25" height="25">
-                            </button></a>
-
-                        <button class="button">
-                            <img src="img/check.svg" width="25" height="25">
-                        </button>
-
-                    </div>
-                    
+            <div class="tsp">
+                <div>
+                    <h2>TSP Ant Colony Optimization</h2>
+                    <p>This is an article about an algorithm that finds a solution for the NP-Traveling Salesman
+                        Problem.</p>
                 </div>
-
+                <img src="img/TSP.png" width="378" height="250">
             </div>
 
-            <div class="comment">
+            <div class="third">
                 <div>
-                    <h2>The algorithm</h2>
-                    <p>
-                        The presented Python script implements an efficient Sudoku solver algorithm. It represents
-                        Sudoku puzzles as 9x9 grids of integers, where 0 denotes empty cells. The script utilizes
-                        dictionaries and sets to manage Sudoku grids, candidate sets, and peer relationships (cells that
-                        share the same row, column, or box).
-                    </p>
-                    <p>
-                        The Sudoku class encapsulates various solving strategies. It initializes Sudoku objects from
-                        given initial values and precomputed candidate sets. Strategies like hidden singles detection
-                        and candidate elimination are employed to efficiently solve Sudoku puzzles. The algorithm
-                        iterates through possible solutions, utilizing techniques like backtracking when direct
-                        strategies cannot determine a unique solution.
-                    </p>
-                    <p>
-                        Performance analysis is conducted by measuring solving times for a set of Sudoku puzzles and
-                        storing results in files. The script discusses optimization techniques such as candidate sets to
-                        enhance solving efficiency while balancing speed and accuracy.
-                    </p>
-
+                    <h2>My Third Blog Post</h2>
+                    <p>Here's some text about my third blog post.</p>
                 </div>
+                <img src="https://placekitten.com/400/300" width="333" height="250">
             </div>
 
         </div>
