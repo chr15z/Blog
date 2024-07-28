@@ -1,4 +1,12 @@
 <div class="main-content" [class.blurred]="isDropdownOpen">
-  <section class="snap-section">Section 1</section>
-  <section class="snap-section">Section 2</section>
+  <section class="snap-section hero" *ngFor="let section of homePageContent">
+    <div class="hero-content">
+      <h1>{{ section.title }}</h1>
+      <p>{{ section.subtitle }}</p>
+      <a href="#" class="btn">Mehr erfahren</a>
+    </div>
+    <div class="hero-image">
+      <img [src]="section.image" alt="Hero Bild">
+    </div>
+  </section>
 </div>
