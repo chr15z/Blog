@@ -56,3 +56,17 @@ button:active {
   color: var(--button-active-text-color);
   scale: 1.1;
 }
+
+@media (max-width: 600px) {
+  footer {
+    flex-direction: column;
+  }
+
+  input, button {
+    width: 100%; /* Breite auf 100% setzen */
+    margin: 0.5em 0; /* Margin anpassen für mobile Bildschirme */
+  }
+  .element {
+    margin: 0;
+  }
+}

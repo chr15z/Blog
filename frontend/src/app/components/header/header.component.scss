@@ -68,3 +68,17 @@ h1 {
   outline: none;
 }
 */
+@media (max-width: 600px) {
+  header {
+    flex-direction: column; /* Flex-Direction ändern, um Elemente untereinander anzuordnen */
+  }
+
+  .element {
+    margin: 0.5em 0; /* Margin weiter reduzieren für schmale Bildschirme */
+    justify-content: center; /* Zentriert die Elemente */
+  }
+
+  h1 {
+    font-size: 1.2em; /* Schriftgröße anpassen, falls nötig */
+  }
+}

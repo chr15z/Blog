@@ -47,18 +47,28 @@ img {
 }
 
 /* Anpassungen für kleinere Bildschirme */
-@media (max-width: 768px) {
+@media (max-width: 600px) {
   .hero {
+    padding: 2em;
     flex-direction: column;
-    text-align: center;
+    height: auto;
   }
 
   .hero-content {
     max-width: 100%;
-    margin-bottom: 20px;
+    text-align: center;
   }
 
-  .hero-image img {
-    width: 80%;
+  img {
+    margin: 1em;
+    height: 20em;
+    width: 20em;
+  }
+  h1 {
+    font-size: 2em; /* Schriftgröße reduzieren für bessere Lesbarkeit auf mobilen Geräten */
+  }
+
+  p {
+    font-size: 1em; /* Schriftgröße anpassen für mobile Geräte */
   }
 }
