@@ -72,18 +72,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "buildTarget": "sepr-group-phase:build"
+            "buildTarget": "cz-blog:build"
           },
           "configurations": {
             "production": {
-              "buildTarget": "sepr-group-phase:build:production"
+              "buildTarget": "cz-blog:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "sepr-group-phase:build"
+            "buildTarget": "cz-blog:build"
           }
         },
         "test": {
