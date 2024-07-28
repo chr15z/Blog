@@ -1,0 +1,9 @@
+[build]
+base = "frontend"  # falls Ihr Angular-Projekt im frontend-Verzeichnis ist
+publish = "dist/cz-blog"  # Pfad zum Verzeichnis, in dem die gebauten Dateien liegen
+command = "ng build --prod"  # Befehl zum Bauen des Projekts
+
+[[redirects]]
+from = "/*"
+to = "/index.html"
+status = 200
