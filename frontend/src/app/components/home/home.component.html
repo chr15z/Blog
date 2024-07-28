@@ -1,9 +1,9 @@
 <div class="main-content" [class.blurred]="isDropdownOpen">
-  <section class="snap-section hero" *ngFor="let section of homePageContent">
+  <section class="snap-section hero" *ngFor="let section of homePageContent; let i = index" [ngClass]="{'reverse': i % 2 !== 0}">
     <div class="hero-content">
       <h1>{{ section.title }}</h1>
       <p>{{ section.subtitle }}</p>
-      <a href="#" class="btn">Mehr erfahren</a>
+      <a href="#" class="btn">Learn More</a>
     </div>
     <div class="hero-image">
       <img [src]="section.image" alt="Hero Bild">

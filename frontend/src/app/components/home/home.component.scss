@@ -39,6 +39,11 @@ p {
 
 img {
   border-radius: 15px;
+  height: 30em;
+  width: 30em;
+}
+.reverse {
+  flex-direction: row-reverse;
 }
 
 /* Anpassungen für kleinere Bildschirme */

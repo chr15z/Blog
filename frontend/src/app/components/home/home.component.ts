@@ -19,9 +19,9 @@ export class HomeComponent implements OnInit {
     first.image = "assets/images/sudoku3.jpeg";
 
     const second = new HomePageSectionDTO();
-    second.title = "Decoding Sudoku";
-    second.subtitle = "Advanced Solving Techniques. A Comprehensive Guide to Algorithmic Puzzle Solving";
-    second.image = "assets/images/sudoku3.jpeg";
+    second.title = "Behind the Scenes of Ticketline";
+    second.subtitle = "Developing a Cutting-Edge Ticketing Platform for Concerts, Movies, and More";
+    second.image = "assets/images/ticket2.jpg";
     this.homePageContent = [first, second]
   }
 
