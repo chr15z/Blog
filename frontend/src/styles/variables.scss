@@ -3,10 +3,11 @@
   --header-background-color: #1F1F1F;
   --text-color: #E0E0E0;
   --text-color-hover: #FFFFFF;
+  --button-background-hover: #0056b3;
+  --button-text: #E0E0E0;
 
   --primary-color: #BB86FC;
-  --button-hover: #0056b3;
-  --secondary-color: #03DAC6;
+  --secondary-color: #005050;
 }
 
 [data-theme='light'] {
@@ -14,8 +15,9 @@
   --header-background-color: #F5F5F5;
   --text-color: #212121;
   --text-color-hover: #000000;
+  --button-background-hover: #0056b3;
+  --button-text: #E0E0E0;
 
-  --primary-color: #6200EE;
-  --button-hover: #0056b3;
-  --secondary-color: #018786;
+  --primary-color: #BB86FC;
+  --secondary-color: #005050;
 }
