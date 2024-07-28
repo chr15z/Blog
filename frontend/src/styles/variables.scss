@@ -1,0 +1,19 @@
+:root {
+  --background-color: #121212;
+  --header-background-color: #1F1F1F;
+  --text-color: #E0E0E0;
+  --text-color-hover: #FFFFFF;
+
+  --primary-color: #BB86FC;
+  --secondary-color: #03DAC6;
+}
+
+[data-theme='light'] {
+  --background-color: #FFFFFF;
+  --header-background-color: #F5F5F5;
+  --text-color: #212121;
+  --text-color-hover: #000000;
+
+  --primary-color: #6200EE;
+  --secondary-color: #018786;
+}

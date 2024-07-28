@@ -1,0 +1,10 @@
+.snap-section {
+  height: 100vh;
+  scroll-behavior: smooth;
+  //ab hier veränderbar
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2em;
+  border: 1px solid #ddd;
+}

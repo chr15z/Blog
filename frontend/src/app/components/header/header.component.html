@@ -1,0 +1,56 @@
+<header>
+
+  <div class="element">
+    CZ
+  </div>
+
+  <div class="element dropdown" (mouseenter)="toggleBlur(true)" (mouseleave)="toggleBlur(false)">
+    <div>Projects & Algorithms</div>
+    <!--
+<div class="dropdown-content"><h1>Take a look at my projects and try a game of Sudoku!</h1>
+  <a href="#">Ticket-line</a>
+  <a href="#">Sudoku</a>
+  <a href="#">Website</a>
+</div>
+-->
+  </div>
+
+  <div class="element dropdown" (mouseenter)="toggleBlur(true)" (mouseleave)="toggleBlur(false)">
+    <div>Sources</div>
+    <!--
+<div class="dropdown-content">
+  <h1>Content that I used for the Website and the Projects mentioned</h1>
+  <a href="#">Architecture</a>
+  <a href="#">Pictures</a>
+  <a href="#">Research web design and algorithms</a>
+</div>
+-->
+  </div>
+
+  <div class="element dropdown" (mouseenter)="toggleBlur(true)" (mouseleave)="toggleBlur(false)">
+    <div>About me</div>
+    <!--
+    <div class="dropdown-content">
+      <h1>Check my channels out and feel free to connect!</h1>
+      <a href="#"><i class="fa-solid fa-download"> CV</i></a>
+      <a href="#"><i class="fa-brands fa-github"></i> Github</a>
+      <a href="#">Linked <i class="fa-brands fa-linkedin"></i> </a>
+    </div>
+    -->
+  </div>
+
+  <div class="element dropdown" (mouseenter)="toggleBlur(true)" (mouseleave)="toggleBlur(false)">
+    <div><i class="fa-solid fa-magnifying-glass search-icon"></i></div>
+    <!--
+<div class="dropdown-content search" [class.show]="isDropdownOpen">
+  <input type="text" pInputText [(ngModel)]="selectedItem"
+         (ngModelChange)="search($event)" placeholder="Search on cz-blog.netlify.app" />
+</div>
+    -->
+  </div>
+
+  <div class="element" (click)="toggleDarkMode()">
+    <i *ngIf="isDarkMode" class="fa-solid fa-toggle-on"></i>
+    <i *ngIf="!isDarkMode" class="fa-solid fa-toggle-off"></i>
+  </div>
+</header>
