@@ -1,6 +1,6 @@
 [build]
 base = "frontend"
-publish = "dist/cz-blog"
+publish = "dist/cz-blog/browser"
 command = "ng build --configuration production"
 
 [[redirects]]
