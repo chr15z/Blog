@@ -16,21 +16,6 @@ export class HeaderComponent implements OnInit {
     });
   }
   ngOnInit() {}
-  selectedItem: any;
-  suggestions: any[] = [];
-
-  search(event: any) {
-    // Your search logic here
-    const query = event.query;
-    this.suggestions = this.getSuggestions(query);
-  }  getSuggestions(query: string): any[] {
-    // Replace with actual suggestion logic
-    return [
-      { name: 'Item1' },
-      { name: 'Item2' },
-      { name: 'Item3' }
-    ].filter(item => item.name.toLowerCase().includes(query.toLowerCase()));
-  }
 
   toggleDarkMode(): void {
     this.isDarkMode = !this.isDarkMode;

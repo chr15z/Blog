@@ -1,10 +1,10 @@
-<header>
+<header (mouseenter)="toggleBlur(true)" (mouseleave)="toggleBlur(false)">
 
   <div class="element">
     <a routerLink="" routerLinkActive="active">CZ</a>
   </div>
 
-  <div class="element dropdown" (mouseenter)="toggleBlur(true)" (mouseleave)="toggleBlur(false)">
+  <div class="element dropdown">
       <a routerLink="/notFound" routerLinkActive="active">Projects & Algorithms</a>
     <!--
 <div class="dropdown-content"><h1>Take a look at my projects and try a game of Sudoku!</h1>
@@ -15,7 +15,7 @@
 -->
   </div>
 
-  <div class="element dropdown" (mouseenter)="toggleBlur(true)" (mouseleave)="toggleBlur(false)">
+  <div class="element dropdown">
     <a routerLink="/notFound" routerLinkActive="active">Sources</a>
     <!--
 <div class="dropdown-content">
@@ -27,7 +27,7 @@
 -->
   </div>
 
-  <div class="element dropdown" (mouseenter)="toggleBlur(true)" (mouseleave)="toggleBlur(false)">
+  <div class="element dropdown">
     <a routerLink="/notFound" routerLinkActive="active">About me</a>
     <!--
     <div class="dropdown-content">

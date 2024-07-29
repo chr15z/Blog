@@ -32,8 +32,8 @@ input {
   padding: 0.5em 1em;
   margin: 0.5em;
 
-  background-color: var(--secondary-color);
-  color: var(--button-text);
+  background-color: var(--background-color);
+  color: var(--text-color-input);
   text-decoration: none;
   border-radius: 5px;
   transition: background-color 0.3s;
