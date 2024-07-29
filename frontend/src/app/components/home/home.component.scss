@@ -54,3 +54,31 @@ img {
     font-size: 1em; /* Schriftgröße anpassen für mobile Geräte */
   }
 }
+
+
+.learn-more {
+  position: relative;
+  transition: all 0.2s linear 0s;
+}
+
+.learn-more:before {
+  content: "\f178";
+  font-family: FontAwesome;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  right: 2em;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0;
+  transition: all 0.2s linear 0s;
+}
+
+.learn-more:hover {
+  text-indent: -0.5em;
+}
+
+.learn-more:hover:before {
+  opacity: 1;
+  right: 0.5em;
+}
