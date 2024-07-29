@@ -1,5 +1,4 @@
 import {Component, OnInit, Renderer2} from '@angular/core';
-import { AutoCompleteModule } from 'primeng/autocomplete';
 import {DropdownService} from "../../services/dropdown.service";
 @Component({
   selector: 'app-header',
@@ -10,7 +9,8 @@ export class HeaderComponent implements OnInit {
   isDarkMode = true;
   isDropdownOpen = false;
 
-  constructor(private renderer: Renderer2, private dropdownService: DropdownService) {
+  constructor(private renderer: Renderer2,
+              private dropdownService: DropdownService) {
     this.dropdownService.isDropdownOpen$.subscribe(state => {
       this.isDropdownOpen = state;
     });

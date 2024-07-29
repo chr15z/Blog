@@ -8,11 +8,14 @@ header {
 }
 .element {
   margin: 0.5em 4em;
-  color: var(--text-color);
   transition: color 0.3s ease;
   cursor: pointer;
   align-items: center;
   display: flex;
+}
+.element a {
+  text-decoration: none;
+  color: var(--text-color);
 }
 .element:hover {
   color: var(--text-color-hover);

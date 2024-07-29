@@ -1,11 +1,11 @@
 <header>
 
   <div class="element">
-    CZ
+    <a routerLink="" routerLinkActive="active">CZ</a>
   </div>
 
   <div class="element dropdown" (mouseenter)="toggleBlur(true)" (mouseleave)="toggleBlur(false)">
-    <div>Projects & Algorithms</div>
+      <a routerLink="/notFound" routerLinkActive="active">Projects & Algorithms</a>
     <!--
 <div class="dropdown-content"><h1>Take a look at my projects and try a game of Sudoku!</h1>
   <a href="#">Ticket-line</a>
@@ -16,7 +16,7 @@
   </div>
 
   <div class="element dropdown" (mouseenter)="toggleBlur(true)" (mouseleave)="toggleBlur(false)">
-    <div>Sources</div>
+    <a routerLink="/notFound" routerLinkActive="active">Sources</a>
     <!--
 <div class="dropdown-content">
   <h1>Content that I used for the Website and the Projects mentioned</h1>
@@ -28,7 +28,7 @@
   </div>
 
   <div class="element dropdown" (mouseenter)="toggleBlur(true)" (mouseleave)="toggleBlur(false)">
-    <div>About me</div>
+    <a routerLink="/notFound" routerLinkActive="active">About me</a>
     <!--
     <div class="dropdown-content">
       <h1>Check my channels out and feel free to connect!</h1>
@@ -38,17 +38,17 @@
     </div>
     -->
   </div>
+  <!--
+<div class="element dropdown" (mouseenter)="toggleBlur(true)" (mouseleave)="toggleBlur(false)">
+  <div><i class="fa-solid fa-magnifying-glass search-icon"></i></div>
 
-  <div class="element dropdown" (mouseenter)="toggleBlur(true)" (mouseleave)="toggleBlur(false)">
-    <div><i class="fa-solid fa-magnifying-glass search-icon"></i></div>
-    <!--
 <div class="dropdown-content search" [class.show]="isDropdownOpen">
-  <input type="text" pInputText [(ngModel)]="selectedItem"
-         (ngModelChange)="search($event)" placeholder="Search on cz-blog.netlify.app" />
+<input type="text" pInputText [(ngModel)]="selectedItem"
+       (ngModelChange)="search($event)" placeholder="Search on cz-blog.netlify.app" />
 </div>
-    -->
-  </div>
 
+  </div>
+  -->
   <div class="element" (click)="toggleDarkMode()">
     <i *ngIf="isDarkMode" class="fa-solid fa-toggle-on"></i>
     <i *ngIf="!isDarkMode" class="fa-solid fa-toggle-off"></i>

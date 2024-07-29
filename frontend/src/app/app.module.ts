@@ -8,6 +8,7 @@ import {AppComponent} from './app.component';
 import {HeaderComponent} from './components/header/header.component';
 import {FooterComponent} from './components/footer/footer.component';
 import {HomeComponent} from './components/home/home.component';
+import {NotFoundComponent} from './components/notFound/notFound.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import {httpInterceptorProviders} from './interceptors';
@@ -24,7 +25,8 @@ import { AutoCompleteModule } from 'primeng/autocomplete';
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    HomeComponent
+    HomeComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
