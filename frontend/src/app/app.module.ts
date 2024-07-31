@@ -17,6 +17,7 @@ import {ToastrModule} from 'ngx-toastr';
 import {NgOptimizedImage} from "@angular/common";
 import {BsDropdownModule} from "ngx-bootstrap/dropdown";
 import { AutoCompleteModule } from 'primeng/autocomplete';
+import {SourcesComponent} from "./components/sources/sources.component";
 
 
 
@@ -26,7 +27,8 @@ import { AutoCompleteModule } from 'primeng/autocomplete';
     HeaderComponent,
     FooterComponent,
     HomeComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    SourcesComponent,
   ],
   imports: [
     BrowserModule,
