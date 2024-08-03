@@ -9,12 +9,22 @@ import {DropdownService} from "../../services/dropdown.service";
 export class SourcesComponent implements OnInit, AfterViewInit {
 
   isDropdownOpen = false;
+  activeTabId = 0;
+  tabs = [
+    { id: 0, title: 'Icons', content: 'FONT AWESOME CONTENT', imgUrl: 'assets/images/icons.png' },
+    { id: 1, title: 'Templates', content: 'Code Pen CONTENT', imgUrl: 'assets/images/template.png' },
+    { id: 2, title: 'Pictures', content: 'Pixaby CONTENT', imgUrl: 'assets/images/img.png' },
+    { id: 3, title: 'Inspiration', content: 'Youtube CONTENT', imgUrl: 'assets/images/youtube.png' }
+  ];
   constructor(private dropdownService: DropdownService) { }
 
   ngOnInit(): void {
     this.dropdownService.isDropdownOpen$.subscribe(state => {
       this.isDropdownOpen = state;
     });
+  }
+  setActiveTab(tabId: number) {
+    this.activeTabId = tabId;
   }
 
   ngAfterViewInit(): void {
