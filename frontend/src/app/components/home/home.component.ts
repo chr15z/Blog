@@ -21,7 +21,7 @@ export class HomeComponent implements OnInit {
     const second = new HomePageSectionDTO();
     second.title = "Behind the Scenes of Ticketline";
     second.subtitle = "Developing a Cutting-Edge Ticketing Platform for Concerts, Movies, and More";
-    second.image = "assets/images/ticket.jpg";
+    second.image = "assets/images/ticket2.jpg";
 
     this.homePageContent = [second, first];
   }
