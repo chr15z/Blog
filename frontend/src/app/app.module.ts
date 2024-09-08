@@ -18,6 +18,8 @@ import {NgOptimizedImage} from "@angular/common";
 import {BsDropdownModule} from "ngx-bootstrap/dropdown";
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import {SourcesComponent} from "./components/sources/sources.component";
+import {PAAComponent} from "./components/pAA/pAA.component";
+import {AboutMeComponent} from "./components/aboutMe/aboutMe.component";
 
 
 
@@ -29,6 +31,8 @@ import {SourcesComponent} from "./components/sources/sources.component";
     HomeComponent,
     NotFoundComponent,
     SourcesComponent,
+    PAAComponent,
+    AboutMeComponent
   ],
   imports: [
     BrowserModule,

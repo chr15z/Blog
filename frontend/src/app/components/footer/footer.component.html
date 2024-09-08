@@ -1,3 +1,15 @@
+
+<div *ngIf="showErrorToast" class="toast-item error close" (click)="closeErrorToast()">
+  <div class="toast error close">
+    <h3 class="close">Error!</h3>
+    <label class="close"*ngFor="let error of errorMessages">
+      <p class="close">{{ error }}</p>
+    </label>
+  </div>
+</div>
+
+
+
 <footer (mouseenter)="toggleBlur(true)" (mouseleave)="toggleBlur(false)">
   <div class="element">
     <div class="trapdoor-linkedin">
@@ -15,9 +27,9 @@
 
   <div class="element">
     <h1>Join the Newsletter!</h1>
-    <input placeholder="Name">
-    <input placeholder="E-Mail">
-    <button>Send</button>
+    <input placeholder="Name" [(ngModel)]="userName">
+    <input placeholder="E-Mail" [(ngModel)]="userEmail">
+    <button (click)="onAddUser()">Send</button>
   </div>
 
   <div class="element">

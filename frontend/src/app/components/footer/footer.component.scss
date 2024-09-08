@@ -6,19 +6,21 @@ footer {
   align-items: center;
   width: 100%;
 }
+
 .element {
-   color: var(--text-color);
-   transition: color 0.3s ease;
-   align-items: center;
-   display: flex;
-   margin: 0.5em 2em;
- }
+  color: var(--text-color);
+  transition: color 0.3s ease;
+  align-items: center;
+  display: flex;
+  margin: 0.5em 2em;
+}
 
 h1 {
   padding: 1em;
   font-size: 0.75em;
   color: var(--text-color-hover);
 }
+
 input {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   padding: 0.5em 1em;
@@ -32,6 +34,7 @@ input {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   border: none;
 }
+
 button {
   padding: 0.5em 1em;
 }
@@ -58,8 +61,8 @@ button {
   -webkit-font-smoothing: antialiased;
   width: 100px;
   height: 50px;
-  box-shadow: inset -7px 0px 12px -8px rgba(0,0,0,0.3), inset 7px 0px 12px -8px rgba(0,0,0,0.3);
-  background: rgba(0,0,0,0.3);
+  box-shadow: inset -7px 0px 12px -8px rgba(0, 0, 0, 0.3), inset 7px 0px 12px -8px rgba(0, 0, 0, 0.3);
+  background: rgba(0, 0, 0, 0.3);
   -webkit-transition: background 400ms ease-in-out;
   -moz-transition: background 400ms ease-in-out;
   -ms-transition: background 400ms ease-in-out;
@@ -71,7 +74,7 @@ button {
   background: var(--primary-color); /* LinkedIn brand color */
 
   .door-linkedin {
-    box-shadow: 0px 0px 10px -2px rgba(0,0,0,0.4);
+    box-shadow: 0px 0px 10px -2px rgba(0, 0, 0, 0.4);
     -webkit-transform: scale(1.08);
     -moz-transform: scale(1.08);
     -ms-transform: scale(1.08);
@@ -160,8 +163,6 @@ button {
 }
 
 
-
-
 //github
 
 .trapdoor-github {
@@ -170,8 +171,8 @@ button {
   -webkit-font-smoothing: antialiased;
   width: 100px;
   height: 50px;
-  box-shadow: inset -7px 0px 12px -8px rgba(0,0,0,0.3), inset 7px 0px 12px -8px rgba(0,0,0,0.3);
-  background: rgba(0,0,0,0.3);
+  box-shadow: inset -7px 0px 12px -8px rgba(0, 0, 0, 0.3), inset 7px 0px 12px -8px rgba(0, 0, 0, 0.3);
+  background: rgba(0, 0, 0, 0.3);
   -webkit-transition: background 400ms ease-in-out;
   -moz-transition: background 400ms ease-in-out;
   -ms-transition: background 400ms ease-in-out;
@@ -183,7 +184,7 @@ button {
   background: var(--text-color);
 
   .door-github {
-    box-shadow: 0px 0px 10px -2px rgba(0,0,0,0.4);
+    box-shadow: 0px 0px 10px -2px rgba(0, 0, 0, 0.4);
     -webkit-transform: scale(1.08);
     -moz-transform: scale(1.08);
     -ms-transform: scale(1.08);
@@ -269,4 +270,68 @@ button {
   src: url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/webfonts/fa-solid-900.woff2') format('woff2');
   font-weight: normal;
   font-style: normal;
+}
+
+
+
+//error
+
+.toast {
+  background: #F5F5F5;
+  color: #f5f5f5;
+  padding: 1rem 2rem 1rem 3rem;
+  border-radius: 1rem;
+  position: relative;
+  font-weight: 300;
+  margin: 1rem 0;
+  text-align: left;
+  transition: var(--tr);
+  opacity: 1;
+  border: 0.15rem solid var(--clr);
+  box-shadow: 0 0 1.5rem 0 #1a1f4360;
+}
+
+.toast:before {
+  content: "";
+  position: absolute;
+  width: 0.5rem;
+  height: calc(100% - 1.5rem);
+  top: 0.75rem;
+  left: 0.5rem;
+  z-index: 0;
+  border-radius: 1rem;
+  background: var(--clr);
+}
+
+.toast-item {
+  position: fixed;
+  top: 2em;
+  right: 10px;
+}
+
+.toast h3 {
+  font-size: 1.2rem;
+  margin: 0;
+  line-height: 1.35rem;
+  font-weight: 600;
+  position: relative;
+  color: var(--clr);
+}
+
+.toast p {
+  position: relative;
+  font-size: 0.95rem;
+  z-index: 1;
+  margin: 0.25rem 0 0;
+  color: #595959;
+  line-height: 1.3rem;
+}
+
+.toast-item {
+  --clr: #db3056;
+  --brd: #db305640;
+}
+.close:hover {
+  background: var(--header-background-color);
+  cursor: pointer;
 }
