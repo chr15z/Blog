@@ -44,6 +44,10 @@ export class FooterComponent implements OnInit {
       if (error instanceof ValidationException) {
         this.errorMessages = error.errors;
         this.showErrorToast = true;
+        setTimeout(() => {
+          this.showErrorToast = false;
+        }, 5000);
+
       } else {
         console.error('Ein unbekannter Fehler ist aufgetreten:', error);
       }
