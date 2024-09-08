@@ -5,6 +5,56 @@
   background-color: var(--header-background-color);
 }
 
+button {
+  padding: 1em 2em;
+  background-color: var(--primary-color);
+  color: var(--button-text);
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border: none;
+}
+
+a {
+  position: absolute;
+  margin-top: 3em;
+  right: 16px;
+}
+button:hover {
+  background-color: var(--button-background-hover);
+}
+.learn-more {
+  transition: all 0.2s linear 0s;
+}
+
+.learn-more:before {
+  content: "\f178";
+  font-family: FontAwesome;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  right: 2em;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0;
+  transition: all 0.2s linear 0s;
+}
+
+.learn-more:hover {
+  text-indent: -0.5em;
+}
+
+.learn-more:hover:before {
+  opacity: 1;
+  right: 0.5em;
+}
+p {
+  text-align: justify;
+  white-space: pre-line;
+}
+
 * {
   padding: 0;
   box-sizing: border-box;
@@ -53,6 +103,7 @@
   gap: 20px;
   background: var(--header-background-color);
   animation: moving 1s ease;
+  position: relative; /* Ermöglicht die absolute Positionierung der Kind-Elemente */
 }
 
 .box img {

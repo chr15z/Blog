@@ -16,6 +16,9 @@
       <div>
         <h3>{{ tab.title }}</h3>
         <p>{{ tab.content }}</p>
+        <a href="{{tab.url}}" target="_blank">
+          <button routerLinkActive="active" class="learn-more">{{ tab.button }}</button>
+        </a>
       </div>
     </div>
   </div>
