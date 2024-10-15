@@ -18,7 +18,7 @@ export class SourcesComponent implements OnInit, AfterViewInit {
     { id: 2, title: 'Pictures', button: 'Visit Pixaby', url:'https://pixabay.com/',
       content: 'Pixabay is a free resource for high-quality images, videos, and music, available for both personal and commercial use. Launched in 2010, it offers a vast collection of media contributed by photographers and creators worldwide. All content is released under a Creative Commons license, ensuring it\'s free of copyright restrictions. The platform\'s easy-to-use search and filter tools help users find the perfect media quickly. Pixabay also features a community where users can share and engage with content. For enhanced functionality, there’s a premium option with additional features and support.', imgUrl: 'assets/images/img.png' },
     { id: 3, title: 'Inspiration', button: 'Visit Youtube', url:'https://youtube.com/',
-      content: 'Youtube CONTENT', imgUrl: 'assets/images/youtube.png' }
+      content: 'I dont think YouTube is something new to anyone. So its obvious they that they have many content creators in nearly every sector you can imagine. And the same applies to Coding. During my computer science studies i gained interest in building websites and i saw one video in particular which motivated me to build a clean website and try out some frontend things. The Youtube Channel is called Sajid and tbh I didnt consume much more than the video "The easiest Way to build Websites", but as a said that was a big inspiration for me. \nOther than that there are many more good Channels when it comes to coding, example given: Script Racoon, freeCodingCamp, Kevin Chromik, ...', imgUrl: 'assets/images/youtube.png' }
   ];
   constructor(private dropdownService: DropdownService) { }
 
