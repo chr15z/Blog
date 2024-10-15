@@ -11,7 +11,7 @@ export class AboutMeComponent implements OnInit {
   }
 
   roles: string[] = [
-    'I am a web developer.',
+    'I am a developer.',
     'I am a student.',
     'Check out my CV.',
   ];
