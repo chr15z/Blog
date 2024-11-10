@@ -1,4 +1,17 @@
-<div class="main-content" [class.blurred]="isDropdownOpen">
+
+<div class="scrolls">
+  <div class="up">
+    <span>↑</span>
+  </div>
+  <div class="center">
+    <span>mouse <br> scrolling</span>
+  </div>
+  <div class="down">
+    <span>↓</span>
+  </div>
+</div>
+
+<div class="smooth">
   <section class="snap-section hero" *ngFor="let section of homePageContent; let i = index" [ngClass]="{'reverse': i % 2 !== 0}">
     <div class="hero-content">
       <h1>{{ section.title }}</h1>
@@ -9,4 +22,6 @@
       <img [src]="section.image" alt="Hero Bild">
     </div>
   </section>
+
 </div>
+
