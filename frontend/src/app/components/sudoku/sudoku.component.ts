@@ -18,7 +18,6 @@ export class SudokuComponent implements OnInit {
     this.initMatrix();
   }
 
-  // Initialisiert die Sudoku-Matrix
   initMatrix(): void {
     this.matrix = [
       [0, 3, 0, 0, 0, 9, 0, 6, 0],
@@ -33,14 +32,12 @@ export class SudokuComponent implements OnInit {
     ];
   }
 
-  // Aktualisiert die Matrix bei Benutzereingaben
   updateMatrix(event: Event, row: number, col: number): void {
     const input = (event.target as HTMLInputElement).value;
     const value = parseInt(input, 10) || 0;
     this.matrix[row][col] = value >= 1 && value <= 9 ? value : 0;
   }
 
-  // Löst das Sudoku rekursiv
   solve(): void {
     if (!this.solvingInProgress) {
       this.solvingInProgress = true;
@@ -51,18 +48,15 @@ export class SudokuComponent implements OnInit {
     }
   }
 
-  // Löscht das Board
   clearBoard(): void {
     this.initMatrix();
   }
 
-  // Geschwindigkeit ändern
   changeSpeed(event: Event): void {
     const speed = parseInt((event.target as HTMLSelectElement).value, 10);
     this.speed = speed || 1;
   }
 
-  // Prüft, ob eine Zahl in die aktuelle Zelle passt
   isValid(row: number, col: number, num: number): boolean {
     // Überprüfen, ob `num` in der Zeile oder Spalte existiert
     for (let i = 0; i < this.ANTX; i++) {
@@ -85,7 +79,6 @@ export class SudokuComponent implements OnInit {
     return true;
   }
 
-  // Sudoku-Solver (Backtracking)
   findSolution(n: number, backtrack: () => void): void {
     if (n === this.N) {
       this.solvingInProgress = false;
