@@ -3,4 +3,5 @@ export class HomePageSectionDTO {
   public subtitle: string;
   public image: string;
   public id: number;
+  public link: string;
 }

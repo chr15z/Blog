@@ -43,7 +43,7 @@ export class SudokuComponent implements OnInit {
       this.solvingInProgress = true;
       this.findSolution(0, () => {
         this.solvingInProgress = false;
-        alert('No solution! :(');
+        console.log('No solution! :(');
       });
     }
   }
@@ -82,7 +82,7 @@ export class SudokuComponent implements OnInit {
   findSolution(n: number, backtrack: () => void): void {
     if (n === this.N) {
       this.solvingInProgress = false;
-      alert('Complete!');
+      console.log('Complete!');
       return;
     }
 
