@@ -1,0 +1,24 @@
+<div class="container">
+  <h1>How robots solve Sudoku!</h1>
+  <table class="board">
+    <tbody>
+    <tr *ngFor="let row of matrix; let i = index">
+      <td *ngFor="let cell of row; let j = index">
+        <input
+          type="text"
+          [value]="cell > 0 ? cell : ''"
+          (input)="updateMatrix($event, i, j)"
+        />
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <button (click)="solve()">Solve!</button>
+  <button (click)="clearBoard()">Clear</button>
+  <select (change)="changeSpeed($event)">
+    <option value="1">Fast</option>
+    <option value="100">Slow</option>
+    <option value="500">Slowmotion</option>
+  </select>
+  <p>Solve right away, or click inside the board to add new or delete/edit existing values!</p>
+</div>
