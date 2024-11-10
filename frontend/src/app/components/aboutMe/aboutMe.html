@@ -1,5 +1,5 @@
-<div class="hero">
-
+<div [class.blurred]="isDropdownOpen" class="main-content">
+  <div class="hero">
 
 <div class="roles">
   <div *ngIf="currentRole">
@@ -12,4 +12,5 @@
   <button (click)="downloadPdf()"><i class="fa-solid fa-download"></i></button>
 </div>
 
+</div>
 </div>
