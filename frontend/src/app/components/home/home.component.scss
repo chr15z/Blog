@@ -33,6 +33,7 @@ img {
 
 .learn-more:before {
   content: "\f178";
+  font-family: FontAwesome; // für den pfeil
   position: absolute;
   display: flex;
   align-items: center;
