@@ -18,8 +18,18 @@
       <button routerLink="{{ section.link }}" routerLinkActive="active" class="learn-more">Learn More</button>
     </div>
     <div class="hero-image">
-      <img [src]="section.image" alt="Hero Bild">
+      <!-- Bedingte Anzeige: Video oder Bild -->
+      <ng-container *ngIf="isVideo(section.image); else imageTemplate">
+        <video autoplay muted loop>
+          <source src="assets/videos/myJourney.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+
+      </ng-container>
+      <ng-template #imageTemplate>
+        <img [src]="section.image" alt="Hero Bild">
+      </ng-template>
     </div>
   </section>
-
 </div>
+
