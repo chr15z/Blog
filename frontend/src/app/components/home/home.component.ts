@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {DropdownService} from "../../services/dropdown.service";
+import {BlurService} from "../../services/blur.service";
 import {HomePageSectionDTO} from "../../dtos/homePageSectionDTO";
 
 @Component({
@@ -9,10 +9,9 @@ import {HomePageSectionDTO} from "../../dtos/homePageSectionDTO";
 })
 export class HomeComponent implements OnInit {
 
-  isDropdownOpen = false;
   homePageContent = [];
 
-  constructor(private dropdownService: DropdownService) {
+  constructor() {
     const first = new HomePageSectionDTO();
     first.title = "Cracking the Code";
     first.subtitle = "Sudoku Solving Algorithms: From Basic Strategies to Complex Computational Methods";
@@ -31,9 +30,6 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.dropdownService.isDropdownOpen$.subscribe(state => {
-      this.isDropdownOpen = state;
-    });
   }
 
 

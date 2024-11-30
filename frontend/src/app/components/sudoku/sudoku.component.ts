@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {DropdownService} from "../../services/dropdown.service";
+import {BlurService} from "../../services/blur.service";
 
 @Component({
   selector: 'app-sudoku',
@@ -7,7 +7,6 @@ import {DropdownService} from "../../services/dropdown.service";
   styleUrls: ['./sudoku.component.scss']
 })
 export class SudokuComponent implements OnInit {
-  isDropdownOpen = false;
   ANTX = 9; // Anzahl der Spalten
   ANTY = 9; // Anzahl der Zeilen
   N = this.ANTX * this.ANTY; // Gesamtanzahl der Felder
@@ -16,13 +15,10 @@ export class SudokuComponent implements OnInit {
   solvingInProgress = false;
   speed = 1;
 
-  constructor(private dropdownService: DropdownService) { }
+  constructor() { }
 
   ngOnInit(): void {
     this.initMatrix();
-    this.dropdownService.isDropdownOpen$.subscribe(state => {
-      this.isDropdownOpen = state;
-    });
   }
 
   initMatrix(): void {

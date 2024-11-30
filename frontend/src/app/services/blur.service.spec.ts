@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { DropdownService } from './dropdown.service';
+import { BlurService } from './blur.service';
 
-describe('DropdownService', () => {
-  let service: DropdownService;
+describe('BlurService', () => {
+  let service: BlurService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(DropdownService);
+    service = TestBed.inject(BlurService);
   });
 
   it('should be created', () => {

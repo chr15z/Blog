@@ -1,5 +1,5 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
-import {DropdownService} from "../../services/dropdown.service";
+import {BlurService} from "../../services/blur.service";
 
 @Component({
   selector: 'app-sources',
@@ -8,7 +8,6 @@ import {DropdownService} from "../../services/dropdown.service";
 })
 export class SourcesComponent implements OnInit, AfterViewInit {
 
-  isDropdownOpen = false;
   activeTabId = 0;
   tabs = [
     { id: 0, title: 'Icons', button: 'Visit Font Awesome', url:'https://fontawesome.com/',
@@ -20,12 +19,9 @@ export class SourcesComponent implements OnInit, AfterViewInit {
     { id: 3, title: 'Inspiration', button: 'Visit Youtube', url:'https://youtube.com/',
       content: 'YouTube is certainly not new to anyone, and it’s well known that the platform hosts countless content creators across almost every imaginable field—including coding. During my computer science studies, I developed an interest in web development, and one particular video inspired me to dive deeper into front-end design and creating clean websites. The video, titled "The Easiest Way to Build Websites," is from a YouTube channel called Sajid. Although I haven\'t explored much more from this channel, that video was a major source of inspiration for me.\nIn addition to Sajid, there are many other excellent coding channels worth checking out, such as Script Raccoon, freeCodeCamp, Kevin Chromik, and others.', imgUrl: 'assets/images/youtube.png' }
   ];
-  constructor(private dropdownService: DropdownService) { }
+  constructor() { }
 
   ngOnInit(): void {
-    this.dropdownService.isDropdownOpen$.subscribe(state => {
-      this.isDropdownOpen = state;
-    });
   }
   setActiveTab(tabId: number) {
     this.activeTabId = tabId;

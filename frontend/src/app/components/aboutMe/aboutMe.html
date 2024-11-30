@@ -1,16 +1,14 @@
-<div [class.blurred]="isDropdownOpen" class="main-content">
-  <div class="hero">
+<div class="hero">
 
-<div class="roles">
-  <div *ngIf="currentRole">
-    {{ currentRole }}
+  <div class="roles">
+    <div *ngIf="currentRole">
+      {{ currentRole }}
+    </div>
   </div>
-</div>
 
-<div class="pdf">
-  <button (click)="showPdf()"><i class="fa-solid fa-eye"></i></button>
-  <button (click)="downloadPdf()"><i class="fa-solid fa-download"></i></button>
-</div>
+  <div class="pdf">
+    <button (click)="showPdf()"><i class="fa-solid fa-eye"></i></button>
+    <button (click)="downloadPdf()"><i class="fa-solid fa-download"></i></button>
+  </div>
 
-</div>
 </div>

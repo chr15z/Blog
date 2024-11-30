@@ -1,5 +1,5 @@
 import {Component, OnInit, Renderer2} from '@angular/core';
-import {DropdownService} from "../../services/dropdown.service";
+import {BlurService} from "../../services/blur.service";
 import {NewsletterService} from "../../services/newsletter.service";
 import {UserDTO} from "../../dtos/userDTO";
 import {ValidationException} from "../../exception/ValidationException";
@@ -17,9 +17,9 @@ export class FooterComponent implements OnInit {
   showErrorToast: boolean = false;
 
   constructor(private renderer: Renderer2,
-              private dropdownService: DropdownService,
+              private dropdownService: BlurService,
               private newsletterService: NewsletterService) {
-    this.dropdownService.isDropdownOpen$.subscribe(state => {
+    this.dropdownService.isBlurred.subscribe(state => {
       this.isDropdownOpen = state;
     });
   }
@@ -28,7 +28,7 @@ export class FooterComponent implements OnInit {
   }
 
   toggleBlur(isBlurred: boolean) {
-    this.dropdownService.setDropdownState(isBlurred);
+    this.dropdownService.setBlurState(isBlurred);
   }
 
   onAddUser(): void {

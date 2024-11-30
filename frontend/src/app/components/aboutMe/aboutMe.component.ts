@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {DropdownService} from "../../services/dropdown.service";
+import {BlurService} from "../../services/blur.service";
 
 @Component({
   selector: 'app-notFound',
@@ -8,9 +8,8 @@ import {DropdownService} from "../../services/dropdown.service";
 })
 export class AboutMeComponent implements OnInit {
 
-  constructor(private dropdownService: DropdownService) { }
+  constructor() { }
 
-  isDropdownOpen = false;
   roles: string[] = [
     'I am a developer.',
     'I am a student.',
@@ -21,9 +20,6 @@ export class AboutMeComponent implements OnInit {
 
   ngOnInit(): void {
     this.startRoleRotation();
-    this.dropdownService.isDropdownOpen$.subscribe(state => {
-      this.isDropdownOpen = state;
-    });
   }
 
   startRoleRotation(): void {

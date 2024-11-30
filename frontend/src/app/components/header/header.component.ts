@@ -1,5 +1,5 @@
 import {Component, OnInit, Renderer2} from '@angular/core';
-import {DropdownService} from "../../services/dropdown.service";
+import {BlurService} from "../../services/blur.service";
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -10,8 +10,8 @@ export class HeaderComponent implements OnInit {
   isDropdownOpen = false;
 
   constructor(private renderer: Renderer2,
-              private dropdownService: DropdownService) {
-    this.dropdownService.isDropdownOpen$.subscribe(state => {
+              private dropdownService: BlurService) {
+    this.dropdownService.isBlurred.subscribe(state => {
       this.isDropdownOpen = state;
     });
   }
@@ -26,7 +26,7 @@ export class HeaderComponent implements OnInit {
     }
   }
   toggleBlur(isBlurred: boolean) {
-    this.dropdownService.setDropdownState(isBlurred);
+    this.dropdownService.setBlurState(isBlurred);
   }
 
 
