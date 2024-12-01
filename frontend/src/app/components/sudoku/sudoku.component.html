@@ -1,24 +1,56 @@
-<div class="container">
-  <h1>How robots solve Sudoku!</h1>
-  <table class="board">
-    <tbody>
-    <tr *ngFor="let row of matrix; let i = index">
-      <td *ngFor="let cell of row; let j = index">
-        <input
-          type="text"
-          [value]="cell > 0 ? cell : ''"
-          (input)="updateMatrix($event, i, j)"
-        />
-      </td>
-    </tr>
-    </tbody>
-  </table>
-  <button (click)="solve()">Solve!</button>
-  <button (click)="clearBoard()">Clear</button>
-  <select (change)="changeSpeed($event)">
-    <option value="1">Fast</option>
-    <option value="100">Slow</option>
-    <option value="500">Slowmotion</option>
-  </select>
-  <p>Solve right away, or click inside the board to add new or delete/edit existing values!</p>
+<div class="content">
+  <div class="sudoku">
+    <table class="board">
+      <tbody>
+      <tr *ngFor="let row of matrix; let i = index">
+        <td *ngFor="let cell of row; let j = index">
+          <input
+            type="text"
+            [value]="cell > 0 ? cell : ''"
+            (input)="updateMatrix($event, i, j)"
+          />
+        </td>
+      </tr>
+      </tbody>
+    </table>
+
+    <div>
+      <button *ngIf="!solvingInProgress" (click)="solve()">Solve!</button>
+      <button *ngIf="solvingInProgress" (click)="stopSolving()">Stop</button>             <!--- TODO --->
+      <button *ngIf="!isMatrixClear" (click)="clearBoard()">Clear</button>
+      <button *ngIf="isMatrixClear" (click)="clearBoard()">Generate Board</button>  <!--- TODO --->
+
+      <select *ngIf="!isMatrixClear" (change)="changeSpeed($event)">
+        <option value="1">Fast</option>
+        <option value="100">Slow</option>
+        <option value="500">Slowmotion</option>
+      </select>
+
+      <select *ngIf="isMatrixClear" (change)="changeSpeed($event)">                 <!--- TODO --->
+        <option value="A">Easy</option>
+        <option value="B">Mid</option>
+        <option value="C">Hard</option>
+      </select>
+    </div>
+  </div>
+
+
+  <div class="stats">
+    <h1>Tactics</h1>
+    <div class="option" *ngFor="let option of options">
+      <div>
+        <span>{{ option.name }}</span>
+        <span class="info" title="{{ option.info }}">ℹ️</span>
+      </div>
+        <i
+          [class]="option.active ? 'fa-solid fa-toggle-on' : 'fa-solid fa-toggle-off'"
+          (click)="toggleOption(option)"
+          class="toggle-icon">
+        </i>
+    </div>
+
+
+    <h1>History</h1>
+
+  </div>
 </div>

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {BlurService} from "../../services/blur.service";
 
 @Component({
   selector: 'app-sudoku',
@@ -12,47 +11,64 @@ export class SudokuComponent implements OnInit {
   N = this.ANTX * this.ANTY; // Gesamtanzahl der Felder
 
   matrix: number[][] = [];
+  isMatrixClear: boolean;
   solvingInProgress = false;
   speed = 1;
+
+  options = [
+    { name: 'Naked Pairs', active: true, info: 'Identification of cells in which only a certain number of candidates are possible.' },
+    { name: 'Hidden Singles', active: true, info: 'Numbers that are only possible in a specific cell within a row, column or region' },
+    { name: 'X-Wing', active: true, info: 'Advanced pattern recognition' },
+  ];
+
 
   constructor() { }
 
   ngOnInit(): void {
     this.initMatrix();
   }
+  toggleOption(option: any) {
+    option.active = !option.active;
+  }
+  stopSolving() {
+    this.solvingInProgress = false;
+  }
 
   initMatrix(): void {
+    this.isMatrixClear = true;
     this.matrix = [
-      [0, 3, 0, 0, 0, 9, 0, 6, 0],
-      [0, 1, 0, 0, 4, 0, 0, 9, 0],
-      [0, 9, 0, 3, 0, 0, 0, 1, 0],
-      [1, 0, 0, 0, 0, 0, 2, 0, 0],
-      [0, 8, 0, 0, 0, 0, 0, 7, 0],
-      [0, 0, 9, 0, 0, 0, 0, 0, 1],
-      [0, 5, 0, 0, 0, 4, 0, 2, 0],
-      [0, 2, 6, 0, 0, 0, 5, 4, 0],
-      [0, 7, 0, 9, 0, 0, 0, 8, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0],
     ];
   }
 
+  clearBoard(): void {
+    this.initMatrix();
+  }
+
   updateMatrix(event: Event, row: number, col: number): void {
+    this.isMatrixClear = false;
     const input = (event.target as HTMLInputElement).value;
     const value = parseInt(input, 10) || 0;
     this.matrix[row][col] = value >= 1 && value <= 9 ? value : 0;
   }
 
   solve(): void {
-    if (!this.solvingInProgress) {
-      this.solvingInProgress = true;
-      this.findSolution(0, () => {
-        this.solvingInProgress = false;
-        console.log('No solution! :(');
-      });
+    this.isMatrixClear = false
+      if (!this.solvingInProgress) {
+        this.solvingInProgress = true;
+        this.findSolution(0, () => {
+          this.solvingInProgress = false;
+          console.log('No solution! :(');
+        });
     }
-  }
-
-  clearBoard(): void {
-    this.initMatrix();
   }
 
   changeSpeed(event: Event): void {
@@ -83,6 +99,9 @@ export class SudokuComponent implements OnInit {
   }
 
   findSolution(n: number, backtrack: () => void): void {
+    if (!this.solvingInProgress) {
+      return;
+    }
     if (n === this.N) {
       this.solvingInProgress = false;
       console.log('Complete!');

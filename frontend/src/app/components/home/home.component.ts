@@ -17,7 +17,7 @@ export class HomeComponent implements OnInit {
     first.subtitle = "Sudoku Solving Algorithms: From Basic Strategies to Complex Computational Methods";
     first.image = "assets/images/sudoku.jpeg";
     first.id = 1;
-    first.link = "/sudoku";
+    first.link = "/notFound";
 
     const second = new HomePageSectionDTO();
     second.title = "Behind the Scenes of Ticketline";
