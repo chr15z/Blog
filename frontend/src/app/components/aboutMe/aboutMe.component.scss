@@ -21,9 +21,16 @@
 .content {
   padding: 2em;
   text-align: center;
+  width: 100%
 }
 
 .work-items {
+  display: grid;
+  grid-template-columns: repeat(2, auto); /* Auto-breite für die Spalten */
+  gap: 1em; /* Abstand zwischen den Items */
+  justify-items: stretch; /* Items werden in der Breite gestreckt */
+}
+.education-items {
   display: grid;
   grid-template-columns: repeat(2, auto); /* Auto-breite für die Spalten */
   gap: 1em; /* Abstand zwischen den Items */
@@ -45,6 +52,21 @@
 .work-item:hover {
   transform: scale(1.05);
 }
+.education-item {
+  width: auto;
+  background: #f4f4f4;
+  padding: 1em;
+  border-radius: 15px;
+  transition: transform 0.3s ease;
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+}
+
+.education-item:hover {
+  transform: scale(1.05);
+}
+
 
 h1 {
   font-size: 2em;
