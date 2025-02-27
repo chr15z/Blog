@@ -2,7 +2,7 @@
 @import "primeng/resources/themes/lara-light-blue/theme.css";
 @import "primeng/resources/primeng.css";
 body {
-  background-color: var(--background-color);
+  background: linear-gradient(to right, var(--background1), var(--background2));
   margin: 0;
   font-family: Verdana, sans-serif;
   color: var(--text-color);
@@ -33,4 +33,18 @@ button:hover {
 }
 button:active {
   scale: 1.05;
+}
+
+.button2 {
+  background-color: transparent; /* Hintergrund transparent für einen subtileren Look */
+  color: var(--button-background-hover); /* Textfarbe in einem klassischen Blau */
+  border: 2px solid var(--button-background-hover); /* Rand in Blau, passend zur Textfarbe */
+  margin: 4em;
+}
+.button2:hover {
+  background-color: var(--primary-color);
+}
+
+h1{
+    color: var(--text-color-h1);
 }

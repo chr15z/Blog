@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {BlurService} from "../../services/blur.service";
 import {HomePageSectionDTO} from "../../dtos/homePageSectionDTO";
 
 @Component({
@@ -41,6 +40,12 @@ export class HomeComponent implements OnInit {
   }
   isVideo(filePath: string): boolean {
     return filePath.endsWith('.mp4') || filePath.endsWith('.webm') || filePath.endsWith('.ogg');
+  }
+  scrollToProjects(): void {
+    const section = document.getElementById('projectsSection');
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth' });
+    }
   }
 
 

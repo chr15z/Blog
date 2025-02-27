@@ -1,32 +1,59 @@
+/* Container für das Scrollen */
+h2{
+  font-size: 3em;
+  background: linear-gradient(to right, darkgreen, blue);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.smooth {
+  position: relative;
+  width: 100%;
+  height: 100vh; /* Vollbildhöhe */
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory; /* Snap-Scrolling aktivieren */
+}
+
+/* Abschnitte, die gesnappt werden sollen */
 .snap-section {
   padding: 8em;
-  scroll-behavior: smooth;
+  scroll-behavior: smooth; /* Sanftes Scrollen aktivieren */
+  height: 100vh; /* Jeder Abschnitt hat die Höhe des Viewports */
+  scroll-snap-align: start; /* Abschnitte "snappen" an den oberen Rand */
+  scroll-snap-stop: always; /* Stoppen des Scrollens bei jedem Abschnitt */
 }
+
+/* Beispiel für die Hero-Sektion */
 .hero {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: var(--header-background-color);
 }
+
 .hero-content {
   max-width: 50%;
 }
+
 h1 {
-  font-size: 4em;
+  font-size: 3em;
 }
+
 p {
   font-size: 1.5em;
 }
+
 img {
   border-radius: 15px;
   height: 30em;
   width: 30em;
 }
+
 video {
   border-radius: 15px;
   height: 30em;
   width: 15em;
 }
+
 .reverse {
   flex-direction: row-reverse;
 }
@@ -37,8 +64,8 @@ video {
 }
 
 .learn-more:before {
-  content: "\f178";
-  font-family: FontAwesome; // für den pfeil
+  content: "\f178"; /* Pfeil aus FontAwesome */
+  font-family: FontAwesome;
   position: absolute;
   display: flex;
   align-items: center;
@@ -58,44 +85,16 @@ video {
   right: 0.5em;
 }
 
-
-
+/* Globale Einstellungen */
 *,
 ::before,
 ::after {
   box-sizing: border-box;
 }
 
-
-
-.scrolls {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  right: 1.25em;
-  z-index: 2;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  font-size: 2rem;
-  color: var(--colthr);
+.image-with-bg {
+  background-color: transparent;
 }
 
-.scrolls .center {
-  font-size: 0.825rem;
-}
 
-.smooth {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  scroll-behavior: smooth;
-  overflow-y: scroll;
-  scroll-snap-type: y mandatory;
-}
-section {
-  scroll-snap-align: center;
-}
 

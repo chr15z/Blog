@@ -1,35 +1,37 @@
-<div class="scrolls">
-  <div class="up">
-    <span>↑</span>
-  </div>
-  <div class="center">
-    <span>mouse <br> scrolling</span>
-  </div>
-  <div class="down">
-    <span>↓</span>
-  </div>
-</div>
-
 <div class="smooth">
-  <section class="snap-section hero" *ngFor="let section of homePageContent; let i = index" [ngClass]="{'reverse': i % 2 !== 0}">
+  <section class="snap-section hero">
+    <div class="hero-image image-with-bg">
+      <img [src]="'https://freepngimg.com/thumb/kitten/30387-2-kitten-transparent-image.png'" alt="Hero Bild" class="image-with-bg">
+    </div>
+
+    <div class="hero-content">
+      <h2>Computer Scientist</h2>
+      <p>Christoph Zeitler</p>
+      <button routerLinkActive="active" class="learn-more" routerLink="/contact">Contact Me</button>
+      <button class="button2" (click)="scrollToProjects()">Projects</button>
+    </div>
+
+  </section>
+
+  <section id="projectsSection" class="snap-section hero" *ngFor="let section of homePageContent; let i = index" [ngClass]="{'reverse': i % 2 !== 0}">
     <div class="hero-content">
       <h1>{{ section.title }}</h1>
       <p>{{ section.subtitle }}</p>
       <button routerLink="{{ section.link }}" routerLinkActive="active" class="learn-more">Learn More</button>
     </div>
-    <div class="hero-image">
+    <div>
       <!-- Bedingte Anzeige: Video oder Bild -->
       <ng-container *ngIf="isVideo(section.image); else imageTemplate">
         <video autoplay muted loop>
           <source src="assets/videos/myJourney.mp4" type="video/mp4">
           Your browser does not support the video tag.
         </video>
-
       </ng-container>
       <ng-template #imageTemplate>
         <img [src]="section.image" alt="Hero Bild">
       </ng-template>
     </div>
   </section>
+
 </div>
 

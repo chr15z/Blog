@@ -1,14 +1,107 @@
-<div class="hero">
+<div class="smooth">
+  <section class="snap-section">
+    <div class="content">
+      <h1>Professional Background</h1>
+      <p>blablablablablablablablablablablablablabla</p>
 
-  <div class="roles">
-    <div *ngIf="currentRole">
-      {{ currentRole }}
+      <div class="work-items">
+        <div class="work-item">
+          <img [src]="'https://e7.pngegg.com/pngimages/377/583/png-clipart-logo-malteser-krankenhaus-st-franziskus-hospital-malteser-hilfsdienst-e-v-malteser-hospital-st-hildegardis-maltesers-text-logo.png'" alt="TU Wien Logo" class="logo">
+          <div class="work-text">
+            <span class="title">Working Student | Shift Supervisor</span>
+            <span class="university">Malteser Hilfsdienst</span>
+            <span class="date">09/2020 - 07/2022</span>
+            <ul>
+              <li>Management of the Corona Test Station</li>
+              <li>Coordination of the day-to-day business</li>
+              <li>Responsible for logistics, employees, inventory and more</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="work-item">
+          <img [src]="'https://dividendpedia.com/wp-content/uploads/Siemens-Healthineers_logo.webp'" alt="TU Wien Logo" class="logo">
+          <div class="work-text">
+            <span class="title">Intern | Software Development</span>
+            <span class="university">Siemens Healthineers</span>
+            <span class="date">07/2024 - 09/2024</span>
+            <ul>
+              <li>Backend Development in PHP</li>
+              <li>PHP Unit / Integration tests with PHPUnit</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="work-item">
+          <img [src]="'https://media-exp1.licdn.com/dms/image/C4E0BAQGjtzpD_Xm9EA/company-logo_200_200/0/1653219599591?e=2147483647&v=beta&t=Ry0l4lgXWZpMbzT83cVtDOc9si9hHzm7JgsubMnIouA'" alt="TU Wien Logo" class="logo">
+          <div class="work-text">
+            <span class="title">Intern | Software Configuration & Project Management</span>
+            <span class="university">Immanuel Albertinen Diakonie</span>
+            <span class="date">07/2023 - 09/2023</span>
+            <ul>
+              <li>Software and Layout Configuration</li>
+              <li>IT support on hospital ward</li>
+              <li>Trainings (preparation and follow-up)</li>
+            </ul>
+          </div>
+        </div>
+
+
+        <div class="work-item">
+          <img [src]="'https://w7.pngwing.com/pngs/771/187/png-transparent-tu-wien-hd-logo.png'" alt="TU Wien Logo" class="logo">
+          <div class="work-text">
+            <span class="title">Working Student | Tutor in Programming</span>
+            <span class="university">Technische Universität Wien</span>
+            <span class="date">10/2024 - Present</span>
+            <ul>
+              <li>Correction of the exercise sheets</li>
+              <li>Tutor for the exercise accompanying the lecture</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
     </div>
-  </div>
+  </section>
 
-  <div class="pdf">
-    <button (click)="showPdf()"><i class="fa-solid fa-eye"></i></button>
-    <button (click)="downloadPdf()"><i class="fa-solid fa-download"></i></button>
-  </div>
 
+  <section class="snap-section">
+    <div class="content">
+      <h1>Academic Background</h1>
+      <p>blablablablablablablablablablablablablabla</p>
+    </div>
+
+    <div class="content">
+
+      <div class="work-items">
+
+      <div class="work-item">
+        <img [src]="'https://iconape.com/wp-content/png_logo_vector/universitat-augsburg-logo.png'" alt="TU Wien Logo" class="logo">
+        <div class="work-text">
+          <span class="title">Bachelor Business Administration</span>
+          <span class="university">Universität Augsburg</span>
+          <span class="date">Graduation year: 2022</span>
+          <ul>
+            <li>Oxford Placement Test</li>
+            <li>Level: C1</li>
+          </ul>
+        </div>
+      </div>
+
+        <div class="work-item">
+          <img [src]="'https://w7.pngwing.com/pngs/771/187/png-transparent-tu-wien-hd-logo.png'" alt="TU Wien Logo" class="logo">
+          <div class="work-text">
+            <span class="title">Bachelor Computer Science</span>
+            <span class="university">Technische Universität Wien</span>
+            <span class="date">Completion expected: 2025</span>
+            <ul>
+              <li>talente.programm</li>
+              <li>diversity skills</li>
+            </ul>
+          </div>
+        </div>
+
+    </div>
+    </div>
+  </section>
 </div>

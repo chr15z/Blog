@@ -20,6 +20,7 @@ import { AutoCompleteModule } from 'primeng/autocomplete';
 import {SourcesComponent} from "./components/sources/sources.component";
 import {AboutMeComponent} from "./components/aboutMe/aboutMe.component";
 import {SudokuComponent} from "./components/sudoku/sudoku.component";
+import {ContactComponent} from "./components/contact/contact.component";
 
 
 
@@ -32,7 +33,8 @@ import {SudokuComponent} from "./components/sudoku/sudoku.component";
     NotFoundComponent,
     SourcesComponent,
     AboutMeComponent,
-    SudokuComponent
+    SudokuComponent,
+    ContactComponent
   ],
   imports: [
     BrowserModule,

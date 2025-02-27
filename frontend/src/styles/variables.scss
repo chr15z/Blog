@@ -1,6 +1,9 @@
 :root {
+  --background1: #292929;
+  --background2: #1f1f1f;
   --background-color: #121212;
   --header-background-color: #1F1F1F;
+  --text-color-h1: #E0E0E0;
   --text-color: #E0E0E0;
   --text-color-hover: #FFFFFF;
   --text-color-input: #FFFFFF;
@@ -12,8 +15,11 @@
 }
 
 [data-theme='light'] {
+  --background1: #f1faee;
+  --background2: #a8dadc;
   --background-color: #FFFFFF;
   --header-background-color: #F5F5F5;
+  --text-color-h1: #212121;
   --text-color: #212121;
   --text-color-hover: #000000;
   --text-color-input: #000000;
