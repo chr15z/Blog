@@ -39,7 +39,7 @@
 .work-item {
   display: block;
   width: auto;
-  background: #f4f4f4;
+  background: var(--background-color);
   padding: 1em;
   border-radius: 15px;
   transition: transform 0.3s ease;
@@ -54,7 +54,7 @@
 }
 .education-item {
   width: auto;
-  background: #f4f4f4;
+  background: var(--background-color);
   padding: 1em;
   border-radius: 15px;
   transition: transform 0.3s ease;
@@ -95,12 +95,10 @@ p {
 
 .university {
   font-size: 1em;
-  color: #333;
 }
 
 .date {
   font-size: 0.8em;
-  color: #666;
 }
 
 ul {

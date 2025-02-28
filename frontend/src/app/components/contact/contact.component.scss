@@ -111,7 +111,7 @@ img {
   position: absolute !important;
   text-decoration: none;
   font-size: 16px;
-  color: var(--header-background-color); /* Text color on LinkedIn button */
+  color: var(--background-color); /* Text color on LinkedIn button */
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -126,7 +126,7 @@ img {
     content: "\f08c"; /* FontAwesome LinkedIn icon */
     font-family: 'FontAwesome';
     font-size: 24px;
-    color: var(--header-background-color); /* Icon color */
+    color: var(--background-color); /* Icon color */
   }
 }
 
@@ -163,7 +163,7 @@ img {
     margin-left: -20px;
     font-size: 35px;
     display: block;
-    color: var(--header-background-color); /* Icon color */
+    color: var(--background-color); /* Icon color */
     content: "\f08c"; /* FontAwesome LinkedIn icon */
     width: 0px;
     height: 20px;
@@ -221,7 +221,7 @@ img {
   position: absolute !important;
   text-decoration: none;
   font-size: 16px;
-  color: var(--header-background-color);
+  color: var(--background-color);
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -236,7 +236,7 @@ img {
     content: "\f09b"; /* FontAwesome GitHub icon */
     font-family: 'FontAwesome';
     font-size: 24px;
-    color: var(--header-background-color);
+    color: var(--background-color);
   }
 }
 
@@ -273,7 +273,7 @@ img {
     margin-left: -20px;
     font-size: 35px;
     display: block;
-    color: var(--header-background-color);
+    color: var(--background-color);
     content: "\f09b"; /* FontAwesome GitHub icon */
     width: 0px;
     height: 20px;

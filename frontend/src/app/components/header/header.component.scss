@@ -1,5 +1,4 @@
 header {
-  //scroll-snap-align: start;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -14,18 +13,13 @@ header {
 }
 .element a {
   text-decoration: none;
-  color: var(--text-color);
+  color: var(--text);
   transition: color 0.3s ease;
 }
 .element a:hover {
-  color: var(--text-color-hover);
+  color: var(--text-color-h1);
 }
 .element:hover {
-  color: var(--text-color-hover);
-}
-h1 {
-  padding: 1em;
-  font-size: 0.75em;
-  color: var(--text-color-hover);
+  color: var(--text-color-h1);
 }
 
