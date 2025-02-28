@@ -26,20 +26,19 @@
 
 .work-items {
   display: grid;
-  grid-template-columns: repeat(2, auto); /* Auto-breite für die Spalten */
-  gap: 1em; /* Abstand zwischen den Items */
-  justify-items: stretch; /* Items werden in der Breite gestreckt */
+  grid-template-columns: repeat(2, auto);
+  gap: 1em;
+  justify-items: stretch;
 }
 .education-items {
-  display: grid;
-  grid-template-columns: repeat(2, auto); /* Auto-breite für die Spalten */
-  gap: 1em; /* Abstand zwischen den Items */
-  justify-items: stretch; /* Items werden in der Breite gestreckt */
+  display: flex;
+  justify-content: center;
+  gap: 4em;
 }
 
 .work-item {
   display: block;
-  width: auto; /* Breite automatisch anpassen */
+  width: auto;
   background: #f4f4f4;
   padding: 1em;
   border-radius: 15px;
@@ -47,6 +46,7 @@
   display: flex;
   align-items: flex-start;
   gap: 15px;
+  align-items: center;
 }
 
 .work-item:hover {
@@ -61,6 +61,8 @@
   display: flex;
   align-items: flex-start;
   gap: 15px;
+  align-items: center;
+
 }
 
 .education-item:hover {
