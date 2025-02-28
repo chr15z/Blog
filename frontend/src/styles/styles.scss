@@ -36,13 +36,14 @@ button:active {
 }
 
 .button2 {
-  background-color: transparent; /* Hintergrund transparent für einen subtileren Look */
-  color: var(--button-background-hover); /* Textfarbe in einem klassischen Blau */
-  border: 2px solid var(--button-background-hover); /* Rand in Blau, passend zur Textfarbe */
+  background-color: transparent;
+  color: var(--button-background-hover);
+  border: 2px solid var(--button-background-hover);
   margin: 4em;
 }
 .button2:hover {
-  background-color: var(--primary-color);
+  background-color: var(--text);
+  color: white;
 }
 
 h1{
