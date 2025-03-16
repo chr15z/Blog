@@ -33,7 +33,8 @@ import {MyJourneyComponent} from "./components/pMyJourney/myJourney.component";
     NotFoundComponent,
     AboutMeComponent,
     SudokuComponent,
-    ContactComponent
+    ContactComponent,
+    MyJourneyComponent
   ],
   imports: [
     BrowserModule,
