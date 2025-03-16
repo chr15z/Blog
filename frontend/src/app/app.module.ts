@@ -18,8 +18,9 @@ import {NgOptimizedImage} from "@angular/common";
 import {BsDropdownModule} from "ngx-bootstrap/dropdown";
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import {AboutMeComponent} from "./components/aboutMe/aboutMe.component";
-import {SudokuComponent} from "./components/sudoku/sudoku.component";
+import {SudokuComponent} from "./components/pSudoku/sudoku.component";
 import {ContactComponent} from "./components/contact/contact.component";
+import {MyJourneyComponent} from "./components/pMyJourney/myJourney.component";
 
 
 
