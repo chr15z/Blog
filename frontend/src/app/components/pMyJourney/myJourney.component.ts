@@ -30,12 +30,10 @@ export class MyJourneyComponent implements OnInit {
     this.technologies.subtitle = "The app is built using modern technologies with a focus on modularity and scalability.";
     this.technologies.id = 4;
     this.technologies.technologies = [
-      { name: "Frontend", image: "assets/images/logo-vuejs.png" },
-      { name: "Backend", image: "assets/images/logo-n8n.png" },
-      { name: "Database", image: "assets/images/logo-mongodb.png" },
-      { name: "CI/CD", image: "assets/images/logo-github.png" },
-      { name: "Versioning", image: "assets/images/logo-github.png" },
-      { name: "Containerization", image: "assets/images/logo-docker.png" },
+      { name: "Frontend", image: "assets/images/logo-vuejs.png", info: "Vue.js is a JavaScript framework that uses a reactive and component-based architecture. Its large community and extensive libraries make it versatile, with a focus on easy integration and rapid development cycles." },
+      { name: "Backend", image: "assets/images/logo-n8n.png", info: "n8n serves as an easy-to-use low-code solution for quickly implementing backend functionality and automating various services." },
+      { name: "Database", image: "assets/images/logo-mongodb.png", info:"MongoDB is a document-oriented NoSQL database that is easily customizable thanks to its flexible schema. It uses the JSON format, which allows for rapid changes while integrating well with modern applications."},
+      { name: "CI/CD", image: "assets/images/logo-github.png", info:"GitHub Actions is a continuous integration/continuous deployment tool from Microsoft that is tightly integrated with GitHub. They simplify development workflows and support the implementation of tests, builds, and simple deployments." },
     ];
   }
 

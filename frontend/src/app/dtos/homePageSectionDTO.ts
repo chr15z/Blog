@@ -4,6 +4,6 @@ export class HomePageSectionDTO {
   public id: number;
   public image?: string;
   public link?: string;
-  public technologies?: { name: string; image: string }[];
+  public technologies?: { name: string; image: string; info?: string}[];
 }
 

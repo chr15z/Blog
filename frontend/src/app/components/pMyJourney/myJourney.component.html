@@ -24,6 +24,7 @@
       <div *ngFor="let tech of technologies.technologies" class="tech-item">
         <img [src]="tech.image" [alt]="tech.name">
         <span>{{ tech.name }}</span>
+        <div class="tech-info">{{ tech.info }}</div>
       </div>
     </div>
   </section>
