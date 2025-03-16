@@ -22,8 +22,8 @@
     <div>
       <!-- Bedingte Anzeige: Video oder Bild -->
       <ng-container *ngIf="isVideo(section.image); else imageTemplate">
-        <video autoplay muted loop>
-          <source src="assets/videos/myJourney.mp4" type="video/mp4">
+        <video autoplay muted loop playsinline>
+          <source [src]="section.image" type="video/mp4">
           Your browser does not support the video tag.
         </video>
       </ng-container>

@@ -12,11 +12,11 @@ export class HomeComponent implements OnInit {
 
   constructor() {
     const first = new HomePageSectionDTO();
-    first.title = "Cracking the Code";
-    first.subtitle = "Sudoku Solving Algorithms: From Basic Strategies to Complex Computational Methods";
-    first.image = "assets/images/sudoku.jpeg";
+    first.title = "MyJourney";
+    first.subtitle = "Organise your health stress-free: Keep an eye on appointments, vital signs and preventive medical check-ups. Benefit from reminders, gamification and a personal overview.";
+    first.image = "assets/videos/myJourneyDemo.mp4";
     first.id = 1;
-    first.link = "/notFound";
+    first.link = "/myJourney";
 
     const second = new HomePageSectionDTO();
     second.title = "Behind the Scenes of Ticketline";
@@ -26,12 +26,11 @@ export class HomeComponent implements OnInit {
     second.link = "/notFound";
 
     const third = new HomePageSectionDTO();
-    third.title = "MyJourney";
-    third.subtitle = "Organise your health stress-free: Keep an eye on appointments, vital signs and preventive medical check-ups. Benefit from reminders, gamification and a personal overview.";
-    third.image = "assets/video/myJourney.mp4"; // DaVinci Resolve um den hintergrund transparent zu machen
+    third.title = "Cracking the Code";
+    third.subtitle = "Sudoku Solving Algorithms: From Basic Strategies to Complex Computational Methods";
+    third.image = "assets/images/sudoku.jpeg";
     third.id = 3;
     third.link = "/notFound";
-
 
     this.homePageContent = [first, second, third];
   }
