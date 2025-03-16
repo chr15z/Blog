@@ -17,7 +17,6 @@ import {ToastrModule} from 'ngx-toastr';
 import {NgOptimizedImage} from "@angular/common";
 import {BsDropdownModule} from "ngx-bootstrap/dropdown";
 import { AutoCompleteModule } from 'primeng/autocomplete';
-import {SourcesComponent} from "./components/sources/sources.component";
 import {AboutMeComponent} from "./components/aboutMe/aboutMe.component";
 import {SudokuComponent} from "./components/sudoku/sudoku.component";
 import {ContactComponent} from "./components/contact/contact.component";
@@ -31,7 +30,6 @@ import {ContactComponent} from "./components/contact/contact.component";
     FooterComponent,
     HomeComponent,
     NotFoundComponent,
-    SourcesComponent,
     AboutMeComponent,
     SudokuComponent,
     ContactComponent
