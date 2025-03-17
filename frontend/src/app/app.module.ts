@@ -21,6 +21,7 @@ import {AboutMeComponent} from "./components/aboutMe/aboutMe.component";
 import {SudokuComponent} from "./components/pSudoku/sudoku.component";
 import {ContactComponent} from "./components/contact/contact.component";
 import {MyJourneyComponent} from "./components/pMyJourney/myJourney.component";
+import {TicketLineComponent} from "./components/pTicketLine/ticketLine.component";
 
 
 
@@ -34,6 +35,7 @@ import {MyJourneyComponent} from "./components/pMyJourney/myJourney.component";
     AboutMeComponent,
     SudokuComponent,
     ContactComponent,
+    TicketLineComponent,
     MyJourneyComponent
   ],
   imports: [
