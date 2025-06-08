@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {SudokuSolverService} from "../../services/sudoku-solver.service";
+import {SudokuBruteForceService} from "../../services/sudoku-brute-force.service";
+import {SudokuSimulatedAnnealingServiceService} from "../../services/sudoku-simulated-annealing-service.service";
 
 @Component({
   selector: 'app-sudoku',
@@ -7,9 +8,6 @@ import {SudokuSolverService} from "../../services/sudoku-solver.service";
   styleUrls: ['./sudoku.component.scss']
 })
 export class SudokuComponent implements OnInit {
-  numCols = 9;
-  numRows = 9;
-  numOfFields = this.numCols * this.numRows;
   matrix: number[][] = [];
   isBoardEmpty: boolean;
   solvingInProgress = false;
@@ -17,11 +15,11 @@ export class SudokuComponent implements OnInit {
 
   options = [
     { name: 'Brute Force', active: true, info: 'Try every possibility.' },
-    { name: 'Simulated Annealing', active: false, info: 'Solving randomly by applying a cost function'},
+    { name: 'Simulated Annealing', active: false, info: 'Solving randomly by applying a cost function.'},
   ];
 
 
-  constructor(private readonly solver: SudokuSolverService) { }
+  constructor(private readonly bruteForceSolver: SudokuBruteForceService, private readonly simulatedAnnealingSolver: SudokuSimulatedAnnealingServiceService) { }
 
   ngOnInit(): void {
     this.initMatrix();
@@ -66,15 +64,21 @@ export class SudokuComponent implements OnInit {
     this.isBoardEmpty = false;
     if (!this.solvingInProgress) {
       this.solvingInProgress = true;
-      this.solver.solve(
-        this.matrix,
-        this.speed,
-        () => this.solvingInProgress,
-        () => {
-          this.solvingInProgress = false;
-          console.log('No solution! :(');
-        }
-      );
+
+      if (this.isStrategieActive("Brute Force")){
+        this.bruteForceSolver.solve(
+          this.matrix,
+          this.speed,
+          () => this.solvingInProgress,
+          () => {
+            this.solvingInProgress = false;
+            console.log('No solution! :(');
+          }
+        );
+      }
+
+      if (this.isStrategieActive("Simulated Annealing"))
+      this.simulatedAnnealingSolver.solve();
     }
   }
 
@@ -85,6 +89,8 @@ export class SudokuComponent implements OnInit {
   }
 
 
-
+  private isStrategieActive(strategie: string): boolean{
+    return this.options.find(opt => opt.name === strategie)?.active;
+  }
 
 }
