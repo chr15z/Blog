@@ -106,8 +106,7 @@ export class SudokuComponent implements OnInit {
       return;
     }
 
-    // if gone through all cells
-    if (n === this.numOfFields) {
+    if (this.hasAllCellsVisited(n)) {
       this.solvingInProgress = false;
       console.log('Complete!');
       return;
@@ -120,36 +119,43 @@ export class SudokuComponent implements OnInit {
       return;
     }
 
-    // Try Number 1 - 9
     let num = 1;
-    const tryNumber = () => {
 
+    const resetCellAndBacktrack = () => {
+      setTimeout(() => {
+        this.matrix[row][col] = 0;
+        backtrack();
+      }, this.speed);
+    };
+
+    const placeNumberAndContinue = () => {
+      setTimeout(() => {
+        this.matrix[row][col] = num;
+
+        this.findSolution(n + 1, () => {
+          this.matrix[row][col] = 0; // Rücksetzen, falls keine Lösung möglich
+          num++;
+          tryNextNumber();
+        });
+      }, this.speed);
+    };
+
+    const tryNextNumber = () => {
       if (num > 9) {
-        setTimeout(() => {
-          this.matrix[row][col] = 0;
-          backtrack();
-        }, this.speed);
+        resetCellAndBacktrack();
         return;
       }
 
       if (this.isNumberAllowed(row, col, num)) {
-        setTimeout(() => {
-          this.matrix[row][col] = num;
-          this.findSolution(n + 1, () => {
-
-            this.matrix[row][col] = 0; // Reset if there is no solution
-            num++;
-            tryNumber();
-
-          });
-        }, this.speed);
-
+        placeNumberAndContinue();
       } else {
         num++;
-        tryNumber();
+        tryNextNumber();
       }
     };
-    tryNumber();
+
+    tryNextNumber();
+
   }
 
   // Helper functions
@@ -163,5 +169,10 @@ export class SudokuComponent implements OnInit {
   private isCellAlreadyOccupied(row: number, col: number) {
     return this.matrix[row][col] !== 0;
   }
+
+  private hasAllCellsVisited(n: number): boolean {
+    return n === this.numOfFields;
+  }
+
 
 }
