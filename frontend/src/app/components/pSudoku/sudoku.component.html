@@ -53,10 +53,13 @@
     </div>
 
     <h1>Info</h1>
-    <div *ngIf="selectedOption?.name === 'Simulated Annealing'">
+    <div *ngIf="selectedOption === 'Simulated Annealing'">
       <span *ngIf="bestCostSimulatedAnnealing === 0">✅</span>
       <span *ngIf="bestCostSimulatedAnnealing > 0">❌</span>
       Current Violations: {{ bestCostSimulatedAnnealing }}
+    </div>
+    <div *ngIf="selectedOption === 'Brute Force'">
+      Number of Recursions: {{ recursiveCallsBruteForce }}
     </div>
 
 

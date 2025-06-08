@@ -13,21 +13,23 @@ export class SudokuComponent implements OnInit {
   solvingInProgress = false;
   speed = 1;
   bestCostSimulatedAnnealing: number;
-  selectedOption: any = null;
+  recursiveCallsBruteForce: number;
+  selectedOption = 'Brute Force';
 
   options = [
     { name: 'Brute Force', active: true, info: 'Try every possibility.' },
     { name: 'Simulated Annealing', active: false, info: 'Solving randomly by applying a cost function.'},
   ];
 
-
   constructor(private readonly bruteForceSolver: SudokuBruteForceService, private readonly simulatedAnnealingSolver: SudokuSimulatedAnnealingServiceService) { }
 
   ngOnInit(): void {
     this.initMatrix();
     this.simulatedAnnealingSolver.bestCost$.subscribe(cost => {
-      console.log(cost);
       this.bestCostSimulatedAnnealing = cost;
+    });
+    this.bruteForceSolver.recursiveCalls$.subscribe(recursiveCalls => {
+      this.recursiveCallsBruteForce = recursiveCalls;
     });
 
   }
@@ -95,20 +97,19 @@ export class SudokuComponent implements OnInit {
     }
   }
 
-
   changeSpeed(event: Event): void {
     const speed = parseInt((event.target as HTMLSelectElement).value, 10);
     this.speed = speed || 1;
   }
 
-
-  private isStrategieActive(strategie: string): boolean{
-    return this.options.find(opt => opt.name === strategie)?.active;
-  }
   selectOption(option: any) {
     this.options.forEach(o => o.active = false);
     option.active = true;
-    this.selectedOption = option;
+    this.selectedOption = option.name;
+  }
+
+  private isStrategieActive(strategie: string): boolean{
+    return this.options.find(opt => opt.name === strategie)?.active;
   }
 
 
