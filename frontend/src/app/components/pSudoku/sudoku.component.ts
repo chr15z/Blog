@@ -77,8 +77,18 @@ export class SudokuComponent implements OnInit {
         );
       }
 
-      if (this.isStrategieActive("Simulated Annealing"))
-      this.simulatedAnnealingSolver.solve();
+      if (this.isStrategieActive("Simulated Annealing")) {
+        this.simulatedAnnealingSolver.solve(
+          this.matrix,
+          this.speed,
+          () => this.solvingInProgress,
+          () => {
+            this.solvingInProgress = false;
+            console.log('No solution! :(');
+          }
+        );
+      }
+
     }
   }
 
