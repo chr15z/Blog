@@ -16,17 +16,17 @@
 
     <div>
       <button *ngIf="!solvingInProgress" (click)="solve()">Solve!</button>
-      <button *ngIf="solvingInProgress" (click)="stopSolving()">Stop</button>             <!--- TODO --->
-      <button *ngIf="!isBoardEmpty" (click)="clearBoard()">Clear</button>
-      <button *ngIf="isBoardEmpty" (click)="clearBoard()">Generate Board</button>  <!--- TODO --->
+      <button *ngIf="solvingInProgress" (click)="stopSolving()">Stop</button>
+      <button *ngIf="!isBoardEmpty" (click)="clearBoard()" [disabled]="solvingInProgress">Clear</button>
+      <button *ngIf="isBoardEmpty" (click)="clearBoard()">Generate Board</button>
 
       <select *ngIf="!isBoardEmpty" (change)="changeSpeed($event)">
         <option value="1">Fast</option>
         <option value="100">Slow</option>
-        <option value="500">Slowmotion</option>
+        <option value="500">Slow Motion</option>
       </select>
 
-      <select *ngIf="isBoardEmpty" (change)="changeSpeed($event)">                 <!--- TODO --->
+      <select *ngIf="isBoardEmpty" (change)="changeSpeed($event)">
         <option value="A">Easy</option>
         <option value="B">Mid</option>
         <option value="C">Hard</option>
