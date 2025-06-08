@@ -13,7 +13,7 @@ export class SudokuComponent implements OnInit {
   matrix: number[][] = [];
   isBoardEmpty: boolean;
   solvingInProgress = false;
-  speed = 1;
+  speed = 500;
 
   options = [
     { name: 'Naked Pairs', active: true, info: 'Identification of cells in which only a certain number of candidates are possible.' },
@@ -39,10 +39,10 @@ export class SudokuComponent implements OnInit {
 
   initMatrix(): void {
     this.isBoardEmpty = true;
-    this.matrix = [
-      [0, 0, 0, 0, 0, 0, 0, 0, 0],
-      [0, 0, 0, 0, 0, 0, 0, 0, 0],
-      [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    let nakedPairs = [
+      [2, 9, 0, 0, 0, 0, 0, 0, 0],
+      [1, 5, 6, 0, 0, 0, 0, 0, 0],
+      [4, 0, 0, 0, 0, 0, 8, 0, 0],
       [0, 0, 0, 0, 0, 0, 0, 0, 0],
       [0, 0, 0, 0, 0, 0, 0, 0, 0],
       [0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -50,6 +50,7 @@ export class SudokuComponent implements OnInit {
       [0, 0, 0, 0, 0, 0, 0, 0, 0],
       [0, 0, 0, 0, 0, 0, 0, 0, 0],
     ];
+    this.matrix = nakedPairs;
   }
 
   clearBoard(): void {
@@ -173,6 +174,6 @@ export class SudokuComponent implements OnInit {
   private hasAllCellsVisited(n: number): boolean {
     return n === this.numOfFields;
   }
-
+  
 
 }
