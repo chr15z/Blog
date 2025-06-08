@@ -37,14 +37,12 @@
 }
 
 .work-item {
-  display: block;
   width: auto;
   background: var(--background-color);
   padding: 1em;
   border-radius: 15px;
   transition: transform 0.3s ease;
   display: flex;
-  align-items: flex-start;
   gap: 15px;
   align-items: center;
 }
@@ -59,7 +57,6 @@
   border-radius: 15px;
   transition: transform 0.3s ease;
   display: flex;
-  align-items: flex-start;
   gap: 15px;
   align-items: center;
 

@@ -6,7 +6,7 @@ import {HomePageSectionDTO} from "../../dtos/homePageSectionDTO";
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent {
 
   homePageContent = [];
 
@@ -35,8 +35,6 @@ export class HomeComponent implements OnInit {
     this.homePageContent = [first, second, third];
   }
 
-  ngOnInit() {
-  }
   isVideo(filePath: string): boolean {
     return filePath.endsWith('.mp4') || filePath.endsWith('.webm') || filePath.endsWith('.ogg');
   }

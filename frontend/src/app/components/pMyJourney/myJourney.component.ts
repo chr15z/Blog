@@ -6,7 +6,7 @@ import { HomePageSectionDTO } from '../../dtos/homePageSectionDTO';
   templateUrl: './myJourney.component.html',
   styleUrls: ['./myJourney.component.scss']
 })
-export class MyJourneyComponent implements OnInit {
+export class MyJourneyComponent {
   homePageContent: HomePageSectionDTO[] = [];
   technologies: HomePageSectionDTO;
 
@@ -36,8 +36,6 @@ export class MyJourneyComponent implements OnInit {
       { name: "CI/CD", image: "assets/images/logo-github.png", info:"GitHub Actions is a continuous integration/continuous deployment tool from Microsoft that is tightly integrated with GitHub. They simplify development workflows and support the implementation of tests, builds, and simple deployments." },
     ];
   }
-
-  ngOnInit() {}
 
   isVideo(filePath: string): boolean {
     return filePath.endsWith('.mp4') || filePath.endsWith('.webm') || filePath.endsWith('.ogg');

@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {BlurService} from "../../services/blur.service";
 
 @Component({
   selector: 'app-notFound',

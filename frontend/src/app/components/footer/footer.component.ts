@@ -9,52 +9,19 @@ import {ValidationException} from "../../exception/ValidationException";
   templateUrl: './footer.component.html',
   styleUrls: ['./footer.component.scss']
 })
-export class FooterComponent implements OnInit {
+export class FooterComponent {
   isDropdownOpen = false;
-  userName: string = '';
-  userEmail: string = '';
-  errorMessages: string[] = [];
-  showErrorToast: boolean = false;
 
-  constructor(private renderer: Renderer2,
-              private dropdownService: BlurService,
-              private newsletterService: NewsletterService) {
+  constructor(private readonly dropdownService: BlurService) {
     this.dropdownService.isBlurred.subscribe(state => {
       this.isDropdownOpen = state;
     });
-  }
-
-  ngOnInit() {
   }
 
   toggleBlur(isBlurred: boolean) {
     this.dropdownService.setBlurState(isBlurred);
   }
 
-  onAddUser(): void {
-    const user: UserDTO = {
-      name: this.userName,
-      email: this.userEmail
-    };
 
-    try {
-      this.newsletterService.addUserToNewsletter(user);
-      this.errorMessages = [];
-    } catch (error) {
-      if (error instanceof ValidationException) {
-        this.errorMessages = error.errors;
-        this.showErrorToast = true;
-        setTimeout(() => {
-          this.showErrorToast = false;
-        }, 5000);
-
-      } else {
-        console.error('Ein unbekannter Fehler ist aufgetreten:', error);
-      }
-    }
-  }
-  closeErrorToast(): void {
-    this.showErrorToast = false;
-  }
 
 }

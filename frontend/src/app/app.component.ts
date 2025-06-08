@@ -8,7 +8,7 @@ import {BlurService} from "./services/blur.service";
 })
 export class AppComponent {
   title = 'CZ Blog ';
-  constructor(private dropdownService: BlurService) { }
+  constructor(private readonly dropdownService: BlurService) { }
   isBlurred = false;
   ngOnInit(): void {
     this.dropdownService.isBlurred.subscribe(state => {

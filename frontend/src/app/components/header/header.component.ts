@@ -5,17 +5,16 @@ import {BlurService} from "../../services/blur.service";
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
   isDarkMode = true;
   isDropdownOpen = false;
 
-  constructor(private renderer: Renderer2,
-              private dropdownService: BlurService) {
+  constructor(private readonly renderer: Renderer2,
+              private readonly dropdownService: BlurService) {
     this.dropdownService.isBlurred.subscribe(state => {
       this.isDropdownOpen = state;
     });
   }
-  ngOnInit() {}
 
   toggleDarkMode(): void {
     this.isDarkMode = !this.isDarkMode;

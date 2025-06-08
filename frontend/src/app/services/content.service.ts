@@ -1,6 +1,4 @@
 import { Injectable } from '@angular/core';
-import {UserDTO} from "../dtos/userDTO";
-import { ValidationException } from '../exception/ValidationException';
 import {HomePageSectionDTO} from "../dtos/homePageSectionDTO";
 
 @Injectable({
