@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+// TODO: check if solving is possible with input grid, else its not terminating
 
 @Component({
   selector: 'app-sudoku',
@@ -6,10 +7,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./sudoku.component.scss']
 })
 export class SudokuComponent implements OnInit {
-  ANTX = 9; // Anzahl der Spalten
-  ANTY = 9; // Anzahl der Zeilen
-  numOfFields = this.ANTX * this.ANTY; // Gesamtanzahl der Felder
-
+  numCols = 9;
+  numRows = 9;
+  numOfFields = this.numCols * this.numRows;
   matrix: number[][] = [];
   isBoardEmpty: boolean;
   solvingInProgress = false;
@@ -80,14 +80,14 @@ export class SudokuComponent implements OnInit {
   }
 
   isNumberAllowed(row: number, col: number, num: number): boolean {
-    // Überprüfen, ob `num` in der Zeile oder Spalte existiert
-    for (let i = 0; i < this.ANTX; i++) {
+    // num in row or col ?
+    for (let i = 0; i < this.numCols; i++) {
       if (this.matrix[row][i] === num || this.matrix[i][col] === num) {
         return false;
       }
     }
 
-    // Überprüfen, ob `num` im 3x3-Block existiert
+    // num in 3x3 grid ?
     const startRow = Math.floor(row / 3) * 3;
     const startCol = Math.floor(col / 3) * 3;
     for (let i = 0; i < 3; i++) {
@@ -101,7 +101,8 @@ export class SudokuComponent implements OnInit {
     return true;
   }
 
-  findSolution(n: number, backtrack: () => void): void {
+  /** Helper functions **/
+  private findSolution(n: number, backtrack: () => void): void {
     if (!this.solvingInProgress) {
       return;
     }
@@ -112,7 +113,7 @@ export class SudokuComponent implements OnInit {
       return;
     }
 
-    const { row, col } = this.getCoords(n, this.ANTX);
+    const { row, col } = this.getCoords(n, this.numCols);
 
     if (this.isCellAlreadyOccupied(row, col)) {
       this.findSolution(n + 1, backtrack);
@@ -133,7 +134,7 @@ export class SudokuComponent implements OnInit {
         this.matrix[row][col] = num;
 
         this.findSolution(n + 1, () => {
-          this.matrix[row][col] = 0; // Rücksetzen, falls keine Lösung möglich
+          this.matrix[row][col] = 0;
           num++;
           tryNextNumber();
         });
@@ -158,7 +159,6 @@ export class SudokuComponent implements OnInit {
 
   }
 
-  // Helper functions
   private getCoords(n: number, width: number): { row: number, col: number } {
     return {
       row: Math.floor(n / width),
