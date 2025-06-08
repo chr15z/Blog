@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {SudokuBruteForceService} from "../../services/sudoku-brute-force.service";
 import {SudokuSimulatedAnnealingServiceService} from "../../services/sudoku-simulated-annealing-service.service";
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-sudoku',
@@ -8,7 +9,8 @@ import {SudokuSimulatedAnnealingServiceService} from "../../services/sudoku-simu
   styleUrls: ['./sudoku.component.scss']
 })
 export class SudokuComponent implements OnInit {
-  matrix: number[][] = [];
+  currentMatrix: number[][];
+  matrix: number[][];
   isBoardEmpty: boolean;
   solvingInProgress = false;
   speed = 1;
@@ -17,11 +19,20 @@ export class SudokuComponent implements OnInit {
   selectedOption = 'Brute Force';
 
   options = [
-    { name: 'Brute Force', active: true, info: 'Try every possibility.' },
-    { name: 'Simulated Annealing', active: false, info: 'Solving randomly by applying a cost function.'},
+    { name: 'Brute Force', active: true, info: 'Try every possibility.', text:'Brute force tries every possible combination until it finds a solution.\n' +
+        'For Sudoku, it means filling in empty cells one by one, checking if the current number placement is valid. If a conflict is found, it backtracks and tries a different number.\n' +
+        'This method guarantees a correct solution if one exists, but it can be slow for complex puzzles.\n' +
+        '\n'},
+    { name: 'Simulated Annealing', active: false, info: 'Solving randomly by applying a cost function.', text: 'Simulated Annealing is inspired by the process of heating and slowly cooling metal to reduce flaws.\n' +
+        'For Sudoku, it starts with a full grid that may have some rule violations. It then makes small changes (like swapping numbers) to reduce those violations with a cost function.\n' +
+        'Sometimes it accepts worse changes to escape local optima, but over time it becomes more selective.\n' +
+        'This method is faster than brute force for large problems but doesn’t always guarantee a perfect solution.\n' +
+        '\n'},
   ];
 
-  constructor(private readonly bruteForceSolver: SudokuBruteForceService, private readonly simulatedAnnealingSolver: SudokuSimulatedAnnealingServiceService) { }
+  constructor(private readonly bruteForceSolver: SudokuBruteForceService,
+              private readonly simulatedAnnealingSolver: SudokuSimulatedAnnealingServiceService,
+              private readonly http: HttpClient) { }
 
   ngOnInit(): void {
     this.initMatrix();
@@ -39,30 +50,19 @@ export class SudokuComponent implements OnInit {
   }
 
   initMatrix(): void {
+    this.pickRandomBoard();
     this.isBoardEmpty = true;
-    let nakedPairs = [
-      [2, 9, 0, 0, 0, 0, 0, 0, 0],
-      [1, 5, 6, 0, 0, 0, 0, 0, 0],
-      [4, 0, 0, 0, 0, 0, 8, 0, 0],
-      [0, 0, 0, 0, 0, 0, 0, 0, 0],
-      [0, 0, 0, 0, 0, 0, 0, 0, 0],
-      [0, 0, 0, 0, 0, 0, 0, 0, 0],
-      [0, 0, 0, 0, 0, 0, 0, 0, 0],
-      [0, 0, 0, 0, 0, 0, 0, 0, 0],
-      [0, 0, 0, 0, 0, 0, 0, 0, 0],
-    ];
-    this.matrix = nakedPairs;
   }
 
   clearBoard(): void {
-    this.initMatrix();
+    this.currentMatrix = this.matrix.map(row => [...row]);
   }
 
   editMatrixManually(event: Event, row: number, col: number): void {
     this.isBoardEmpty = false;
     const input = (event.target as HTMLInputElement).value;
     const value = parseInt(input, 10) || 0;
-    this.matrix[row][col] = value >= 1 && value <= 9 ? value : 0;
+    this.currentMatrix[row][col] = value >= 1 && value <= 9 ? value : 0;
   }
 
   solve(): void {
@@ -72,7 +72,7 @@ export class SudokuComponent implements OnInit {
 
       if (this.isStrategieActive("Brute Force")){
         this.bruteForceSolver.solve(
-          this.matrix,
+          this.currentMatrix,
           this.speed,
           () => this.solvingInProgress,
           () => {
@@ -84,7 +84,7 @@ export class SudokuComponent implements OnInit {
 
       if (this.isStrategieActive("Simulated Annealing")) {
         this.simulatedAnnealingSolver.solve(
-          this.matrix,
+          this.currentMatrix,
           this.speed,
           () => this.solvingInProgress,
           () => {
@@ -107,6 +107,25 @@ export class SudokuComponent implements OnInit {
     option.active = true;
     this.selectedOption = option.name;
   }
+
+  pickRandomBoard(){
+    this.http.get<number[][][]>('assets/boards.json').subscribe({
+      next: (boards) => {
+        const randomIndex = Math.floor(Math.random() * boards.length);
+        this.matrix = boards[randomIndex].map(row => [...row]);
+        this.currentMatrix = this.matrix.map(row => [...row]);
+      },
+      error: (err) => {
+        console.error('Fehler beim Laden der Boards:', err);
+      }
+    });
+  }
+
+  getSelectedOptionText(): string {
+    const selected = this.options.find(o => o.name === this.selectedOption);
+    return selected?.text || '';
+  }
+
 
   private isStrategieActive(strategie: string): boolean{
     return this.options.find(opt => opt.name === strategie)?.active;

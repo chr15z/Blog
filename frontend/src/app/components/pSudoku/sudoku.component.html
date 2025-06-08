@@ -2,7 +2,7 @@
   <div class="sudoku">
     <table class="board">
       <tbody>
-      <tr *ngFor="let row of matrix; let i = index">
+      <tr *ngFor="let row of currentMatrix; let i = index">
         <td *ngFor="let cell of row; let j = index">
           <input
             type="text"
@@ -17,8 +17,8 @@
     <div>
       <button *ngIf="!solvingInProgress" (click)="solve()">Solve!</button>
       <button *ngIf="solvingInProgress" (click)="stopSolving()">Stop</button>
-      <button *ngIf="!isBoardEmpty" (click)="clearBoard()" [disabled]="solvingInProgress">Clear</button>
-      <button *ngIf="isBoardEmpty" (click)="clearBoard()">Generate Board</button>
+      <button (click)="clearBoard()" [disabled]="solvingInProgress">Clear Progress</button>
+      <button (click)="pickRandomBoard()" [disabled]="solvingInProgress"><i class="fa-solid fa-rotate-right"></i></button>
 
       <div>
         <label for="speedRange">Speed (ms delay): {{ speed }}</label>
@@ -52,15 +52,22 @@
       </label>
     </div>
 
-    <h1>Info</h1>
     <div *ngIf="selectedOption === 'Simulated Annealing'">
+      <h1>
       <span *ngIf="bestCostSimulatedAnnealing === 0">✅</span>
       <span *ngIf="bestCostSimulatedAnnealing > 0">❌</span>
-      Current Violations: {{ bestCostSimulatedAnnealing }}
+       Current Violations: {{ bestCostSimulatedAnnealing }} </h1>
     </div>
     <div *ngIf="selectedOption === 'Brute Force'">
+      <h1>
       Number of Recursions: {{ recursiveCallsBruteForce }}
+      </h1>
     </div>
+
+    <div class="info-text" *ngIf="getSelectedOptionText()">
+      <p *ngFor="let line of getSelectedOptionText().split('\n')">
+        {{ line }}
+      </p>
 
 
   </div>
