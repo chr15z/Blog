@@ -8,10 +8,10 @@ import { Component, OnInit } from '@angular/core';
 export class SudokuComponent implements OnInit {
   ANTX = 9; // Anzahl der Spalten
   ANTY = 9; // Anzahl der Zeilen
-  N = this.ANTX * this.ANTY; // Gesamtanzahl der Felder
+  numOfFields = this.ANTX * this.ANTY; // Gesamtanzahl der Felder
 
   matrix: number[][] = [];
-  isMatrixClear: boolean;
+  isBoardEmpty: boolean;
   solvingInProgress = false;
   speed = 1;
 
@@ -19,6 +19,7 @@ export class SudokuComponent implements OnInit {
     { name: 'Naked Pairs', active: true, info: 'Identification of cells in which only a certain number of candidates are possible.' },
     { name: 'Hidden Singles', active: true, info: 'Numbers that are only possible in a specific cell within a row, column or region' },
     { name: 'X-Wing', active: true, info: 'Advanced pattern recognition' },
+    { name: 'Simulated Annealing', active: false, info: 'Solving randomly by applying a cost function'},
   ];
 
 
@@ -27,15 +28,17 @@ export class SudokuComponent implements OnInit {
   ngOnInit(): void {
     this.initMatrix();
   }
+
   toggleOption(option: any) {
     option.active = !option.active;
   }
+
   stopSolving() {
     this.solvingInProgress = false;
   }
 
   initMatrix(): void {
-    this.isMatrixClear = true;
+    this.isBoardEmpty = true;
     this.matrix = [
       [0, 0, 0, 0, 0, 0, 0, 0, 0],
       [0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -53,15 +56,15 @@ export class SudokuComponent implements OnInit {
     this.initMatrix();
   }
 
-  updateMatrix(event: Event, row: number, col: number): void {
-    this.isMatrixClear = false;
+  editMatrixManually(event: Event, row: number, col: number): void {
+    this.isBoardEmpty = false;
     const input = (event.target as HTMLInputElement).value;
     const value = parseInt(input, 10) || 0;
     this.matrix[row][col] = value >= 1 && value <= 9 ? value : 0;
   }
 
   solve(): void {
-    this.isMatrixClear = false
+    this.isBoardEmpty = false
       if (!this.solvingInProgress) {
         this.solvingInProgress = true;
         this.findSolution(0, () => {
@@ -76,7 +79,7 @@ export class SudokuComponent implements OnInit {
     this.speed = speed || 1;
   }
 
-  isValid(row: number, col: number, num: number): boolean {
+  isNumberAllowed(row: number, col: number, num: number): boolean {
     // Überprüfen, ob `num` in der Zeile oder Spalte existiert
     for (let i = 0; i < this.ANTX; i++) {
       if (this.matrix[row][i] === num || this.matrix[i][col] === num) {
@@ -102,44 +105,63 @@ export class SudokuComponent implements OnInit {
     if (!this.solvingInProgress) {
       return;
     }
-    if (n === this.N) {
+
+    // if gone through all cells
+    if (n === this.numOfFields) {
       this.solvingInProgress = false;
       console.log('Complete!');
       return;
     }
 
-    const row = Math.floor(n / this.ANTX);
-    const col = n % this.ANTY;
+    const { row, col } = this.getCoords(n, this.ANTX);
 
-    if (this.matrix[row][col] !== 0) {
+    if (this.isCellAlreadyOccupied(row, col)) {
       this.findSolution(n + 1, backtrack);
       return;
     }
 
-    let num = 1; // Starte mit der ersten Zahl
+    // Try Number 1 - 9
+    let num = 1;
     const tryNumber = () => {
+
       if (num > 9) {
         setTimeout(() => {
-          this.matrix[row][col] = 0; // Reset der Zelle
+          this.matrix[row][col] = 0;
           backtrack();
         }, this.speed);
         return;
       }
 
-      if (this.isValid(row, col, num)) {
+      if (this.isNumberAllowed(row, col, num)) {
         setTimeout(() => {
-          this.matrix[row][col] = num; // Setze die Zahl
+          this.matrix[row][col] = num;
           this.findSolution(n + 1, () => {
-            this.matrix[row][col] = 0; // Rücksetzen, wenn es keine Lösung gibt
+
+            this.matrix[row][col] = 0; // Reset if there is no solution
             num++;
-            tryNumber(); // Versuche die nächste Zahl
+            tryNumber();
+
           });
         }, this.speed);
+
       } else {
-        num++; // Versuche die nächste Zahl
+        num++;
         tryNumber();
       }
     };
     tryNumber();
   }
+
+  // Helper functions
+  private getCoords(n: number, width: number): { row: number, col: number } {
+    return {
+      row: Math.floor(n / width),
+      col: n % width
+    };
+  }
+
+  private isCellAlreadyOccupied(row: number, col: number) {
+    return this.matrix[row][col] !== 0;
+  }
+
 }
