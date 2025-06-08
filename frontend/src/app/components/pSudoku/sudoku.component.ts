@@ -12,6 +12,8 @@ export class SudokuComponent implements OnInit {
   isBoardEmpty: boolean;
   solvingInProgress = false;
   speed = 1;
+  bestCostSimulatedAnnealing = this.simulatedAnnealingSolver.getBestCosts();
+  selectedOption: any = null;
 
   options = [
     { name: 'Brute Force', active: true, info: 'Try every possibility.' },
@@ -23,10 +25,10 @@ export class SudokuComponent implements OnInit {
 
   ngOnInit(): void {
     this.initMatrix();
-  }
+    this.simulatedAnnealingSolver.bestCost$.subscribe(cost => {
+      this.bestCostSimulatedAnnealing = cost;
+    });
 
-  toggleOption(option: any) {
-    option.active = !option.active;
   }
 
   stopSolving() {
@@ -102,5 +104,11 @@ export class SudokuComponent implements OnInit {
   private isStrategieActive(strategie: string): boolean{
     return this.options.find(opt => opt.name === strategie)?.active;
   }
+  selectOption(option: any) {
+    this.options.forEach(o => o.active = false);
+    option.active = true;
+    this.selectedOption = option;
+  }
+
 
 }

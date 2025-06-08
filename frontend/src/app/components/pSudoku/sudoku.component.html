@@ -37,20 +37,25 @@
 
   <div class="stats">
     <h1>Tactics</h1>
-    <div class="option" *ngFor="let option of options">
-      <div>
-        <span>{{ option.name }}</span>
+    <div class="option" *ngFor="let option of options; let i = index">
+      <input
+        type="radio"
+        name="tactics"
+        [id]="'option' + i"
+        [checked]="option.active"
+        (change)="selectOption(option)" />
+      <label [for]="'option' + i">
+        {{ option.name }}
         <span class="info" title="{{ option.info }}">ℹ️</span>
-      </div>
-        <i
-          [class]="option.active ? 'fa-solid fa-toggle-on' : 'fa-solid fa-toggle-off'"
-          (click)="toggleOption(option)"
-          class="toggle-icon">
-        </i>
+      </label>
     </div>
 
-
-    <h1>History</h1>
+    <h1>Info</h1>
+    <div *ngIf="selectedOption?.name === 'Simulated Annealing'">
+      Best Cost (Simulated Annealing): {{ bestCostSimulatedAnnealing }}
+    </div>
 
   </div>
+
+
 </div>
