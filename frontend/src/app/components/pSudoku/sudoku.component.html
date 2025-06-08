@@ -20,17 +20,19 @@
       <button *ngIf="!isBoardEmpty" (click)="clearBoard()" [disabled]="solvingInProgress">Clear</button>
       <button *ngIf="isBoardEmpty" (click)="clearBoard()">Generate Board</button>
 
-      <select *ngIf="!isBoardEmpty" (change)="changeSpeed($event)">
-        <option value="1">Fast</option>
-        <option value="100">Slow</option>
-        <option value="500">Slow Motion</option>
-      </select>
+      <div>
+        <label for="speedRange">Speed (ms delay): {{ speed }}</label>
+        <input
+          id="speedRange"
+          type="range"
+          min="0"
+          max="500"
+          [value]="speed"
+          (input)="changeSpeed($event)"
+          [disabled]="solvingInProgress"
+        />
+      </div>
 
-      <select *ngIf="isBoardEmpty" (change)="changeSpeed($event)">
-        <option value="A">Easy</option>
-        <option value="B">Mid</option>
-        <option value="C">Hard</option>
-      </select>
     </div>
   </div>
 
@@ -52,8 +54,11 @@
 
     <h1>Info</h1>
     <div *ngIf="selectedOption?.name === 'Simulated Annealing'">
-      Best Cost (Simulated Annealing): {{ bestCostSimulatedAnnealing }}
+      <span *ngIf="bestCostSimulatedAnnealing === 0">✅</span>
+      <span *ngIf="bestCostSimulatedAnnealing > 0">❌</span>
+      Current Violations: {{ bestCostSimulatedAnnealing }}
     </div>
+
 
   </div>
 

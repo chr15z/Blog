@@ -12,7 +12,7 @@ export class SudokuComponent implements OnInit {
   isBoardEmpty: boolean;
   solvingInProgress = false;
   speed = 1;
-  bestCostSimulatedAnnealing = this.simulatedAnnealingSolver.getBestCosts();
+  bestCostSimulatedAnnealing: number;
   selectedOption: any = null;
 
   options = [
@@ -26,6 +26,7 @@ export class SudokuComponent implements OnInit {
   ngOnInit(): void {
     this.initMatrix();
     this.simulatedAnnealingSolver.bestCost$.subscribe(cost => {
+      console.log(cost);
       this.bestCostSimulatedAnnealing = cost;
     });
 
