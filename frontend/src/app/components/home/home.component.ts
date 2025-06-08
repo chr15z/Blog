@@ -30,7 +30,7 @@ export class HomeComponent {
     third.subtitle = "Sudoku Solving Algorithms: From Basic Strategies to Complex Computational Methods";
     third.image = "assets/images/sudoku.jpeg";
     third.id = 3;
-    third.link = "/notFound";
+    third.link = "/sudoku";
 
     this.homePageContent = [first, second, third];
   }
