@@ -1,4 +1,5 @@
 sudoku:
 - Number of Recursions: muss genullt werden
+- Current Violations: muss genullt werden
 - Visuelles Feedback mit den violations
 - buttons ausgrauen die nicht benutzt werden dürfen
