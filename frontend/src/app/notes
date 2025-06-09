@@ -1,6 +1,4 @@
-home:
-- mouse scrolling fixieren
-- myJourney GIF transparent machen
-
 sudoku:
--
+- Number of Recursions: muss genullt werden
+- Visuelles Feedback mit den violations
+- buttons ausgrauen die nicht benutzt werden dürfen
