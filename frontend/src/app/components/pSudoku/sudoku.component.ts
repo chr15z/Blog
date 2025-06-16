@@ -25,7 +25,8 @@ export class SudokuComponent implements OnInit {
       info: 'Try every possibility.',
       text: 'Brute force tries every possible combination until it finds a solution.\n' +
         'For Sudoku, it means filling in empty cells one by one, checking if the current number placement is valid. If a conflict is found, it backtracks and tries a different number.\n' +
-        'This method guarantees a correct solution if one exists, but it can be slow for complex puzzles.\n'
+        'This method guarantees a correct solution if one exists, but it can be slow for complex puzzles.\n' +
+        '\n'
     },
     {
       name: 'Simulated Annealing',
@@ -33,24 +34,26 @@ export class SudokuComponent implements OnInit {
       info: 'Solving randomly by applying a cost function.',
       text: 'Simulated Annealing is inspired by the process of heating and slowly cooling metal to reduce flaws.\n' +
         'For Sudoku, it starts with a full grid that may have some rule violations. It then makes small changes (like swapping numbers) to reduce those violations with a cost function.\n' +
-        'Sometimes it accepts worse changes to escape local optima, but over time it becomes more selective.\n'
+        'Sometimes it accepts worse changes to escape local optima, but over time it becomes more selective.\n' +
+        'This method is faster than brute force for large problems but doesn’t always guarantee a perfect solution.\n' +
+        '\n'
     },
   ];
 
-  constructor(
-    private readonly bruteForceSolver: SudokuBruteForceService,
-    private readonly simulatedAnnealingSolver: SudokuSimulatedAnnealingServiceService,
-    private readonly http: HttpClient
-  ) {}
+  constructor(private readonly bruteForceSolver: SudokuBruteForceService,
+              private readonly simulatedAnnealingSolver: SudokuSimulatedAnnealingServiceService,
+              private readonly http: HttpClient) {
+  }
 
   ngOnInit(): void {
     this.initMatrix();
     this.simulatedAnnealingSolver.bestCost$.subscribe(cost => {
       this.bestCostSimulatedAnnealing = cost;
     });
-    this.bruteForceSolver.recursiveCalls$.subscribe(calls => {
-      this.recursiveCallsBruteForce = calls;
+    this.bruteForceSolver.recursiveCalls$.subscribe(recursiveCalls => {
+      this.recursiveCallsBruteForce = recursiveCalls;
     });
+
   }
 
   stopSolving() {
@@ -77,23 +80,23 @@ export class SudokuComponent implements OnInit {
 
   solve(): void {
     this.isBoardEmpty = false;
-    if (this.solvingInProgress) return;
+    if (this.solvingInProgress) {
+      return;
+    }
     this.solvingInProgress = true;
 
     if (this.isStrategieActive("Brute Force")) {
+
       this.bruteForceSolver.solve(
         this.currentMatrix,
         this.speed,
         () => this.solvingInProgress,
         () => {
           this.solvingInProgress = false;
-          console.log('No solution! ❌');
-        },
-        () => {
-          this.solvingInProgress = false;
-          console.log('Solved successfully! ✅');
+          console.log('No solution! :(');
         }
       );
+
     }
 
     if (this.isStrategieActive("Simulated Annealing")) {
@@ -103,10 +106,11 @@ export class SudokuComponent implements OnInit {
         () => this.solvingInProgress,
         () => {
           this.solvingInProgress = false;
-          console.log('No solution! ❌');
+          console.log('No solution! :(');
         }
       );
     }
+
   }
 
   changeSpeed(event: Event): void {
@@ -138,7 +142,10 @@ export class SudokuComponent implements OnInit {
     return selected?.text || '';
   }
 
+
   private isStrategieActive(strategie: string): boolean {
     return this.options.find(opt => opt.name === strategie)?.active;
   }
+
+
 }
