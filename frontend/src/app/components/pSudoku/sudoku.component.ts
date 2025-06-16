@@ -125,6 +125,8 @@ export class SudokuComponent implements OnInit {
   }
 
   pickRandomBoard() {
+    this.recursiveCallsBruteForce = 0;
+    this.bestCostSimulatedAnnealing = 0;
     this.http.get<number[][][]>('assets/boards.json').subscribe({
       next: (boards) => {
         const randomIndex = Math.floor(Math.random() * boards.length);

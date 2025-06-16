@@ -3,16 +3,18 @@
     <table class="board">
       <tbody>
       <tr *ngFor="let row of currentMatrix; let i = index">
-        <td *ngFor="let cell of row; let j = index">
+        <td *ngFor="let cell of row; let j = index" [class.prefilled]="matrix[i][j] !== 0">
           <input
             type="text"
             [value]="cell > 0 ? cell : ''"
             (input)="editMatrixManually($event, i, j)"
+            [readonly]="matrix[i][j] !== 0"
           />
         </td>
       </tr>
       </tbody>
     </table>
+
 
     <div>
       <button *ngIf="!solvingInProgress" (click)="solve()">Solve!</button>

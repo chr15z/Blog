@@ -1,4 +1,3 @@
 sudoku:
 - Brute Force must be stoped?
-- Visuelles Feedback mit den violations
 - buttons ausgrauen die nicht benutzt werden dürfen
