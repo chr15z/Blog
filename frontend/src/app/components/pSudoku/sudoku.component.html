@@ -18,7 +18,8 @@
       <button *ngIf="!solvingInProgress" (click)="solve()">Solve!</button>
       <button *ngIf="solvingInProgress" (click)="stopSolving()">Stop</button>
       <button (click)="clearBoard()" [disabled]="solvingInProgress">Clear Progress</button>
-      <button (click)="pickRandomBoard()" [disabled]="solvingInProgress"><i class="fa-solid fa-rotate-right"></i></button>
+      <button (click)="pickRandomBoard()" [disabled]="solvingInProgress"><i class="fa-solid fa-rotate-right"></i>
+      </button>
 
       <div>
         <label for="speedRange">Speed (ms delay): {{ speed }}</label>
@@ -45,7 +46,7 @@
         name="tactics"
         [id]="'option' + i"
         [checked]="option.active"
-        (change)="selectOption(option)" />
+        (change)="selectOption(option)"/>
       <label [for]="'option' + i">
         {{ option.name }}
         <span class="info" title="{{ option.info }}">ℹ️</span>
@@ -54,13 +55,13 @@
 
     <div *ngIf="selectedOption === 'Simulated Annealing'">
       <h1>
-      <span *ngIf="bestCostSimulatedAnnealing === 0">✅</span>
-      <span *ngIf="bestCostSimulatedAnnealing > 0">❌</span>
-       Current Violations: {{ bestCostSimulatedAnnealing }} </h1>
+        <span *ngIf="bestCostSimulatedAnnealing === 0">✅</span>
+        <span *ngIf="bestCostSimulatedAnnealing > 0">❌</span>
+        Current Violations: {{ bestCostSimulatedAnnealing }} </h1>
     </div>
     <div *ngIf="selectedOption === 'Brute Force'">
       <h1>
-      Number of Recursions: {{ recursiveCallsBruteForce }}
+        Number of Recursions: {{ recursiveCallsBruteForce }}
       </h1>
     </div>
 
@@ -70,7 +71,8 @@
       </p>
 
 
+    </div>
+
+
   </div>
-
-
 </div>

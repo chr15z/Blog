@@ -56,6 +56,8 @@ export class SudokuComponent implements OnInit {
 
   clearBoard(): void {
     this.currentMatrix = this.matrix.map(row => [...row]);
+    this.recursiveCallsBruteForce = 0;
+    this.bestCostSimulatedAnnealing = 0;
   }
 
   editMatrixManually(event: Event, row: number, col: number): void {

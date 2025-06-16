@@ -1,6 +1,4 @@
 sudoku:
-- Number of Recursions: muss genullt werden
-- Current Violations: muss genullt werden
 - Brute Force must be stoped?
 - Visuelles Feedback mit den violations
 - buttons ausgrauen die nicht benutzt werden dürfen

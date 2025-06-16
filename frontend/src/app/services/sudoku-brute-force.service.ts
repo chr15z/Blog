@@ -14,6 +14,7 @@ export class SudokuBruteForceService {
   public solve(matrix: number[][], speed: number, isRunning: () => boolean, onFinish: () => void): void {
     this.matrix = matrix;
     this.speed = speed;
+    this.recursiveCalls = 0;
 
     this.solveBruteForce(0, isRunning, () => {
       onFinish();
