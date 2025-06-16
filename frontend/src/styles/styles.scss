@@ -49,3 +49,9 @@ button:active {
 h1{
     color: var(--text-color-h1);
 }
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  filter: grayscale(70%);
+}
