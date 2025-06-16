@@ -1,82 +1,90 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {BehaviorSubject} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class SudokuBruteForceService {
-  private matrix: number[][] = [];
-  private speed: number;
-  private recursiveCallsSubject = new BehaviorSubject<number>(null);
-  public recursiveCalls$ = this.recursiveCallsSubject.asObservable();
   private recursiveCalls = 0;
+  private recursiveCallsSubject = new BehaviorSubject<number>(0);
+  recursiveCalls$ = this.recursiveCallsSubject.asObservable();
 
-  public solve(matrix: number[][], speed: number, isRunning: () => boolean, onFinish: () => void): void {
+  private matrix: number[][];
+  private speed = 1;
+
+  public solve(
+    matrix: number[][],
+    speed: number,
+    isRunning: () => boolean,
+    onFailure: () => void,
+    onSuccess: () => void
+  ): void {
     this.matrix = matrix;
     this.speed = speed;
     this.recursiveCalls = 0;
-
-    this.solveBruteForce(0, isRunning, () => {
-      onFinish();
-    });
+    this.solveBruteForce(0, isRunning, onFailure, onSuccess);
   }
 
-  private increaseRecursiveCalls() {
-    this.recursiveCalls++;
-    this.recursiveCallsSubject.next(this.recursiveCalls);
-  }
+  private solveBruteForce(
+    n: number,
+    isRunning: () => boolean,
+    onFailure: () => void,
+    onSuccess: () => void
+  ): void {
+    this.increaseRecursiveCalls();
 
-  private solveBruteForce(n: number, isRunning: () => boolean, backtrack: () => void): void {
-    this.increaseRecursiveCalls()
-    if (!isRunning()) return;
-
-    if (this.hasAllCellsVisited(n)) {
-      console.log('Complete!');
+    if (!isRunning()) {
+      onFailure(); // manuell abgebrochen
       return;
     }
 
-    const { row, col } = this.getCoords(n);
+    if (this.hasAllCellsVisited(n)) {
+      setTimeout(() => onSuccess(), this.speed);
+      return;
+    }
+
+    const {row, col} = this.getCoords(n);
 
     if (this.isCellAlreadyOccupied(row, col)) {
-      this.solveBruteForce(n + 1, isRunning, backtrack);
+      this.solveBruteForce(n + 1, isRunning, onFailure, onSuccess);
       return;
     }
 
     let num = 1;
 
-    const resetCellAndBacktrack = () => {
+    const resetAndBacktrack = () => {
       setTimeout(() => {
         this.matrix[row][col] = 0;
-        backtrack();
+        onFailure();
       }, this.speed);
     };
 
-    const placeNumberAndContinue = () => {
-      setTimeout(() => {
-        this.matrix[row][col] = num;
-        this.solveBruteForce(n + 1, isRunning, () => {
-          this.matrix[row][col] = 0;
-          num++;
-          tryNextNumber();
-        });
-      }, this.speed);
-    };
-
-    const tryNextNumber = () => {
+    const tryNext = () => {
       if (num > 9) {
-        resetCellAndBacktrack();
+        resetAndBacktrack();
         return;
       }
 
       if (this.isNumberAllowed(row, col, num)) {
-        placeNumberAndContinue();
+        this.matrix[row][col] = num;
+        setTimeout(() => {
+          this.solveBruteForce(n + 1, isRunning, () => {
+            this.matrix[row][col] = 0;
+            num++;
+            tryNext();
+          }, onSuccess);
+        }, this.speed);
       } else {
         num++;
-        tryNextNumber();
+        tryNext();
       }
     };
 
-    tryNextNumber();
+    tryNext();
+  }
+
+  private hasAllCellsVisited(n: number): boolean {
+    return n >= 81;
   }
 
   private getCoords(n: number): { row: number, col: number } {
@@ -90,29 +98,28 @@ export class SudokuBruteForceService {
     return this.matrix[row][col] !== 0;
   }
 
-  private hasAllCellsVisited(n: number): boolean {
-    return n === 81;
+  private isNumberAllowed(row: number, col: number, num: number): boolean {
+    return (
+      !this.matrix[row].includes(num) &&
+      !this.matrix.some(r => r[col] === num) &&
+      this.getBoxValues(row, col).every(val => val !== num)
+    );
   }
 
-  private isNumberAllowed(row: number, col: number, num: number): boolean {
-    // check row and column
-    for (let i = 0; i < 9; i++) {
-      if (this.matrix[row][i] === num || this.matrix[i][col] === num) {
-        return false;
+  private getBoxValues(row: number, col: number): number[] {
+    const box: number[] = [];
+    const boxStartRow = row - row % 3;
+    const boxStartCol = col - col % 3;
+    for (let i = boxStartRow; i < boxStartRow + 3; i++) {
+      for (let j = boxStartCol; j < boxStartCol + 3; j++) {
+        box.push(this.matrix[i][j]);
       }
     }
+    return box;
+  }
 
-    // check 3x3 box
-    const startRow = Math.floor(row / 3) * 3;
-    const startCol = Math.floor(col / 3) * 3;
-    for (let i = 0; i < 3; i++) {
-      for (let j = 0; j < 3; j++) {
-        if (this.matrix[startRow + i][startCol + j] === num) {
-          return false;
-        }
-      }
-    }
-
-    return true;
+  private increaseRecursiveCalls(): void {
+    this.recursiveCalls++;
+    this.recursiveCallsSubject.next(this.recursiveCalls);
   }
 }
