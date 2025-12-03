@@ -1,4 +1,5 @@
 export const environment = {
-  production: true,
+  production: false,
   apiUrl: 'https://api.example.com',
+  apiSportsKey: 'DEIN_API_SPORTS_KEY',
 };

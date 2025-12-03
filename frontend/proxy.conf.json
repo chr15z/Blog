@@ -1,0 +1,17 @@
+[
+  {
+    "context": ["/wdqs"],
+    "target": "https://query.wikidata.org",
+    "secure": true,
+    "changeOrigin": true,
+    "logLevel": "info",
+    "pathRewrite": { "^/wdqs": "" },
+
+    // Wichtig bei WDQS:
+    "timeout": 120000,
+    "proxyTimeout": 120000,
+    "headers": {
+      "User-Agent": "football-ttt/0.1 (dev@example.com)"
+    }
+  }
+]

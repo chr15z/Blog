@@ -2,7 +2,7 @@
   <section class="snap-section hero" *ngFor="let section of homePageContent; let i = index" [ngClass]="{'reverse': i % 2 !== 0}">
     <div class="hero-content">
       <h1>{{ section.title }}</h1>
-      <p [innerHTML]="section.subtitle"></p>
+      <p class="subtitle" [innerHTML]="section.subtitle"></p>
     </div>
     <div>
       <ng-container *ngIf="isVideo(section.image); else imageTemplate">

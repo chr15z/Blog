@@ -7,6 +7,7 @@ import {SudokuComponent} from "./components/pSudoku/sudoku.component";
 import {MyJourneyComponent} from "./components/pMyJourney/myJourney.component";
 import {ContactComponent} from "./components/contact/contact.component";
 import {TicketLineComponent} from "./components/pTicketLine/ticketLine.component";
+import {FootballComponent} from "./components/football/football.component";
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -16,7 +17,7 @@ const routes: Routes = [
   {path: 'sudoku', component: SudokuComponent},
   {path: 'myJourney', component: MyJourneyComponent},
   {path: 'ticketLine', component: TicketLineComponent},
-
+  {path: 'football', component: FootballComponent},
 ];
 
 @NgModule({

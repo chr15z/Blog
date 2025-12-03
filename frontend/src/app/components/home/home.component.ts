@@ -23,7 +23,7 @@ export class HomeComponent {
     second.subtitle = "Developing a Cutting-Edge Ticketing Platform for Concerts, Movies, and More";
     second.image = "assets/images/ticket2.jpg";
     second.id = 2;
-    second.link = "/notFound";
+    second.link = "/ticketLine";
 
     const third = new HomePageSectionDTO();
     third.title = "Cracking the Code";
