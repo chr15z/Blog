@@ -35,7 +35,7 @@
 
   <section class="tech-section snap-section">
     <h1>{{ technologies.title }}</h1>
-    <p>{{ technologies.subtitle }}</p>
+    <p [innerHTML]="technologies.subtitle"></p>
     <div class="tech-grid">
       <div *ngFor="let tech of technologies.technologies" class="tech-item">
         <img [src]="tech.image" [alt]="tech.name">
@@ -44,5 +44,4 @@
       </div>
     </div>
   </section>
-
 </div>

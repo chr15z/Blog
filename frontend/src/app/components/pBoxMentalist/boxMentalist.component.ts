@@ -1,54 +1,75 @@
-import {Component} from '@angular/core';
-import {HomePageSectionDTO} from "../../dtos/homePageSectionDTO";
-import {ContentService, TechnologieKey} from "../../services/content.service";
-import {TechnologieDTO} from "../../dtos/technologieDTO";
+import { Component } from '@angular/core';
+import { ContentService, TechnologieKey } from '../../services/content.service';
+import { TechnologieDTO } from '../../dtos/technologieDTO';
+import { DetailViewDTO } from '../../dtos/detailViewDTO';
+
+type HeroSectionVM = {
+  id: number;
+  title: string;
+  subtitle: string; // html string
+  image: string;
+};
+
+type TechnologiesSectionVM = {
+  title: string;
+  subtitle: string;
+  technologies: TechnologieDTO[];
+};
 
 @Component({
   selector: 'app-notFound',
   templateUrl: './boxMentalist.component.html',
-  styleUrls: ['./boxMentalist.component.scss']
+  styleUrls: ['./boxMentalist.component.scss'],
 })
 export class BoxMentalistComponent {
-  homePageContent: HomePageSectionDTO[] = [];
-  technologies: HomePageSectionDTO;
+  homePageContent: HeroSectionVM[] = [];
+  technologies!: TechnologiesSectionVM;
+
   private readonly techKeys: TechnologieKey[] = [
     'swift',
     'kotlin',
     'gloves',
     'githubActions',
   ];
+
   isMuted: Record<number, boolean> = {};
 
-  constructor(contentService: ContentService) {
-    const boxMentalist = contentService.getDetailViewSection("boxMentalist")
-    const first = new HomePageSectionDTO();
-    first.title = "Idea";
-    first.subtitle = boxMentalist.explanation;
-    first.image = boxMentalist.image;
+  constructor(private contentService: ContentService) {
+    const detail = this.contentService.getDetailViewSection('boxMentalist') as DetailViewDTO;
 
-    const second = new HomePageSectionDTO();
-    second.title = "Features";
-    second.subtitle = boxMentalist.features;
-    second.image = boxMentalist.image;
+    this.homePageContent = [
+      this.buildHeroSection(1, 'Idea', detail.explanation, detail.image),
+      this.buildHeroSection(2, 'Features', detail.features, detail.image),
+    ];
 
-    this.homePageContent = [first, second];
-
-    const third = new HomePageSectionDTO();
-    third.title = "Technologies";
-    third.subtitle = boxMentalist.tech
-    third.technologies = this.techKeys
-      .map((k) => contentService.getTechnologieSection(k))
-      .filter((x): x is TechnologieDTO => x !== null);
-
-    this.technologies = third;
+    this.technologies = {
+      title: 'Technologies',
+      subtitle: detail.tech,
+      technologies: this.techKeys
+        .map((k) => this.contentService.getTechnologieSection(k))
+        .filter((t): t is TechnologieDTO => t !== null),
+    };
 
     for (const s of this.homePageContent) {
       this.isMuted[s.id] = true;
     }
   }
 
+  private buildHeroSection(
+    id: number,
+    title: string,
+    subtitle: string,
+    image: string
+  ): HeroSectionVM {
+    return { id, title, subtitle, image };
+  }
+
   isVideo(filePath: string): boolean {
-    return filePath.endsWith('.mp4') || filePath.endsWith('.webm') || filePath.endsWith('.ogg');
+    return (
+      filePath.endsWith('.mp4') ||
+      filePath.endsWith('.webm') ||
+      filePath.endsWith('.ogg')
+    );
   }
 
   toggleMute(video: HTMLVideoElement, id: number) {
@@ -56,5 +77,4 @@ export class BoxMentalistComponent {
     this.isMuted[id] = next;
     video.muted = next;
   }
-
 }
