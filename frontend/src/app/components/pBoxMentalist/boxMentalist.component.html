@@ -1,0 +1,48 @@
+<div class="smooth">
+  <section class="snap-section hero" *ngFor="let section of homePageContent; let i = index" [ngClass]="{'reverse': i % 2 !== 0}">
+    <div class="hero-content">
+      <h1>{{ section.title }}</h1>
+      <p class="subtitle" [innerHTML]="section.subtitle"></p>
+    </div>
+    <div>
+      <ng-container *ngIf="isVideo(section.image); else imageTemplate">
+        <div class="video-wrapper">
+          <video
+            #vid
+            autoplay
+            loop
+            playsinline
+            [muted]="true"
+            [controls]="false">
+            <source [src]="section.image" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+
+          <button
+            type="button"
+            class="mute-btn"
+            (click)="toggleMute(vid, section.id)">
+            {{ isMuted[section.id] ? '🔇' : '🔊' }}
+          </button>
+        </div>
+      </ng-container>
+
+      <ng-template #imageTemplate>
+        <img [src]="section.image" alt="Hero Bild">
+      </ng-template>
+    </div>
+  </section>
+
+  <section class="tech-section snap-section">
+    <h1>{{ technologies.title }}</h1>
+    <p>{{ technologies.subtitle }}</p>
+    <div class="tech-grid">
+      <div *ngFor="let tech of technologies.technologies" class="tech-item">
+        <img [src]="tech.image" [alt]="tech.name">
+        <span>{{ tech.name }}</span>
+        <div class="tech-info">{{ tech.info }}</div>
+      </div>
+    </div>
+  </section>
+
+</div>

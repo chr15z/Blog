@@ -1,7 +1,7 @@
 <div class="smooth">
   <section class="snap-section hero">
     <div class="hero-image image-with-bg">
-      <img src="../../../assets/images/home-VR.png" class="image-with-bg"/>
+      <img src="../../../assets/images/home.png" class="image-with-bg"/>
     </div>
 
     <div class="hero-content">
@@ -22,11 +22,26 @@
     <div>
       <!-- Bedingte Anzeige: Video oder Bild -->
       <ng-container *ngIf="isVideo(section.image); else imageTemplate">
-        <video autoplay muted loop playsinline>
-          <source [src]="section.image" type="video/mp4">
-          Your browser does not support the video tag.
-        </video>
+        <div class="video-wrapper">
+          <video
+            #vid
+            autoplay
+            loop
+            playsinline
+            [muted]="isMuted[i]">
+            <source [src]="section.image" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+
+          <button
+            type="button"
+            class="mute-btn"
+            (click)="toggleMute(vid, i)">
+            {{ isMuted[i] ? '🔇' : '🔊' }}
+          </button>
+        </div>
       </ng-container>
+
       <ng-template #imageTemplate>
         <img [src]="section.image" alt="Hero Bild">
       </ng-template>

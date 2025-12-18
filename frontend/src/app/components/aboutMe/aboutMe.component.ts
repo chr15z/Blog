@@ -28,24 +28,4 @@ export class AboutMeComponent implements OnInit {
     }, 2000);
   }
 
-
-  downloadPdf() {
-    // URL zur PDF-Datei (entweder lokal oder auf einem Server gehostet)
-    const pdfUrl = 'assets/CV.pdf';  // Wenn die Datei lokal im assets-Ordner liegt
-    const pdfName = 'CV.pdf';  // Name der herunterzuladenden Datei
-
-    // Erstelle einen unsichtbaren Link und löse den Download aus
-    const link = document.createElement('a');
-    link.href = pdfUrl;
-    link.download = pdfName;
-    link.click();
-  }
-
-  showPdf() {
-    const pdfUrl = 'assets/CV.pdf';  // Lokale oder externe PDF-Datei
-
-    // Öffne das PDF in einem neuen Tab/Fenster
-    window.open(pdfUrl, '_blank');
-  }
-
 }

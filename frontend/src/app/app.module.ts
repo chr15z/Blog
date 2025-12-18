@@ -22,7 +22,7 @@ import {SudokuComponent} from "./components/pSudoku/sudoku.component";
 import {ContactComponent} from "./components/contact/contact.component";
 import {MyJourneyComponent} from "./components/pMyJourney/myJourney.component";
 import {TicketLineComponent} from "./components/pTicketLine/ticketLine.component";
-import {FootballComponent} from "./components/football/football.component";
+import {BoxMentalistComponent} from "./components/pBoxMentalist/boxMentalist.component";
 
 
 
@@ -38,7 +38,7 @@ import {FootballComponent} from "./components/football/football.component";
     ContactComponent,
     TicketLineComponent,
     MyJourneyComponent,
-    FootballComponent
+    BoxMentalistComponent
   ],
   imports: [
     BrowserModule,

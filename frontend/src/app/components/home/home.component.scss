@@ -98,5 +98,26 @@ video {
   width: 30em;
 }
 
+.video-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.video-wrapper video {
+  border-radius: 15px;
+}
+
+.mute-btn {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  background: rgba(0, 0, 0, 0.6);
+  border: none;
+  border-radius: 999px;
+  padding: 8px 10px;
+  cursor: pointer;
+  color: white;
+  font-size: 1rem;
+}
 
 

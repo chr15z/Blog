@@ -32,7 +32,25 @@ export class HomeComponent {
     third.id = 3;
     third.link = "/sudoku";
 
-    this.homePageContent = [first, second, third];
+    const fourth = new HomePageSectionDTO();
+    fourth.title = "Box Mentalist";
+    fourth.subtitle = "A Study, developing and testing a digital game that combines boxing with music to support mental health";
+    fourth.image = "assets/videos/boxMentalist.mp4";
+    fourth.id = 4;
+    fourth.link = "/boxMentalist";
+
+    this.homePageContent = [first, second, third, fourth];
+  }
+  isMuted: boolean[] = [];
+
+  ngOnInit() {
+    // alle Videos initial stumm
+    this.isMuted = this.homePageContent.map(() => true);
+  }
+
+  toggleMute(video: HTMLVideoElement, index: number) {
+    this.isMuted[index] = !this.isMuted[index];
+    video.muted = this.isMuted[index];
   }
 
   isVideo(filePath: string): boolean {
