@@ -167,6 +167,13 @@ export class ContentService {
       tech: "The prototype was implemented using a focused technology stack chosen to support rapid iteration, sensor-based interaction, and evaluation within the scope of a bachelor thesis.\n",
       image: 'assets/videos/boxMentalist.mp4',
     });
+
+    this.detailContent.set('myJourney', {
+      explanation: "myJourney is a mobile app for better organizing healthcare and treatments.<br><br>Users can manage appointments, vital signs, and treatment plans to reduce stress and gain a better overview of their health.<br><br>The app reminds users of checkups, vaccinations, and medical treatments to promote early diagnosis and prevention. It also enables the digital exchange of relevant health information with doctors.",
+      features: "The app offers a variety of functions to simplify users' everyday lives. After creating a personal profile, disease progression and medical treatments can be documented in detail. <br><br>Vaccinations and other relevant health data can be stored in a digital vaccination record. A key feature of myJourney is the ability to create customized patient journeys that track specific treatments or preventative measures. <br><br>Users can add new nodes with just a few clicks, for example, to record a vaccination or a doctor's visit. Automatic reminders ensure that upcoming health measures are not forgotten. <br><br>In addition, the app enables structured management of documents such as lab reports or medication plans. To improve interaction with healthcare providers, physicians can access a JSON-based view of the patient journey, which provides a quick and clear insight into the user's health history.",
+      tech: "The app is built using modern technologies with a focus on modularity and scalability.",
+      image: 'assets/videos/myJourneyDemo.mp4',
+    });
   }
   // --------------------
   // Public API

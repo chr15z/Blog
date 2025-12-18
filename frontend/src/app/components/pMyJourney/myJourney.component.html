@@ -4,13 +4,23 @@
       <h1>{{ section.title }}</h1>
       <p class="subtitle" [innerHTML]="section.subtitle"></p>
     </div>
+
     <div>
       <ng-container *ngIf="isVideo(section.image); else imageTemplate">
-        <video autoplay muted loop playsinline>
-          <source [src]="section.image" type="video/mp4">
-          Your browser does not support the video tag.
-        </video>
+        <div class="video-wrapper">
+          <video
+            #vid
+            autoplay
+            loop
+            playsinline
+            [muted]="true"
+            [controls]="false">
+            <source [src]="section.image" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+        </div>
       </ng-container>
+
       <ng-template #imageTemplate>
         <img [src]="section.image" alt="Hero Bild">
       </ng-template>
@@ -19,7 +29,7 @@
 
   <section class="tech-section snap-section">
     <h1>{{ technologies.title }}</h1>
-    <p>{{ technologies.subtitle }}</p>
+    <p [innerHTML]="technologies.subtitle"></p>
     <div class="tech-grid">
       <div *ngFor="let tech of technologies.technologies" class="tech-item">
         <img [src]="tech.image" [alt]="tech.name">
@@ -28,5 +38,4 @@
       </div>
     </div>
   </section>
-
 </div>
