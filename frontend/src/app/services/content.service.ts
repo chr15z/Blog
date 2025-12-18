@@ -27,9 +27,9 @@ import {DetailViewDTO} from "../dtos/detailViewDTO";
 })
 export class ContentService {
 
-  private homePageContent = new Map<HomePageSectionKey, HomePageSectionDTO>();
-  private technologieContent = new Map<TechnologieKey, TechnologieDTO>();
-  private detailContent = new Map<HomePageSectionKey, DetailViewDTO>();
+  private readonly homePageContent = new Map<HomePageSectionKey, HomePageSectionDTO>();
+  private readonly technologieContent = new Map<TechnologieKey, TechnologieDTO>();
+  private readonly detailContent = new Map<HomePageSectionKey, DetailViewDTO>();
 
   constructor() {
     this.initializeHomePageContent();

@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {HomePageSectionDTO} from "../../dtos/homePageSectionDTO";
 import {ContentService, TechnologieKey} from "../../services/content.service";
 import {TechnologieDTO} from "../../dtos/technologieDTO";
@@ -11,12 +11,13 @@ import {TechnologieDTO} from "../../dtos/technologieDTO";
 export class BoxMentalistComponent {
   homePageContent: HomePageSectionDTO[] = [];
   technologies: HomePageSectionDTO;
-  private techKeys: TechnologieKey[] = [
+  private readonly techKeys: TechnologieKey[] = [
     'swift',
     'kotlin',
     'gloves',
     'githubActions',
   ];
+  isMuted: Record<number, boolean> = {};
 
   constructor(contentService: ContentService) {
     const boxMentalist = contentService.getDetailViewSection("boxMentalist")
@@ -50,12 +51,10 @@ export class BoxMentalistComponent {
     return filePath.endsWith('.mp4') || filePath.endsWith('.webm') || filePath.endsWith('.ogg');
   }
 
-  isMuted: Record<number, boolean> = {};
-
   toggleMute(video: HTMLVideoElement, id: number) {
     const next = !this.isMuted[id];
     this.isMuted[id] = next;
     video.muted = next;
-
   }
+
 }
