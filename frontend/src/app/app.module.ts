@@ -11,7 +11,6 @@ import {HomeComponent} from './components/home/home.component';
 import {NotFoundComponent} from './components/notFound/notFound.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
-import {httpInterceptorProviders} from './interceptors';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {ToastrModule} from 'ngx-toastr';
 import {NgOptimizedImage} from "@angular/common";
@@ -54,7 +53,6 @@ import {BoxMentalistComponent} from "./components/pBoxMentalist/boxMentalist.com
     BsDropdownModule.forRoot(),
     AutoCompleteModule
   ],
-  providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule {

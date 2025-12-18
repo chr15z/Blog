@@ -1,8 +1,5 @@
-import {Component, OnInit, Renderer2} from '@angular/core';
+import {Component} from '@angular/core';
 import {BlurService} from "../../services/blur.service";
-import {NewsletterService} from "../../services/newsletter.service";
-import {UserDTO} from "../../dtos/userDTO";
-import {ValidationException} from "../../exception/ValidationException";
 
 @Component({
   selector: 'app-footer',
