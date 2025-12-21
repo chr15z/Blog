@@ -46,12 +46,73 @@ img {
   border-radius: 15px;
   height: 30em;
   width: 30em;
+  object-fit: contain; /* prevents distortion */
 }
 
 video {
   border-radius: 15px;
   height: 30em;
   width: 15em;
+}
+
+/* --- Screenshot carousel --- */
+.carousel {
+  position: relative;
+  width: 30em;
+  height: 30em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.carousel-image {
+  width: 100%;
+  height: 100%;
+  border-radius: 15px;
+  object-fit: contain;
+}
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  cursor: pointer;
+
+  /* ↓ kleiner machen */
+  font-size: 1.4em;
+  width: 1.6em;
+  height: 1.6em;
+
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.3);
+  color: white;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transition: background 0.2s ease, transform 0.15s ease;
+}
+
+.carousel-btn.left {
+  left: -0.5em;
+}
+
+.carousel-btn.right {
+  right: -0.5em;
+}
+
+.carousel-btn:hover {
+  background: rgba(0, 0, 0, 0.5);
+  transform: translateY(-50%) scale(1.08);
+}
+
+
+.carousel-counter {
+  position: absolute;
+  bottom: -1.6em;
+  font-size: 0.95em;
+  opacity: 0.8;
 }
 
 .reverse {
@@ -67,7 +128,6 @@ video {
 .image-with-bg {
   background-color: transparent;
 }
-
 
 .tech-section {
   text-align: center;

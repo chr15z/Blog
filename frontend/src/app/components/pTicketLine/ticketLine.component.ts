@@ -1,66 +1,102 @@
-import { Component, OnInit } from '@angular/core';
-import { HomePageSectionDTO } from '../../dtos/homePageSectionDTO';
+import { Component } from '@angular/core';
+import { ContentService, TechnologieKey } from '../../services/content.service';
+import { TechnologieDTO } from '../../dtos/technologieDTO';
+import { DetailViewDTO } from '../../dtos/detailViewDTO';
+
+type HeroSectionVM = {
+  id: number;
+  title: string;
+  subtitle: string; // HTML string
+  image: string;
+};
+
+type TechnologiesSectionVM = {
+  title: string;
+  subtitle: string; // HTML string
+  technologies: TechnologieDTO[];
+};
 
 @Component({
   selector: 'app-ticketLine',
   templateUrl: './ticketLine.component.html',
-  styleUrls: ['./ticketLine.component.scss']
+  styleUrls: ['./ticketLine.component.scss'],
 })
-export class TicketLineComponent implements OnInit {
+export class TicketLineComponent {
+  homePageContent: HeroSectionVM[] = [];
+  technologies!: TechnologiesSectionVM;
 
-  homePageContent: HomePageSectionDTO[] = [];
-  technologies: HomePageSectionDTO;
+  readonly galleryImages: string[] = Array.from({ length: 27 }, (_, i) => this.buildSepmPath(i + 1));
 
-  constructor() {
-    const first = new HomePageSectionDTO();
-    first.title = "Idea";
-    first.subtitle =
-      "ticketLine is a modern platform for discovering, booking, and managing live events – similar to Eventim or Ö-Tickets.<br><br>" +
-      "Users can browse concerts, theater performances, sports events, and more, check event details and news, and purchase tickets directly through the platform.<br><br>" +
-      "With integrated seat maps, ticketLine makes it easy to choose the best available seats and complete the purchase in just a few steps. In addition, a built-in merch shop allows users to buy fan articles and related products for their favorite events.";
-    first.image = "assets/videos/-.mp4";
-    first.id = 1;
+  private readonly screenshotIndexBySection: Record<number, number> = {};
 
-    const second = new HomePageSectionDTO();
-    second.title = "Features";
-    second.subtitle =
-      "ticketLine offers a wide range of features that make planning and enjoying events as convenient as possible.<br><br>" +
-      "Users can search and filter events by category, date, location, or artist. Interactive seat maps enable transparent seat selection with real-time availability and pricing.<br><br>" +
-      "In addition to tickets, the integrated merch shop allows users to purchase fan merchandise and event-related products. Organizers benefit from tools for managing news, merch, events, price categories.";
-    second.image = "assets/videos/-.mp4";
-    second.id = 2;
-    this.homePageContent = [first, second];
+  private readonly techKeys: TechnologieKey[] = ['angular', 'java', 'h2', 'gitlab'];
 
-    this.technologies = new HomePageSectionDTO();
-    this.technologies.title = "Technologies";
-    this.technologies.subtitle = "The app is built using modern technologies with a focus on modularity and scalability.";
-    this.technologies.id = 4;
-    this.technologies.technologies = [{
-      name: "Frontend",
-      image: "assets/images/logo-angular.png",
-      info: "Angular is a TypeScript-based frontend framework developed by Google. It provides a robust component architecture, two-way data binding, and powerful tooling for building scalable web applications."
-    },
-      {
-        name: "Backend",
-        image: "assets/images/logo-java.png",
-        info: "Java is a widely used, platform-independent backend language known for its stability, performance, and strong ecosystem. It is commonly used for building secure, scalable server-side applications."
-      },
-      {
-        name: "Database",
-        image: "assets/images/logo-h2.png",
-        info: "H2 is a lightweight, in-memory relational database written in Java. It is often used for development and testing due to its fast performance, easy setup, and SQL compatibility."
-      },
-      {
-        name: "CI/CD",
-        image: "assets/images/logo-gitlab.png",
-        info: "GitLab CI/CD is an integrated DevOps solution that automates testing, building, and deployment pipelines. It enables seamless continuous integration and delivery directly within GitLab repositories."
-      }
+  isMuted: Record<number, boolean> = {};
+
+  constructor(private contentService: ContentService) {
+    const detail = this.contentService.getDetailViewSection('ticketLine') as DetailViewDTO;
+    console.log(detail);
+
+    this.homePageContent = [
+      this.buildHeroSection(1, 'Idea', detail.explanation, detail.image),
+      this.buildHeroSection(2, 'Features', detail.features, detail.image),
     ];
+
+    this.technologies = {
+      title: 'Technologies',
+      subtitle: detail.tech,
+      technologies: this.techKeys
+        .map((k) => this.contentService.getTechnologieSection(k))
+        .filter((t): t is TechnologieDTO => t !== null),
+    };
+
+    for (const s of this.homePageContent) {
+      this.isMuted[s.id] = true; // default: muted
+      this.screenshotIndexBySection[s.id] = 0;
+    }
+  }
+
+  private buildHeroSection(id: number, title: string, subtitle: string, image: string): HeroSectionVM {
+    return { id, title, subtitle, image };
   }
 
   isVideo(filePath: string): boolean {
     return filePath.endsWith('.mp4') || filePath.endsWith('.webm') || filePath.endsWith('.ogg');
   }
 
-  ngOnInit() {}
+  toggleMute(video: HTMLVideoElement, id: number) {
+    const next = !this.isMuted[id];
+    this.isMuted[id] = next;
+    video.muted = next;
+  }
+
+  // --- Screenshot gallery helpers ---
+
+  private buildSepmPath(n: number): string {
+    return `assets/images/sepm/sepm${n}.png`;
+  }
+
+  currentScreenshot(sectionId: number): string {
+    const idx = this.screenshotIndexBySection[sectionId] ?? 0;
+    return this.galleryImages[Math.max(0, Math.min(idx, this.galleryImages.length - 1))];
+  }
+
+  screenshotCounter(sectionId: number): string {
+    const idx = (this.screenshotIndexBySection[sectionId] ?? 0) + 1;
+    return `${idx} / ${this.galleryImages.length}`;
+  }
+
+  prevScreenshot(sectionId: number): void {
+    const len = this.galleryImages.length;
+    if (!len) return;
+    const cur = this.screenshotIndexBySection[sectionId] ?? 0;
+    this.screenshotIndexBySection[sectionId] = (cur - 1 + len) % len;
+  }
+
+  nextScreenshot(sectionId: number): void {
+    const len = this.galleryImages.length;
+    if (!len) return;
+    const cur = this.screenshotIndexBySection[sectionId] ?? 0;
+    this.screenshotIndexBySection[sectionId] = (cur + 1) % len;
+  }
 }

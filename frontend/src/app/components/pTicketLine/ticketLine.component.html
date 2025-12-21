@@ -1,32 +1,81 @@
 <div class="smooth">
-  <section class="snap-section hero" *ngFor="let section of homePageContent; let i = index" [ngClass]="{'reverse': i % 2 !== 0}">
+  <section
+    class="snap-section hero"
+    *ngFor="let section of homePageContent; let i = index"
+    [ngClass]="{'reverse': i % 2 !== 0}"
+  >
     <div class="hero-content">
       <h1>{{ section.title }}</h1>
       <p class="subtitle" [innerHTML]="section.subtitle"></p>
     </div>
+
     <div>
       <ng-container *ngIf="isVideo(section.image); else imageTemplate">
-        <video autoplay muted loop playsinline>
-          <source [src]="section.image" type="video/mp4">
-          Your browser does not support the video tag.
-        </video>
+        <div class="video-wrapper">
+          <video
+            #vid
+            autoplay
+            loop
+            playsinline
+            [muted]="true"
+            [controls]="false"
+          >
+            <source [src]="section.image" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+
+          <button
+            type="button"
+            class="mute-btn"
+            (click)="toggleMute(vid, section.id)"
+          >
+            {{ isMuted[section.id] ? '🔇' : '🔊' }}
+          </button>
+        </div>
       </ng-container>
+
       <ng-template #imageTemplate>
-        <img [src]="section.image" alt="Hero Bild">
+        <div class="carousel" aria-label="Screenshot gallery">
+          <button
+            type="button"
+            class="carousel-btn left"
+            (click)="prevScreenshot(section.id)"
+            aria-label="Previous screenshot"
+          >
+            ‹
+          </button>
+
+          <img
+            class="carousel-image"
+            [src]="currentScreenshot(section.id)"
+            alt="Project screenshot"
+          />
+
+          <button
+            type="button"
+            class="carousel-btn right"
+            (click)="nextScreenshot(section.id)"
+            aria-label="Next screenshot"
+          >
+            ›
+          </button>
+
+          <div class="carousel-counter">{{ screenshotCounter(section.id) }}</div>
+        </div>
       </ng-template>
     </div>
   </section>
 
   <section class="tech-section snap-section">
     <h1>{{ technologies.title }}</h1>
-    <p>{{ technologies.subtitle }}</p>
+    <p [innerHTML]="technologies.subtitle"></p>
+
     <div class="tech-grid">
       <div *ngFor="let tech of technologies.technologies" class="tech-item">
-        <img [src]="tech.image" [alt]="tech.name">
+        <img [src]="tech.image" [alt]="tech.name" />
         <span>{{ tech.name }}</span>
         <div class="tech-info">{{ tech.info }}</div>
       </div>
     </div>
   </section>
-
 </div>

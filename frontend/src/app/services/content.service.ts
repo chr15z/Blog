@@ -139,7 +139,7 @@ export class ContentService {
       name: 'Backend (Java)',
       image: 'assets/images/logo-java.png',
       info:
-        'Stable, platform-independent backend language with a strong ecosystem for scalable applications.',
+        'Stable, platform-independent backend language with a strong ecosystem for scalable applications. The implementation was done using frameworks as JUint and spring boot as well as REST Endpoints',
     });
 
     this.technologieContent.set('h2', {
@@ -173,6 +173,24 @@ export class ContentService {
       features: "The app offers a variety of functions to simplify users' everyday lives. After creating a personal profile, disease progression and medical treatments can be documented in detail. <br><br>Vaccinations and other relevant health data can be stored in a digital vaccination record. A key feature of myJourney is the ability to create customized patient journeys that track specific treatments or preventative measures. <br><br>Users can add new nodes with just a few clicks, for example, to record a vaccination or a doctor's visit. Automatic reminders ensure that upcoming health measures are not forgotten. <br><br>In addition, the app enables structured management of documents such as lab reports or medication plans. To improve interaction with healthcare providers, physicians can access a JSON-based view of the patient journey, which provides a quick and clear insight into the user's health history.",
       tech: "The app is built using modern technologies with a focus on modularity and scalability.",
       image: 'assets/videos/myJourneyDemo.mp4',
+    });
+
+    this.detailContent.set('ticketLine', {
+      explanation:
+        'TicketLine is a ticketing platform for discovering, booking, and managing live event similar to Eventim or Ö-Tickets. <br><br>With integrated seat maps, ticketLine makes it easy to choose the best available seats and complete the purchase in just a few steps. In addition, a built-in merch shop allows users to buy fan articles and related products for their favorite events.',
+      features:
+        '• Management of events such as concerts, movies, and theater performances with configurable dates, venues, prices, and seating layouts.<br>' +
+        '• Reservation of specific event tickets with real-time availability checks.<br>' +
+        '• Complete ticket purchase workflow from selection to confirmation.<br>' +
+        '• Integrated merchandise shop for additional products related to events.<br>' +
+        '• News page for announcements, updates, and featured events.<br><br>' +
+        '• Global Search to find everything you need quickly.<br><br>' +
+        'The platform supports different user roles:<br><br>' +
+        '• Customer role: browsing events, reserving tickets, purchasing tickets, and buying merchandise.<br>' +
+        '• Admin role: creating and managing events, ticket contingents, pricing, and published content.',
+      tech:
+        'TicketLine was built with Angular, Java, H2 and GitLab CI/CD.',
+      image: 'assets/images/sepm/sepm5.png',
     });
   }
   // --------------------
