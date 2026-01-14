@@ -80,17 +80,17 @@ export class ContentService {
 
   private initializeTechnologieContent(): void {
     this.technologieContent.set('swift', {
-      name: 'Mobile App (Swift)',
+      name: 'Swift',
       image: 'assets/images/logo-swift.png',
       info:
-        'Native iOS app built with Swift and Xcode, enabling direct BLE access and stable real-time interaction with smart boxing gloves.',
+        'Swift is a powerful programming language for iOS.',
     });
 
     this.technologieContent.set('kotlin', {
       name: 'Wearable SDK (Kotlin)',
       image: 'assets/images/logo-kotlin.png',
       info:
-        'Kotlin Multiplatform SDK for accessing sensor data such as punch timing and intensity via Bluetooth Low Energy.',
+        'Kotlin is a statically typed, cross-platform programming language.',
     });
 
     this.technologieContent.set('gloves', {
@@ -104,56 +104,56 @@ export class ContentService {
       name: 'CI/CD (GitHub Actions)',
       image: 'assets/images/logo-github.png',
       info:
-        'Automated testing, builds, and deployments tightly integrated into GitHub workflows.',
+        'GitHub Actions is a CI/CD platform.',
     });
 
     this.technologieContent.set('vue', {
       name: 'Frontend (Vue.js)',
       image: 'assets/images/logo-vuejs.png',
       info:
-        'Reactive, component-based JavaScript framework optimized for rapid development and easy integration.',
+        'Reactive, component-based JavaScript framework.',
     });
 
     this.technologieContent.set('n8n', {
       name: 'Backend (n8n)',
       image: 'assets/images/logo-n8n.png',
       info:
-        'Low-code backend solution for automating services and implementing backend workflows quickly.',
+        'backend solution for automating services and backend workflows.',
     });
 
     this.technologieContent.set('mongodb', {
       name: 'Database (MongoDB)',
       image: 'assets/images/logo-mongodb.png',
       info:
-        'Flexible NoSQL document database using JSON, ideal for rapidly evolving applications.',
+        'Flexible NoSQL document database using JSON.',
     });
 
     this.technologieContent.set('angular', {
       name: 'Frontend (Angular)',
       image: 'assets/images/logo-angular.png',
       info:
-        'TypeScript-based frontend framework by Google for scalable and structured web applications.',
+        'TypeScript-based frontend component based framework.',
     });
 
     this.technologieContent.set('java', {
       name: 'Backend (Java)',
       image: 'assets/images/logo-java.png',
       info:
-        'Stable, platform-independent backend language with a strong ecosystem for scalable applications. The implementation was done using frameworks as JUint and spring boot as well as REST Endpoints',
+        'backend language with helpful frameworks as JUint and spring boot.',
     });
 
     this.technologieContent.set('h2', {
       name: 'Database (H2)',
       image: 'assets/images/logo-h2.png',
       info:
-        'Lightweight, in-memory SQL database used mainly for development and testing.',
+        'H2 is a lightweight, in-memory SQL database.',
     });
 
     this.technologieContent.set('gitlab', {
       name: 'CI/CD (GitLab)',
       image: 'assets/images/logo-gitlab.png',
       info:
-        'Integrated DevOps pipeline solution for automating builds, tests, and deployments.',
+        'GitLab is a CI/CD platform.',
     });
   }
 
