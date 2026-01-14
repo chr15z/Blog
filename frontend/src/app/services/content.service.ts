@@ -183,9 +183,9 @@ export class ContentService {
         '• Reservation of specific event tickets with real-time availability checks.<br>' +
         '• Complete ticket purchase workflow from selection to confirmation.<br>' +
         '• Integrated merchandise shop for additional products related to events.<br>' +
-        '• News page for announcements, updates, and featured events.<br><br>' +
+        '• News page for announcements, updates, and featured events.<br>' +
         '• Global Search to find everything you need quickly.<br><br>' +
-        'The platform supports different user roles:<br><br>' +
+        'The platform supports different user roles:<br>' +
         '• Customer role: browsing events, reserving tickets, purchasing tickets, and buying merchandise.<br>' +
         '• Admin role: creating and managing events, ticket contingents, pricing, and published content.',
       tech:
