@@ -42,3 +42,40 @@ app-footer {
     transform: rotate(360deg);
   }
 }
+
+.mobile-blocker {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  .mobile-blocker {
+    display: grid;
+    place-items: center;
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+    padding: 24px;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(6px);
+  }
+
+  .mobile-blocker__card {
+    width: min(520px, 100%);
+    padding: 24px;
+    border-radius: 16px;
+    background: #111;
+    color: #fff;
+    text-align: center;
+  }
+
+  // Optional: Alles dahinter nicht klickbar/scrollbar
+  .main-content {
+    pointer-events: none;
+  }
+
+  // Optional: Header/Footer komplett ausblenden auf Mobile
+  app-header,
+  app-footer {
+    display: none;
+  }
+}

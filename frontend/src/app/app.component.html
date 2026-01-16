@@ -3,6 +3,13 @@
 
 <div class="animated-background">
 
+  <div class="mobile-blocker" aria-live="polite">
+    <div class="mobile-blocker__card">
+      <h2>Desktop only</h2>
+      <p>Please open on your desktop – mobile view is not yet available.</p>
+    </div>
+  </div>
+
   <div [class.blurred]="isBlurred" class="main-content">
     <div class="container">
       <router-outlet></router-outlet>
