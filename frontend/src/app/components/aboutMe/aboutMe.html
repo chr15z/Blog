@@ -15,7 +15,7 @@
           <div class="tech-info">
             <div class="tech-category" *ngIf="tech.category">{{ tech.category }}</div>
             <ul>
-              <li *ngFor="let bullet of tech.bullets">{{ bullet }}</li>
+              <p *ngFor="let bullet of tech.bullets">{{ bullet }}</p>
             </ul>
           </div>
         </div>

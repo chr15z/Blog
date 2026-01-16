@@ -125,6 +125,7 @@ ul {
   height: 5em;
   background-color: transparent;
 }
+
 .tech-item {
   position: relative;
   overflow: hidden;
@@ -134,9 +135,10 @@ ul {
   flex-direction: column;
   justify-content: center;
   text-align: center;
-  min-width: 11em;
+  min-width: 15em;
   min-height: 11em;
 }
+.img-tech { mix-blend-mode: multiply; }
 
 .tech-title {
   margin-top: 0.6em;

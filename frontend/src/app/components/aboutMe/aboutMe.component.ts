@@ -45,7 +45,6 @@ export class AboutMeComponent implements OnInit {
       'githubActions',
       'swift',
       'kotlin',
-      'gloves',
       'n8n',
     ];
 
