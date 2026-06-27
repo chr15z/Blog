@@ -17,11 +17,11 @@ import {NgOptimizedImage} from "@angular/common";
 import {BsDropdownModule} from "ngx-bootstrap/dropdown";
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import {AboutMeComponent} from "./components/aboutMe/aboutMe.component";
-import {SudokuComponent} from "./components/pSudoku/sudoku.component";
+import {SudokuComponent} from "./components/projects/pSudoku/sudoku.component";
 import {ContactComponent} from "./components/contact/contact.component";
-import {MyJourneyComponent} from "./components/pMyJourney/myJourney.component";
-import {TicketLineComponent} from "./components/pTicketLine/ticketLine.component";
-import {BoxMentalistComponent} from "./components/pBoxMentalist/boxMentalist.component";
+import {MyJourneyComponent} from "./components/projects/pMyJourney/myJourney.component";
+import {TicketLineComponent} from "./components/projects/pTicketLine/ticketLine.component";
+import {BoxMentalistComponent} from "./components/projects/pBoxMentalist/boxMentalist.component";
 
 
 

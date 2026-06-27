@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { ContentService, TechnologieKey } from '../../services/content.service';
-import { TechnologieDTO } from '../../dtos/technologieDTO';
-import { DetailViewDTO } from '../../dtos/detailViewDTO';
+import { ContentService, TechnologieKey } from '../../../services/content.service';
+import { TechnologieDTO } from '../../../dtos/technologieDTO';
+import { DetailViewDTO } from '../../../dtos/detailViewDTO';
 
 type HeroSectionVM = {
   id: number;

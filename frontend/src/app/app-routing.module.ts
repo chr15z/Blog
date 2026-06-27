@@ -3,11 +3,11 @@ import {RouterModule, Routes} from '@angular/router';
 import {HomeComponent} from './components/home/home.component';
 import {NotFoundComponent} from "./components/notFound/notFound.component";
 import {AboutMeComponent} from "./components/aboutMe/aboutMe.component";
-import {SudokuComponent} from "./components/pSudoku/sudoku.component";
-import {MyJourneyComponent} from "./components/pMyJourney/myJourney.component";
+import {SudokuComponent} from "./components/projects/pSudoku/sudoku.component";
+import {MyJourneyComponent} from "./components/projects/pMyJourney/myJourney.component";
 import {ContactComponent} from "./components/contact/contact.component";
-import {TicketLineComponent} from "./components/pTicketLine/ticketLine.component";
-import {BoxMentalistComponent} from "./components/pBoxMentalist/boxMentalist.component";
+import {TicketLineComponent} from "./components/projects/pTicketLine/ticketLine.component";
+import {BoxMentalistComponent} from "./components/projects/pBoxMentalist/boxMentalist.component";
 
 const routes: Routes = [
   {path: '', component: HomeComponent},

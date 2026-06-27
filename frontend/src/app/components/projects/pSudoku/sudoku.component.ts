@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {SudokuBruteForceService} from "../../services/sudoku-brute-force.service";
-import {SudokuSimulatedAnnealingServiceService} from "../../services/sudoku-simulated-annealing-service.service";
+import {SudokuBruteForceService} from "../../../services/sudoku-brute-force.service";
+import {SudokuSimulatedAnnealingServiceService} from "../../../services/sudoku-simulated-annealing-service.service";
 import {HttpClient} from '@angular/common/http';
 
 @Component({
