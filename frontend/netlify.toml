@@ -3,6 +3,9 @@ base = "frontend"
 publish = "dist/cz-blog/browser"
 command = "ng build --configuration production"
 
+[build.environment]
+NODE_VERSION = "20"
+
 [[redirects]]
 from = "/*"
 to = "/index.html"
