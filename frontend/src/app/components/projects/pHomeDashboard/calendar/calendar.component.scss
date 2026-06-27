@@ -1,0 +1,154 @@
+// ─── Container ───────────────────────────────────────────────────────────────
+
+.calendar {
+  width: 100%;
+  padding: 14px 16px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  user-select: none;
+  box-sizing: border-box;
+}
+
+// ─── Header ──────────────────────────────────────────────────────────────────
+
+.calendar__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.calendar__title {
+  display: flex;
+  align-items: baseline;
+}
+
+.calendar__month {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text-color-h1);
+  text-transform: capitalize;
+}
+
+.nav-btn {
+  all: unset;
+  cursor: pointer;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  color: var(--text);
+  transition: background 0.12s ease;
+  line-height: 1;
+
+  &:hover {
+    background: rgba(52, 73, 102, 0.12);
+  }
+}
+
+// ─── Weekdays ─────────────────────────────────────────────────────────────────
+
+.calendar__weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  margin-bottom: 4px;
+
+  span {
+    text-align: center;
+    font-size: 0.6rem;
+    font-weight: 600;
+    color: var(--text);
+    opacity: 0.4;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    padding: 2px 0;
+  }
+}
+
+// ─── Days Grid – 6 Reihen fix damit der Monat die Größe nicht ändert ─────────
+
+.calendar__days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: repeat(6, 1fr);
+  gap: 2px;
+  // Feste Höhe: 6 Reihen à ~28px + Gaps
+  height: calc(6 * 28px + 5 * 2px);
+}
+
+.calendar__day {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  font-size: 0.7rem;
+  color: var(--text);
+  cursor: default;
+  transition: background 0.1s ease;
+
+  &.calendar__day--today {
+    background: var(--text);
+    color: #fff;
+    font-weight: 700;
+    border-radius: 50%;
+  }
+
+  &.calendar__day--holiday:not(.calendar__day--today) {
+    background: rgba(231, 111, 81, 0.18);
+    color: #c0502e;
+    font-weight: 600;
+    border-radius: 50%;
+  }
+
+  &.calendar__day--weekend:not(.calendar__day--today):not(.calendar__day--holiday) {
+    opacity: 0.4;
+  }
+}
+
+// ─── Legende ─────────────────────────────────────────────────────────────────
+
+.calendar__legend {
+  display: flex;
+  gap: 14px;
+  margin-top: 10px;
+  padding-top: 8px;
+  border-top: 1px solid rgba(52, 73, 102, 0.1);
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.legend-badge {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.58rem;
+  font-weight: 700;
+  flex-shrink: 0;
+
+  &--today {
+    background: var(--text);
+    color: #fff;
+  }
+
+  &--holiday {
+    background: rgba(231, 111, 81, 0.18);
+    color: #c0502e;
+  }
+}
+
+.legend-label {
+  font-size: 0.68rem;
+  color: var(--text);
+  opacity: 0.6;
+}

@@ -8,6 +8,7 @@ import {MyJourneyComponent} from "./components/projects/pMyJourney/myJourney.com
 import {ContactComponent} from "./components/contact/contact.component";
 import {TicketLineComponent} from "./components/projects/pTicketLine/ticketLine.component";
 import {BoxMentalistComponent} from "./components/projects/pBoxMentalist/boxMentalist.component";
+import {PHomeDashboardComponent} from "./components/projects/pHomeDashboard/pHomeDashboard.component";
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -18,6 +19,7 @@ const routes: Routes = [
   {path: 'myJourney', component: MyJourneyComponent},
   {path: 'ticketLine', component: TicketLineComponent},
   {path: 'boxMentalist', component: BoxMentalistComponent},
+  {path: 'homeDashboard', component: PHomeDashboardComponent},
 ];
 
 @NgModule({

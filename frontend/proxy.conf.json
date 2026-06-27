@@ -6,12 +6,17 @@
     "changeOrigin": true,
     "logLevel": "info",
     "pathRewrite": { "^/wdqs": "" },
-
-    // Wichtig bei WDQS:
     "timeout": 120000,
     "proxyTimeout": 120000,
     "headers": {
       "User-Agent": "football-ttt/0.1 (dev@example.com)"
     }
+  },
+  {
+    "context": ["/ogd_realtime"],
+    "target": "https://www.wienerlinien.at",
+    "secure": true,
+    "changeOrigin": true,
+    "logLevel": "debug"
   }
 ]

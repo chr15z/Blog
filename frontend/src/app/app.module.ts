@@ -22,6 +22,9 @@ import {ContactComponent} from "./components/contact/contact.component";
 import {MyJourneyComponent} from "./components/projects/pMyJourney/myJourney.component";
 import {TicketLineComponent} from "./components/projects/pTicketLine/ticketLine.component";
 import {BoxMentalistComponent} from "./components/projects/pBoxMentalist/boxMentalist.component";
+import {PHomeDashboardComponent} from "./components/projects/pHomeDashboard/pHomeDashboard.component";
+import {WeatherComponent} from "./components/projects/pHomeDashboard/weather/weather.component";
+import {PublicTransitComponent} from "./components/projects/pHomeDashboard/public-transit/public-transit.component";
 
 
 
@@ -37,7 +40,7 @@ import {BoxMentalistComponent} from "./components/projects/pBoxMentalist/boxMent
     ContactComponent,
     TicketLineComponent,
     MyJourneyComponent,
-    BoxMentalistComponent
+    BoxMentalistComponent,
   ],
   imports: [
     BrowserModule,
@@ -51,7 +54,10 @@ import {BoxMentalistComponent} from "./components/projects/pBoxMentalist/boxMent
     ToastrModule.forRoot(),
     NgOptimizedImage,
     BsDropdownModule.forRoot(),
-    AutoCompleteModule
+    AutoCompleteModule,
+    PHomeDashboardComponent,
+    WeatherComponent,
+    PublicTransitComponent,
   ],
   bootstrap: [AppComponent]
 })

@@ -1,0 +1,44 @@
+<div class="calendar">
+
+  <!-- Header: Jahr · Monat -->
+  <div class="calendar__header">
+    <button class="nav-btn" (click)="prevMonth()" aria-label="Vorheriger Monat">‹</button>
+    <div class="calendar__title">
+      <span class="calendar__month">{{ currentDate | date:'MMMM yyyy' }}</span>
+    </div>
+    <button class="nav-btn" (click)="nextMonth()" aria-label="Nächster Monat">›</button>
+  </div>
+
+  <!-- Wochentage -->
+  <div class="calendar__weekdays">
+    <span *ngFor="let day of weekdays">{{ day }}</span>
+  </div>
+
+  <!-- Tage-Grid -->
+  <div class="calendar__days">
+    <div
+      *ngFor="let day of calendarDays"
+      class="calendar__day"
+      [class.calendar__day--empty]="!day"
+      [class.calendar__day--today]="day && isToday(day)"
+      [class.calendar__day--holiday]="day && !!getHoliday(day)"
+      [class.calendar__day--weekend]="day && isWeekend(day)"
+      [title]="day && getHoliday(day) ? getHoliday(day)! : ''"
+    >
+      <span *ngIf="day">{{ day.getDate() }}</span>
+    </div>
+  </div>
+
+  <!-- Legende -->
+  <div class="calendar__legend">
+    <div class="legend-item">
+      <span class="legend-badge legend-badge--today">27</span>
+      <span class="legend-label">Heute</span>
+    </div>
+    <div class="legend-item">
+      <span class="legend-badge legend-badge--holiday">1</span>
+      <span class="legend-label">Feiertag</span>
+    </div>
+  </div>
+
+</div>

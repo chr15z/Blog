@@ -1,0 +1,78 @@
+<div class="weather">
+
+  <!-- Loading -->
+  <div class="weather__state" *ngIf="loading">
+    <span class="spinner"></span>
+    <span>Wetterdaten laden…</span>
+  </div>
+
+  <!-- Error -->
+  <div class="weather__state weather__state--error" *ngIf="error">
+    <span>⚠️ Fehler beim Laden</span>
+    <span class="error-detail">{{ errorMsg }}</span>
+    <span class="error-hint">Bitte <code>provideHttpClient()</code> in <code>app.config.ts</code> prüfen.</span>
+  </div>
+
+  <!-- Inhalt -->
+  <ng-container *ngIf="!loading && !error && weather && today">
+
+    <!-- Header: Heute-Übersicht + Sonne -->
+    <div class="weather__header">
+      <div class="weather__today-main">
+        <span class="today-icon">{{ icon(today.weatherCode) }}</span>
+        <div class="today-temps">
+          <span class="today-max">{{ today.tempMax }}°</span>
+          <span class="today-min">{{ today.tempMin }}°</span>
+        </div>
+        <span class="today-label">{{ label(today.weatherCode) }}</span>
+      </div>
+      <div class="weather__sun">
+        <div class="sun-item">
+          <span class="sun-icon">🌅</span>
+          <span class="sun-time">{{ formatTime(today.sunrise) }}</span>
+          <span class="sun-label">Aufgang</span>
+        </div>
+        <div class="sun-item">
+          <span class="sun-icon">🌇</span>
+          <span class="sun-time">{{ formatTime(today.sunset) }}</span>
+          <span class="sun-label">Untergang</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 24h Horizontal-Scroll -->
+    <div class="weather__hourly-wrap">
+      <div class="weather__hourly">
+        <div class="hour-item" *ngFor="let h of weather.hourly">
+          <span class="hour-label">{{ formatHour(h.time) }}</span>
+          <span class="hour-icon">{{ icon(h.weatherCode, h.isDay) }}</span>
+          <span class="hour-temp">{{ h.temperature }}°</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="weather__divider"></div>
+
+    <!-- 7-Tage -->
+    <div class="weather__daily">
+      <div class="day-row" *ngFor="let d of weather.daily">
+        <span class="day-name">{{ formatDay(d.date) }}</span>
+        <span class="day-icon">{{ icon(d.weatherCode) }}</span>
+        <span class="day-precip" [class.empty]="!d.precipitationProbabilityMax">
+          {{ d.precipitationProbabilityMax ? d.precipitationProbabilityMax + '%' : '' }}
+        </span>
+        <span class="day-min">{{ d.tempMin }}°</span>
+        <div class="day-bar-track">
+          <div class="day-bar" [ngStyle]="barStyle(d, weather!.daily)"></div>
+        </div>
+        <span class="day-max">{{ d.tempMax }}°</span>
+      </div>
+    </div>
+
+    <!-- Footer: Datenquelle -->
+    <div class="weather__footer">
+      Daten: Open-Meteo API
+    </div>
+
+  </ng-container>
+</div>

@@ -1,0 +1,51 @@
+<div class="transit">
+
+  <div class="transit__header">
+    <button class="refresh-btn" (click)="load()" [disabled]="loading" aria-label="Aktualisieren">
+      <span class="refresh-icon" [class.refresh-icon--spinning]="loading">↻</span>
+    </button>
+    <span class="transit__title">Öffis</span>
+    <span class="transit__updated" *ngIf="lastUpdated">{{ formatUpdated(lastUpdated) }}</span>
+  </div>
+
+  <div class="transit__state" *ngIf="loading">
+    <span class="spinner"></span>
+    <span>Abfahrten laden…</span>
+  </div>
+
+  <div class="transit__state transit__state--error" *ngIf="error && !loading">
+    ⚠️ Daten konnten nicht geladen werden.
+  </div>
+
+  <div class="transit__stops" *ngIf="!loading && !error">
+    <ng-container *ngFor="let stop of stops">
+
+      <!-- Keine Daten für diesen Stop -->
+      <div class="stop__row" *ngIf="!stop.departures.length">
+        <div class="stop__left">
+          <span class="dep__line dep__line--unknown">?</span>
+          <span class="stop__towards">{{ stop.stopLabel }}</span>
+        </div>
+        <span class="stop__empty">–</span>
+      </div>
+
+      <!-- Eine Zeile pro Linie+Richtung -->
+      <div class="stop__row" *ngFor="let group of groupByLine(stop.departures)">
+        <div class="stop__left">
+          <span class="dep__line" [style.background]="lineColor(group.line, group.type)">{{ group.line }}</span>
+          <span class="stop__towards">{{ group.towards }}</span>
+        </div>
+        <div class="stop__times">
+          <ng-container *ngFor="let dep of group.departures; let last = last">
+            <span class="dep__time" [class.dep__time--now]="dep.countdown <= 0">{{ countdown(dep.countdown) }}</span>
+            <span class="sep" *ngIf="!last"> · </span>
+          </ng-container>
+        </div>
+      </div>
+
+    </ng-container>
+  </div>
+
+  <div class="transit__footer">Echtzeit: Wiener Linien OGD API</div>
+
+</div>
