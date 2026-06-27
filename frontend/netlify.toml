@@ -6,7 +6,22 @@ command = "ng build --configuration production"
 [build.environment]
 NODE_VERSION = "20"
 
+# ─── Proxy: Wiener Linien API (CORS-Bypass für Production) ───────────────────
 [[redirects]]
-from = "/*"
-to = "/index.html"
+from   = "/ogd_realtime/*"
+to     = "https://www.wienerlinien.at/ogd_realtime/:splat"
+status = 200
+force  = true
+
+# ─── Proxy: Wikidata (falls verwendet) ───────────────────────────────────────
+[[redirects]]
+from   = "/wdqs/*"
+to     = "https://query.wikidata.org/:splat"
+status = 200
+force  = true
+
+# ─── SPA Fallback ────────────────────────────────────────────────────────────
+[[redirects]]
+from   = "/*"
+to     = "/index.html"
 status = 200
