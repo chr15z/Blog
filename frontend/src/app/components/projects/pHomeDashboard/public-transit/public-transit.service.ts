@@ -24,6 +24,8 @@ export const STOPS: { rbl: number; stopLabel: string; filterLine?: string }[] = 
   { rbl: 4609, stopLabel: 'U6 → Siebenhirten',   filterLine: 'U6' },
   // Linie 49 Urban-Loritz-Platz → Ring (stadteinwärts)
   { rbl: 1477, stopLabel: '49 → Ring',            filterLine: '49' },
+  // Linie 49 Urban-Loritz-Platz → Hütteldorf (stadtauswärts)
+  { rbl: 1445, stopLabel: '49 → Hütteldorf',      filterLine: '49' },
   // Linie 18 Urban-Loritz-Platz → Schlachthausgasse (fährt von hier ab)
   { rbl: 462,  stopLabel: '18 → Schlachthausg.',  filterLine: '18' },
   // 48A Burggasse-Stadthalle → Ring (bestätigt RBL 1431)

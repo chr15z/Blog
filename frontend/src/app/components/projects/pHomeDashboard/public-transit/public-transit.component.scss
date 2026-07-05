@@ -105,6 +105,13 @@
   display: flex;
   align-items: center;
   gap: 10px;
+  padding: 3px 6px;
+  margin: 0 -6px;
+  border-radius: 6px;
+
+  &:nth-child(even) {
+    background: rgba(52, 73, 102, 0.06);
+  }
 }
 
 .stop__left {
@@ -172,15 +179,4 @@
   color: var(--text);
   opacity: 0.3;
   flex-shrink: 0;
-}
-
-// ─── Footer ──────────────────────────────────────────────────────────────────
-
-.transit__footer {
-  margin-top: auto;
-  font-size: 0.62rem;
-  color: var(--text);
-  opacity: 0.4;
-  border-top: 1px solid rgba(52, 73, 102, 0.07);
-  padding-top: 6px;
 }
