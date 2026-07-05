@@ -35,78 +35,6 @@
   to { transform: rotate(360deg); }
 }
 
-// ─── Header: Heute + Sonne ───────────────────────────────────────────────────
-
-.weather__header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-}
-
-.weather__today-main {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.today-icon {
-  font-size: 2rem;
-  line-height: 1;
-}
-
-.today-temps {
-  display: flex;
-  flex-direction: column;
-  line-height: 1.1;
-}
-
-.today-max {
-  font-size: 1.3rem;
-  font-weight: 700;
-  color: var(--text-color-h1);
-}
-
-.today-min {
-  font-size: 0.85rem;
-  color: var(--text);
-  opacity: 0.55;
-}
-
-.today-label {
-  font-size: 0.78rem;
-  color: var(--text);
-  opacity: 0.65;
-}
-
-.weather__sun {
-  display: flex;
-  gap: 14px;
-}
-
-.sun-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1px;
-}
-
-.sun-icon {
-  font-size: 1rem;
-}
-
-.sun-time {
-  font-size: 0.78rem;
-  font-weight: 600;
-  color: var(--text-color-h1);
-}
-
-.sun-label {
-  font-size: 0.6rem;
-  color: var(--text);
-  opacity: 0.5;
-}
-
 // ─── 24h Horizontal Scroll ───────────────────────────────────────────────────
 
 .weather__hourly-wrap {
@@ -158,6 +86,20 @@
   font-size: 0.75rem;
   font-weight: 600;
   color: var(--text-color-h1);
+}
+
+.hour-precip {
+  font-size: 0.6rem;
+  font-weight: 600;
+  color: #5b9bd5;
+}
+
+.hour-item--sun {
+  .hour-temp {
+    font-size: 0.62rem;
+    font-weight: 500;
+    opacity: 0.7;
+  }
 }
 
 // ─── Divider ─────────────────────────────────────────────────────────────────
@@ -231,26 +173,4 @@
   height: 100%;
   border-radius: 3px;
   min-width: 8px;
-}
-
-// ─── Footer ──────────────────────────────────────────────────────────────────
-
-.weather__footer {
-  margin-top: auto;
-  font-size: 0.62rem;
-  color: var(--text);
-  opacity: 0.4;
-  text-align: right;
-  padding-top: 4px;
-  border-top: 1px solid rgba(52, 73, 102, 0.07);
-
-  a {
-    color: inherit;
-    text-decoration: none;
-
-    &:hover {
-      text-decoration: underline;
-      opacity: 1;
-    }
-  }
 }

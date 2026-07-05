@@ -6,6 +6,7 @@ export interface HourlyWeather {
   temperature: number;
   weatherCode: number;
   isDay: number;
+  precipitationProbability: number;
 }
 
 export interface DailyWeather {
@@ -31,7 +32,7 @@ export class WeatherService {
       'https://api.open-meteo.com/v1/forecast',
       '?latitude=48.2085',
       '&longitude=16.3721',
-      '&hourly=temperature_2m%2Cweather_code%2Cis_day',
+      '&hourly=temperature_2m%2Cweather_code%2Cis_day%2Cprecipitation_probability',
       '&daily=weather_code%2Ctemperature_2m_max%2Ctemperature_2m_min%2Csunrise%2Csunset%2Cprecipitation_probability_max',
       '&forecast_days=7',
       '&timezone=Europe%2FVienna',
@@ -68,6 +69,7 @@ export class WeatherService {
         temperature: Math.round(raw.hourly.temperature_2m[i]),
         weatherCode: raw.hourly.weather_code[i],
         isDay: raw.hourly.is_day[i],
+        precipitationProbability: raw.hourly.precipitation_probability[i],
       }))
       .filter((h: HourlyWeather) => {
         const hTime = new Date(h.time);
@@ -123,5 +125,10 @@ export class WeatherService {
     if (code <= 86)  return 'Schneeschauer';
     if (code <= 99)  return 'Gewitter';
     return 'Unbekannt';
+  }
+
+  /** true bei Niesel/Regen/Schauer/Gewitter – Schnee zählt bewusst nicht als "Regen". */
+  static isRain(code: number): boolean {
+    return (code >= 51 && code <= 69) || (code >= 80 && code <= 82) || (code >= 95 && code <= 99);
   }
 }

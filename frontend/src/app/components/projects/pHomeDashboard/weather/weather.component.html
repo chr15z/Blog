@@ -14,39 +14,25 @@
   </div>
 
   <!-- Inhalt -->
-  <ng-container *ngIf="!loading && !error && weather && today">
+  <ng-container *ngIf="!loading && !error && weather">
 
-    <!-- Header: Heute-Übersicht + Sonne -->
-    <div class="weather__header">
-      <div class="weather__today-main">
-        <span class="today-icon">{{ icon(today.weatherCode) }}</span>
-        <div class="today-temps">
-          <span class="today-max">{{ today.tempMax }}°</span>
-          <span class="today-min">{{ today.tempMin }}°</span>
-        </div>
-        <span class="today-label">{{ label(today.weatherCode) }}</span>
-      </div>
-      <div class="weather__sun">
-        <div class="sun-item">
-          <span class="sun-icon">🌅</span>
-          <span class="sun-time">{{ formatTime(today.sunrise) }}</span>
-          <span class="sun-label">Aufgang</span>
-        </div>
-        <div class="sun-item">
-          <span class="sun-icon">🌇</span>
-          <span class="sun-time">{{ formatTime(today.sunset) }}</span>
-          <span class="sun-label">Untergang</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- 24h Horizontal-Scroll -->
+    <!-- 24h Horizontal-Scroll (inkl. Sonnenauf-/-untergang) -->
     <div class="weather__hourly-wrap">
       <div class="weather__hourly">
-        <div class="hour-item" *ngFor="let h of weather.hourly">
-          <span class="hour-label">{{ formatHour(h.time) }}</span>
-          <span class="hour-icon">{{ icon(h.weatherCode, h.isDay) }}</span>
-          <span class="hour-temp">{{ h.temperature }}°</span>
+        <div class="hour-item" [class.hour-item--sun]="item.sun" *ngFor="let item of hourlyTimeline">
+          <ng-container *ngIf="item.hour as h; else sunTpl">
+            <span class="hour-label">{{ formatHour(h.time) }}</span>
+            <span class="hour-icon">{{ icon(h.weatherCode, h.isDay) }}</span>
+            <span class="hour-temp">{{ h.temperature }}°</span>
+            <span class="hour-precip" *ngIf="isRain(h.weatherCode)">{{ h.precipitationProbability }}%</span>
+          </ng-container>
+          <ng-template #sunTpl>
+            <ng-container *ngIf="item.sun as s">
+              <span class="hour-label">{{ formatTime(item.time) }}</span>
+              <span class="hour-icon">{{ s.type === 'sunrise' ? '🌅' : '🌇' }}</span>
+              <span class="hour-temp">{{ s.type === 'sunrise' ? 'Sunrise' : 'Sundown' }}</span>
+            </ng-container>
+          </ng-template>
         </div>
       </div>
     </div>
@@ -67,11 +53,6 @@
         </div>
         <span class="day-max">{{ d.tempMax }}°</span>
       </div>
-    </div>
-
-    <!-- Footer: Datenquelle -->
-    <div class="weather__footer">
-      Daten: Open-Meteo API
     </div>
 
   </ng-container>

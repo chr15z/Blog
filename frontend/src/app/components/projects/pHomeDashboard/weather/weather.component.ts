@@ -1,6 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { WeatherService, WeatherData, DailyWeather } from './weather.service';
+import { WeatherService, WeatherData, DailyWeather, HourlyWeather } from './weather.service';
+
+/** Ein Eintrag der Stundenleiste: entweder ein Wetter-Stundenwert oder ein Sonnenauf-/-untergang. */
+export interface TimelineItem {
+  time: string;
+  hour?: HourlyWeather;
+  sun?: { type: 'sunrise' | 'sunset' };
+}
 
 @Component({
   selector: 'app-weather',
@@ -35,8 +42,8 @@ export class WeatherComponent implements OnInit {
     return WeatherService.weatherIcon(code, isDay);
   }
 
-  label(code: number): string {
-    return WeatherService.weatherLabel(code);
+  isRain(code: number): boolean {
+    return WeatherService.isRain(code);
   }
 
   formatHour(iso: string): string {
@@ -76,15 +83,33 @@ export class WeatherComponent implements OnInit {
     };
   }
 
-  get today(): DailyWeather | null {
-    if (!this.weather) return null;
-    const daily = this.weather.daily[0];
-    if (!daily) return null;
-    // Wettercode vom aktuellen Stundenblock statt dem pessimistischen Tages-Aggregat
-    const currentHour = this.weather.hourly[0];
-    return {
-      ...daily,
-      weatherCode: currentHour?.weatherCode ?? daily.weatherCode,
-    };
+  /**
+   * Stundenwerte und Sonnenauf-/-untergänge chronologisch zu einer Zeitleiste
+   * zusammengeführt, damit Sonnenereignisse an der passenden Stelle im
+   * 24h-Scroll erscheinen statt in einem eigenen Header.
+   */
+  get hourlyTimeline(): TimelineItem[] {
+    if (!this.weather || this.weather.hourly.length === 0) return [];
+
+    const hourly = this.weather.hourly;
+    const start = new Date(hourly[0].time).getTime();
+    const end = new Date(hourly[hourly.length - 1].time).getTime();
+
+    const items: TimelineItem[] = hourly.map((h) => ({ time: h.time, hour: h }));
+
+    for (const day of this.weather.daily) {
+      const events: Array<['sunrise' | 'sunset', string]> = [
+        ['sunrise', day.sunrise],
+        ['sunset', day.sunset],
+      ];
+      for (const [type, time] of events) {
+        const t = new Date(time).getTime();
+        if (t >= start && t <= end) {
+          items.push({ time, sun: { type } });
+        }
+      }
+    }
+
+    return items.sort((a, b) => new Date(a.time).getTime() - new Date(b.time).getTime());
   }
 }
