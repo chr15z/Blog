@@ -125,6 +125,13 @@
   gap: 6px;
   font-size: 0.78rem;
   color: var(--text);
+  padding: 3px 6px;
+  margin: 0 -6px;
+  border-radius: 6px;
+
+  &:nth-child(even) {
+    background: rgba(52, 73, 102, 0.06);
+  }
 }
 
 .day-name {
