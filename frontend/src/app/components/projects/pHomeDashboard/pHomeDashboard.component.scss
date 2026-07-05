@@ -1,6 +1,7 @@
 // ─── Dashboard Layout ────────────────────────────────────────────────────────
 
 .dashboard-grid {
+  margin-top: 20px;
   display: grid;
   grid-template-columns: 220px 1fr 1fr;
   grid-template-rows: auto 1fr;
@@ -85,5 +86,53 @@
     font-size: 0.82rem;
     font-style: italic;
     text-align: center;
+  }
+}
+
+// ─── Mobile ──────────────────────────────────────────────────────────────────
+
+// Tablet & unten: alles wird zu einer Spalte, Reihenfolge = DOM-Reihenfolge
+// (Kalender → Wetter → Transit → Fußball → Zitat)
+@media (max-width: 768px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: none;
+    gap: 12px;
+    padding: 16px;
+
+    .widget--calendar,
+    .widget--weather,
+    .widget--transit,
+    .widget--football,
+    .widget--quote {
+      grid-column: 1;
+      grid-row: auto;
+    }
+  }
+
+  // Hover-Transform stört auf Touch-Geräten (bleibt "hängen" nach Tap)
+  .dashboard-widget:hover {
+    transform: none;
+  }
+}
+
+// Kleine Phones: Abstände & Placeholder weiter verkleinern
+@media (max-width: 420px) {
+  .dashboard-grid {
+    padding: 12px;
+    gap: 10px;
+  }
+
+  .widget-placeholder {
+    min-height: 90px;
+    padding: 16px 12px;
+
+    .placeholder-icon {
+      font-size: 1.6rem;
+    }
+
+    p {
+      font-size: 0.78rem;
+    }
   }
 }
