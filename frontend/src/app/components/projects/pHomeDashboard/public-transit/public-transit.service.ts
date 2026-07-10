@@ -30,6 +30,8 @@ export const STOPS: { rbl: number; stopLabel: string; filterLine?: string }[] = 
   { rbl: 462,  stopLabel: '18 → Schlachthausg.',  filterLine: '18' },
   // 48A Burggasse-Stadthalle → Ring (bestätigt RBL 1431)
   { rbl: 1431, stopLabel: '48A → Ring',            filterLine: '48A' },
+  // Linie 5 Kaiserstraße/Burggasse → Praterstern (Richtung Prater)
+  { rbl: 375,  stopLabel: '5 → Prater',            filterLine: '5' },
 ];
 
 @Injectable({ providedIn: 'root' })
