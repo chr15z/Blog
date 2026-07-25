@@ -60,8 +60,8 @@ export class AboutMeComponent implements OnInit {
   private loadTechStack(): void {
     const keys: TechnologieKey[] = [
       'swift', 'kotlin', 'java', 'python', 'javascript', 'php', 'sql',
-      'angular', 'vue', 'springBoot', 'junit',
-      'mongodb', 'h2',
+      'angular', 'vue', 'springBoot', 'junit', 'phpunit',
+      'mongodb', 'h2', 'postgresql',
       'githubActions', 'gitlab', 'docker',
       'n8n',
     ];

@@ -23,8 +23,10 @@ export type TechnologieKey =
   | 'javascript'
   | 'php'
   | 'sql'
+  | 'postgresql'
   | 'springBoot'
-  | 'junit';
+  | 'junit'
+  | 'phpunit';
 import { Injectable } from '@angular/core';
 import { HomePageSectionDTO } from '../dtos/homePageSectionDTO';
 import {DetailViewDTO} from "../dtos/detailViewDTO";
@@ -176,6 +178,14 @@ export class ContentService {
       type: TechnologieCategory.FrameworksLibraries,
     });
 
+    this.technologieContent.set('phpunit', {
+      name: 'PHPUnit',
+      image: 'assets/images/logo-php.png',
+      info:
+        'Testing framework for PHP used to write and run unit tests.',
+      type: TechnologieCategory.FrameworksLibraries,
+    });
+
     // Databases
     this.technologieContent.set('mongodb', {
       name: 'MongoDB',
@@ -190,6 +200,14 @@ export class ContentService {
       image: 'assets/images/logo-h2.png',
       info:
         'H2 is a lightweight, in-memory SQL database.',
+      type: TechnologieCategory.Database,
+    });
+
+    this.technologieContent.set('postgresql', {
+      name: 'PostgreSQL',
+      image: 'assets/images/logo-postgresql.png',
+      info:
+        'Powerful open-source relational database known for reliability and standards compliance.',
       type: TechnologieCategory.Database,
     });
 
