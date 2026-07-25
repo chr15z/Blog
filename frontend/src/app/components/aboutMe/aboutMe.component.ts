@@ -20,16 +20,7 @@ export class AboutMeComponent implements OnInit {
 
   techStack: TechCard[] = [];
 
-  roles: string[] = [
-    'I am a developer.',
-    'I am a student.',
-    'Check out my CV.',
-  ];
-  currentRoleIndex: number = 0;
-  currentRole: string = this.roles[0];
-
   ngOnInit(): void {
-    this.startRoleRotation();
     this.loadTechStack();
   }
 
@@ -90,12 +81,5 @@ export class AboutMeComponent implements OnInit {
       .map((p) => (p.endsWith('.') ? p : `${p}.`));
 
     return parts.length ? parts : [info.trim()];
-  }
-
-  startRoleRotation(): void {
-    setInterval(() => {
-      this.currentRoleIndex = (this.currentRoleIndex + 1) % this.roles.length;
-      this.currentRole = this.roles[this.currentRoleIndex];
-    }, 2000);
   }
 }
