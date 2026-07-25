@@ -1,4 +1,4 @@
-import {TechnologieDTO} from "../dtos/technologieDTO";
+import {TechnologieDTO, TechnologieCategory} from "../dtos/technologieDTO";
 
 export type HomePageSectionKey =
   | 'myJourney'
@@ -84,13 +84,15 @@ export class ContentService {
       image: 'assets/images/logo-swift.png',
       info:
         'Swift is a powerful programming language for iOS.',
+      type: TechnologieCategory.ProgrammingLanguage,
     });
 
     this.technologieContent.set('kotlin', {
-      name: 'Wearable SDK (Kotlin)',
+      name: 'Kotlin Multiplatform SDK',
       image: 'assets/images/logo-kotlin.png',
       info:
         'Kotlin is a statically typed, cross-platform programming language.',
+      type: TechnologieCategory.WebBackendDb,
     });
 
     this.technologieContent.set('gloves', {
@@ -98,62 +100,71 @@ export class ContentService {
       image: 'assets/images/logo-gloves.jpeg',
       info:
         'Smart boxing gloves with inertial and force sensors providing real-time punch data for gameplay and feedback.',
+      type: TechnologieCategory.Hardware,
     });
 
     this.technologieContent.set('githubActions', {
-      name: 'CI/CD (GitHub Actions)',
+      name: 'GitHub Actions',
       image: 'assets/images/logo-github.png',
       info:
         'GitHub Actions is a CI/CD platform.',
+      type: TechnologieCategory.CiCd,
     });
 
     this.technologieContent.set('vue', {
-      name: 'Frontend (Vue.js)',
+      name: 'Vue.js',
       image: 'assets/images/logo-vuejs.png',
       info:
         'Reactive, component-based JavaScript framework.',
+      type: TechnologieCategory.WebBackendDb,
     });
 
     this.technologieContent.set('n8n', {
-      name: 'Backend (n8n)',
+      name: 'n8n',
       image: 'assets/images/logo-n8n.png',
       info:
         'backend solution for automating services and backend workflows.',
+      type: TechnologieCategory.WebBackendDb,
     });
 
     this.technologieContent.set('mongodb', {
-      name: 'Database (MongoDB)',
+      name: 'MongoDB',
       image: 'assets/images/logo-mongodb.png',
       info:
         'Flexible NoSQL document database using JSON.',
+      type: TechnologieCategory.WebBackendDb,
     });
 
     this.technologieContent.set('angular', {
-      name: 'Frontend (Angular)',
+      name: 'Angular',
       image: 'assets/images/logo-angular.png',
       info:
         'TypeScript-based frontend component based framework.',
+      type: TechnologieCategory.WebBackendDb,
     });
 
     this.technologieContent.set('java', {
-      name: 'Backend (Java)',
+      name: 'Java',
       image: 'assets/images/logo-java.png',
       info:
         'backend language with helpful frameworks as JUint and spring boot.',
+      type: TechnologieCategory.ProgrammingLanguage,
     });
 
     this.technologieContent.set('h2', {
-      name: 'Database (H2)',
+      name: 'H2',
       image: 'assets/images/logo-h2.png',
       info:
         'H2 is a lightweight, in-memory SQL database.',
+      type: TechnologieCategory.WebBackendDb,
     });
 
     this.technologieContent.set('gitlab', {
-      name: 'CI/CD (GitLab)',
+      name: 'GitLab',
       image: 'assets/images/logo-gitlab.png',
       info:
         'GitLab is a CI/CD platform.',
+      type: TechnologieCategory.CiCd,
     });
   }
 

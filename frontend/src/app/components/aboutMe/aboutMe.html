@@ -29,27 +29,35 @@
 
 
       <h1>Contact Information</h1>
-      <div>
+      <div class="contact-info">
         <p><i class="fa-solid fa-envelope"></i> chrisztlr&#64;gmail.com</p>
         <p><i class="fa-solid fa-location-dot"></i> vienna, austria</p>
       </div>
 
-      <div class="badges">
+      <div class="connect-card work-item">
 
-        <div class="trapdoor-linkedin">
-          <div class="top-linkedin door-linkedin"></div>
-          <div class="bottom-linkedin door-linkedin"></div>
-          <a href="https://www.linkedin.com/in/christoph-zeitler-338a64247/" class="linkedin-button">Connect</a>
+        <div class="badges">
+
+          <div class="trapdoor-linkedin">
+            <div class="top-linkedin door-linkedin"></div>
+            <div class="bottom-linkedin door-linkedin"></div>
+            <a href="https://www.linkedin.com/in/christoph-zeitler-338a64247/" target="_blank" rel="noopener noreferrer" class="linkedin-button">Connect</a>
+          </div>
+
+          <div class="trapdoor-github">
+            <div class="top-github door-github"></div>
+            <div class="bottom-github door-github"></div>
+            <a href="https://github.com/chr15z/" target="_blank" rel="noopener noreferrer" class="github-button">Follow</a>
+          </div>
+
         </div>
 
-        <div class="trapdoor-github">
-          <div class="top-github door-github"></div>
-          <div class="bottom-github door-github"></div>
-          <a href="https://github.com/chr15z/" class="github-button">Follow</a>
+        <div class="github-chart">
+          <img [src]="githubChartUrl" alt="GitHub contribution graph" class="github-chart-img" loading="lazy">
+          <span class="github-chart-caption">recent GitHub activity</span>
         </div>
 
       </div>
-
 
     </div>
 

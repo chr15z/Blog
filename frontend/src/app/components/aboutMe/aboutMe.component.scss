@@ -125,9 +125,17 @@ ul {
 }
 
 .badges {
-  margin: 1em;
+  margin: 0;
   display: flex;
   justify-content: center;
+}
+
+.connect-card {
+  flex-direction: column;
+  gap: 1.5em;
+  padding: 1.5em 2em;
+  margin: 1.5em auto 0;
+  max-width: 26em;
 }
 
 //linkedin icon
@@ -228,6 +236,26 @@ ul {
     height: 20px;
     left: 52%;
   }
+}
+
+.github-chart {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5em;
+  width: 100%;
+}
+
+.github-chart-caption {
+  font-size: 0.85em;
+  opacity: 0.65;
+  letter-spacing: 0.02em;
+}
+
+.github-chart-img {
+  width: 100%;
+  height: auto;
+  mix-blend-mode: multiply;
 }
 
 @font-face {

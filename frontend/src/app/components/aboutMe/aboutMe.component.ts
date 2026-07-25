@@ -20,6 +20,11 @@ export class AboutMeComponent implements OnInit {
 
   techStack: TechCard[] = [];
 
+  // GitHub contribution graph (rendered via ghchart.rshah.org as an SVG image)
+  private readonly githubUsername = 'chr15z';
+  private readonly githubChartColor = ''; // matches the site's teal accent
+  readonly githubChartUrl = `https://ghchart.rshah.org/${this.githubChartColor}/${this.githubUsername}`;
+
   ngOnInit(): void {
     this.loadTechStack();
   }
@@ -29,14 +34,14 @@ export class AboutMeComponent implements OnInit {
     const keys: TechnologieKey[] = [
       'angular',
       'vue',
-      'java',
-      'mongodb',
-      'h2',
-      'gitlab',
-      'githubActions',
-      'swift',
-      'kotlin',
-      'n8n',
+      //'java',
+      //'mongodb',
+      //'h2',
+      //'gitlab',
+      //'githubActions',
+      //'swift',
+      //'kotlin',
+      //'n8n',
     ];
 
     const dtos: TechnologieDTO[] = keys
