@@ -6,8 +6,10 @@ export class TechnologieDTO {
 }
 
 export enum TechnologieCategory {
-  ProgrammingLanguage = 'Programming Language',
-  WebBackendDb = 'Web, Backend & DB',
-  CiCd = 'CI / CD',
-  Hardware = 'Hardware'
+  ProgrammingLanguage = 'Programming Languages',
+  FrameworksLibraries = 'Frameworks & Libraries',
+  Database = 'Databases',
+  DevOpsCiCd = 'DevOps & CI/CD',
+  ToolsAutomation = 'Tools & Automation',
+  Hardware = 'Hardware',
 }

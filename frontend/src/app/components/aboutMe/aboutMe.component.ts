@@ -26,8 +26,10 @@ export class AboutMeComponent implements OnInit {
   // Fixed display order for the tech categories (also used for the filter chips).
   readonly categories: TechnologieCategory[] = [
     TechnologieCategory.ProgrammingLanguage,
-    TechnologieCategory.WebBackendDb,
-    TechnologieCategory.CiCd,
+    TechnologieCategory.FrameworksLibraries,
+    TechnologieCategory.Database,
+    TechnologieCategory.DevOpsCiCd,
+    TechnologieCategory.ToolsAutomation,
   ];
 
   techGroups: TechGroup[] = [];
@@ -57,9 +59,11 @@ export class AboutMeComponent implements OnInit {
 
   private loadTechStack(): void {
     const keys: TechnologieKey[] = [
-      'swift', 'kotlin', 'java',
-      'angular', 'vue', 'n8n', 'mongodb', 'h2',
+      'swift', 'kotlin', 'java', 'python', 'javascript', 'php', 'sql',
+      'angular', 'vue', 'springBoot', 'junit',
+      'mongodb', 'h2',
       'githubActions', 'gitlab', 'docker',
+      'n8n',
     ];
 
     const cards: TechCard[] = keys

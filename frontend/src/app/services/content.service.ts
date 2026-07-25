@@ -18,7 +18,13 @@ export type TechnologieKey =
   | 'java'
   | 'h2'
   | 'gitlab'
-  | 'docker';
+  | 'docker'
+  | 'python'
+  | 'javascript'
+  | 'php'
+  | 'sql'
+  | 'springBoot'
+  | 'junit';
 import { Injectable } from '@angular/core';
 import { HomePageSectionDTO } from '../dtos/homePageSectionDTO';
 import {DetailViewDTO} from "../dtos/detailViewDTO";
@@ -80,6 +86,7 @@ export class ContentService {
   // --------------------
 
   private initializeTechnologieContent(): void {
+    // Programming Languages
     this.technologieContent.set('swift', {
       name: 'Swift',
       image: 'assets/images/logo-swift.png',
@@ -93,23 +100,56 @@ export class ContentService {
       image: 'assets/images/logo-kotlin.png',
       info:
         'Kotlin is a statically typed, cross-platform programming language.',
-      type: TechnologieCategory.WebBackendDb,
+      type: TechnologieCategory.ProgrammingLanguage,
     });
 
-    this.technologieContent.set('gloves', {
-      name: 'Sensor Input',
-      image: 'assets/images/logo-gloves.jpeg',
+    this.technologieContent.set('java', {
+      name: 'Java',
+      image: 'assets/images/logo-java.png',
       info:
-        'Smart boxing gloves with inertial and force sensors providing real-time punch data for gameplay and feedback.',
-      type: TechnologieCategory.Hardware,
+        'Backend language with helpful frameworks such as JUnit and Spring Boot.',
+      type: TechnologieCategory.ProgrammingLanguage,
     });
 
-    this.technologieContent.set('githubActions', {
-      name: 'GitHub Actions',
-      image: 'assets/images/logo-github.png',
+    this.technologieContent.set('python', {
+      name: 'Python',
+      image: 'assets/images/logo-python.png',
       info:
-        'GitHub Actions is a CI/CD platform.',
-      type: TechnologieCategory.CiCd,
+        'Versatile, interpreted programming language used for backend development, scripting and automation.',
+      type: TechnologieCategory.ProgrammingLanguage,
+    });
+
+    this.technologieContent.set('javascript', {
+      name: 'JavaScript',
+      image: 'assets/images/logo-javascript.png',
+      info:
+        'Dynamic scripting language for interactive web frontends and Node.js-based backends.',
+      type: TechnologieCategory.ProgrammingLanguage,
+    });
+
+    this.technologieContent.set('php', {
+      name: 'PHP',
+      image: 'assets/images/logo-php.png',
+      info:
+        'Server-side scripting language widely used for dynamic web applications.',
+      type: TechnologieCategory.ProgrammingLanguage,
+    });
+
+    this.technologieContent.set('sql', {
+      name: 'SQL',
+      image: 'assets/images/logo-sql.png',
+      info:
+        'Standard language for querying and managing relational databases.',
+      type: TechnologieCategory.ProgrammingLanguage,
+    });
+
+    // Frameworks & Libraries
+    this.technologieContent.set('angular', {
+      name: 'Angular',
+      image: 'assets/images/logo-angular.png',
+      info:
+        'TypeScript-based frontend component based framework.',
+      type: TechnologieCategory.FrameworksLibraries,
     });
 
     this.technologieContent.set('vue', {
@@ -117,39 +157,32 @@ export class ContentService {
       image: 'assets/images/logo-vuejs.png',
       info:
         'Reactive, component-based JavaScript framework.',
-      type: TechnologieCategory.WebBackendDb,
+      type: TechnologieCategory.FrameworksLibraries,
     });
 
-    this.technologieContent.set('n8n', {
-      name: 'n8n',
-      image: 'assets/images/logo-n8n.png',
+    this.technologieContent.set('springBoot', {
+      name: 'Spring Boot',
+      image: 'assets/images/logo-java.png',
       info:
-        'backend solution for automating services and backend workflows.',
-      type: TechnologieCategory.WebBackendDb,
+        'Java framework for building production-ready backend applications quickly.',
+      type: TechnologieCategory.FrameworksLibraries,
     });
 
+    this.technologieContent.set('junit', {
+      name: 'JUnit',
+      image: 'assets/images/logo-java.png',
+      info:
+        'Testing framework for Java used to write and run unit tests.',
+      type: TechnologieCategory.FrameworksLibraries,
+    });
+
+    // Databases
     this.technologieContent.set('mongodb', {
       name: 'MongoDB',
       image: 'assets/images/logo-mongodb.png',
       info:
         'Flexible NoSQL document database using JSON.',
-      type: TechnologieCategory.WebBackendDb,
-    });
-
-    this.technologieContent.set('angular', {
-      name: 'Angular',
-      image: 'assets/images/logo-angular.png',
-      info:
-        'TypeScript-based frontend component based framework.',
-      type: TechnologieCategory.WebBackendDb,
-    });
-
-    this.technologieContent.set('java', {
-      name: 'Java',
-      image: 'assets/images/logo-java.png',
-      info:
-        'backend language with helpful frameworks as JUint and spring boot.',
-      type: TechnologieCategory.ProgrammingLanguage,
+      type: TechnologieCategory.Database,
     });
 
     this.technologieContent.set('h2', {
@@ -157,7 +190,16 @@ export class ContentService {
       image: 'assets/images/logo-h2.png',
       info:
         'H2 is a lightweight, in-memory SQL database.',
-      type: TechnologieCategory.WebBackendDb,
+      type: TechnologieCategory.Database,
+    });
+
+    // DevOps & CI/CD
+    this.technologieContent.set('githubActions', {
+      name: 'GitHub Actions',
+      image: 'assets/images/logo-github.png',
+      info:
+        'GitHub Actions is a CI/CD platform.',
+      type: TechnologieCategory.DevOpsCiCd,
     });
 
     this.technologieContent.set('gitlab', {
@@ -165,7 +207,7 @@ export class ContentService {
       image: 'assets/images/logo-gitlab.png',
       info:
         'GitLab is a CI/CD platform.',
-      type: TechnologieCategory.CiCd,
+      type: TechnologieCategory.DevOpsCiCd,
     });
 
     this.technologieContent.set('docker', {
@@ -173,7 +215,25 @@ export class ContentService {
       image: 'assets/images/logo-docker.png',
       info:
         'Docker packages applications and their dependencies into portable containers for consistent builds and deployments.',
-      type: TechnologieCategory.CiCd,
+      type: TechnologieCategory.DevOpsCiCd,
+    });
+
+    // Tools & Automation
+    this.technologieContent.set('n8n', {
+      name: 'n8n',
+      image: 'assets/images/logo-n8n.png',
+      info:
+        'Backend solution for automating services and backend workflows.',
+      type: TechnologieCategory.ToolsAutomation,
+    });
+
+    // Hardware
+    this.technologieContent.set('gloves', {
+      name: 'Sensor Input',
+      image: 'assets/images/logo-gloves.jpeg',
+      info:
+        'Smart boxing gloves with inertial and force sensors providing real-time punch data for gameplay and feedback.',
+      type: TechnologieCategory.Hardware,
     });
   }
 
