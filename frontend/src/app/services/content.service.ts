@@ -98,7 +98,7 @@ export class ContentService {
     });
 
     this.technologieContent.set('kotlin', {
-      name: 'Kotlin Multiplatform SDK',
+      name: 'Kotlin',
       image: 'assets/images/logo-kotlin.png',
       info:
         'Kotlin is a statically typed, cross-platform programming language.',
