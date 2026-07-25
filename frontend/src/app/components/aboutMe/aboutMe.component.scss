@@ -400,3 +400,38 @@ ul {
     left: 52%;
   }
 }
+
+// ---------------------------------------------------------------------
+// Mobile
+// Everything above stays as the desktop baseline; this block only
+// adjusts what genuinely needs to change on narrow screens.
+// ---------------------------------------------------------------------
+@media (max-width: 768px) {
+  .smooth,
+  .snap-section {
+    // dvh accounts for the mobile browser's address/toolbar so full-screen
+    // sections don't get clipped; falls back to vh where dvh isn't supported.
+    height: 100vh;
+    height: 100dvh;
+  }
+
+  .content {
+    // .content was capped at 62% width for the desktop layout; on mobile
+    // it should use the full available width instead.
+    max-width: 100%;
+  }
+
+  h1 {
+    font-size: 1.8em;
+  }
+
+  p {
+    font-size: 1em;
+  }
+
+  .badges {
+    // Defensive wrap so the two 100px badges never force horizontal
+    // overflow on very narrow devices.
+    flex-wrap: wrap;
+  }
+}
