@@ -17,7 +17,8 @@ export type TechnologieKey =
   | 'angular'
   | 'java'
   | 'h2'
-  | 'gitlab';
+  | 'gitlab'
+  | 'docker';
 import { Injectable } from '@angular/core';
 import { HomePageSectionDTO } from '../dtos/homePageSectionDTO';
 import {DetailViewDTO} from "../dtos/detailViewDTO";
@@ -164,6 +165,14 @@ export class ContentService {
       image: 'assets/images/logo-gitlab.png',
       info:
         'GitLab is a CI/CD platform.',
+      type: TechnologieCategory.CiCd,
+    });
+
+    this.technologieContent.set('docker', {
+      name: 'Docker',
+      image: 'assets/images/logo-docker.png',
+      info:
+        'Docker packages applications and their dependencies into portable containers for consistent builds and deployments.',
       type: TechnologieCategory.CiCd,
     });
   }

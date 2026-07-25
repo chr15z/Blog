@@ -1,12 +1,17 @@
 import {Component, OnInit} from '@angular/core';
 import {ContentService, TechnologieKey} from '../../services/content.service';
-import {TechnologieDTO} from '../../dtos/technologieDTO';
+import {TechnologieCategory} from '../../dtos/technologieDTO';
 
 type TechCard = {
+  key: TechnologieKey;
   title: string;
-  category?: string;
   image: string;
-  bullets: string[];
+  type: TechnologieCategory;
+};
+
+type TechGroup = {
+  type: TechnologieCategory;
+  items: TechCard[];
 };
 
 @Component({
@@ -18,73 +23,57 @@ export class AboutMeComponent implements OnInit {
 
   constructor(private readonly contentService: ContentService) { }
 
-  techStack: TechCard[] = [];
+  // Fixed display order for the tech categories (also used for the filter chips).
+  readonly categories: TechnologieCategory[] = [
+    TechnologieCategory.ProgrammingLanguage,
+    TechnologieCategory.WebBackendDb,
+    TechnologieCategory.CiCd,
+  ];
+
+  techGroups: TechGroup[] = [];
+  activeFilter: TechnologieCategory | 'all' = 'all';
 
   // GitHub contribution graph (rendered via ghchart.rshah.org as an SVG image)
   private readonly githubUsername = 'chr15z';
-  private readonly githubChartColor = ''; // matches the site's teal accent
-  readonly githubChartUrl = `https://ghchart.rshah.org/${this.githubChartColor}/${this.githubUsername}`;
+  readonly githubChartUrl = `https://ghchart.rshah.org/${this.githubUsername}`;
 
   ngOnInit(): void {
     this.loadTechStack();
   }
 
+  get visibleGroups(): TechGroup[] {
+    return this.activeFilter === 'all'
+      ? this.techGroups
+      : this.techGroups.filter((group) => group.type === this.activeFilter);
+  }
+
+  setFilter(filter: TechnologieCategory | 'all'): void {
+    this.activeFilter = filter;
+  }
+
+  trackByKey(_index: number, tech: TechCard): TechnologieKey {
+    return tech.key;
+  }
+
   private loadTechStack(): void {
-    // Keep an explicit order so the layout stays stable.
     const keys: TechnologieKey[] = [
-      'angular',
-      'vue',
-      //'java',
-      //'mongodb',
-      //'h2',
-      //'gitlab',
-      //'githubActions',
-      //'swift',
-      //'kotlin',
-      //'n8n',
+      'swift', 'kotlin', 'java',
+      'angular', 'vue', 'n8n', 'mongodb', 'h2',
+      'githubActions', 'gitlab', 'docker',
     ];
 
-    const dtos: TechnologieDTO[] = keys
-      .map((k) => this.contentService.getTechnologieSection(k))
-      .filter((t): t is TechnologieDTO => !!t);
+    const cards: TechCard[] = keys
+      .map((key) => ({key, dto: this.contentService.getTechnologieSection(key)}))
+      .filter((entry) => !!entry.dto)
+      .map(({key, dto}) => ({
+        key,
+        title: dto!.name,
+        image: dto!.image,
+        type: dto!.type,
+      }));
 
-    this.techStack = dtos.map((t) => this.toTechCard(t));
-  }
-
-  private toTechCard(dto: TechnologieDTO): TechCard {
-    const parsed = this.parseTechName(dto.name);
-    return {
-      title: parsed.title,
-      category: parsed.category,
-      image: dto.image,
-      bullets: this.toBullets(dto.info),
-    };
-  }
-
-  private parseTechName(name: string): { title: string; category?: string } {
-    const match = name.match(/^(.*?)\((.*?)\)\s*$/);
-    if (!match) return { title: name.trim() };
-
-    const category = match[1].trim().replace(/\s+$/, '');
-    const title = match[2].trim();
-    return {
-      title: title || name.trim(),
-      category: category || undefined,
-    };
-  }
-
-  private toBullets(info: string): string[] {
-    if (!info?.trim()) return [];
-
-    // Split into readable bullets (keep it short so cards stay compact).
-    const parts = info
-      .replace(/\s+/g, ' ')
-      .split(/\.\s+/)
-      .map((p) => p.trim())
-      .filter(Boolean)
-      .slice(0, 3)
-      .map((p) => (p.endsWith('.') ? p : `${p}.`));
-
-    return parts.length ? parts : [info.trim()];
+    this.techGroups = this.categories
+      .map((type) => ({type, items: cards.filter((card) => card.type === type)}))
+      .filter((group) => group.items.length > 0);
   }
 }
