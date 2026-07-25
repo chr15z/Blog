@@ -1,45 +1,5 @@
 <div class="smooth">
   <section class="snap-section">
-    <div class="content tech-stack-content">
-      <h1>Tech Stack</h1>
-      <p>
-        A selection of technologies I’ve used across my projects.
-      </p>
-
-      <div class="tech-filters">
-        <button
-          type="button"
-          class="filter-chip"
-          [class.active]="activeFilter === 'all'"
-          (click)="setFilter('all')">
-          All
-        </button>
-        <button
-          *ngFor="let category of categories"
-          type="button"
-          class="filter-chip"
-          [class.active]="activeFilter === category"
-          (click)="setFilter(category)">
-          {{ category }}
-        </button>
-      </div>
-
-      <div class="tech-groups">
-        <div class="tech-group" *ngFor="let group of visibleGroups">
-          <div class="tech-group-title">{{ group.type }}</div>
-          <div class="tech-group-items">
-            <div class="work-item tech-item" *ngFor="let tech of group.items; trackBy: trackByKey">
-              <img [src]="tech.image" [alt]="tech.title + ' Logo'" class="img-tech">
-              <span class="tech-title">{{ tech.title }}</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <section class="snap-section">
     <div class="content">
 
 
@@ -77,5 +37,45 @@
     </div>
 
 
+  </section>
+
+  <section class="snap-section">
+    <div class="content tech-stack-content">
+      <h1>Tech Stack</h1>
+      <p>
+        A selection of technologies I’ve used across my projects.
+      </p>
+
+      <div class="tech-filters">
+        <button
+          type="button"
+          class="filter-chip"
+          [class.active]="activeFilter === 'all'"
+          (click)="setFilter('all')">
+          All
+        </button>
+        <button
+          *ngFor="let category of categories"
+          type="button"
+          class="filter-chip"
+          [class.active]="activeFilter === category"
+          (click)="setFilter(category)">
+          {{ category }}
+        </button>
+      </div>
+
+      <div class="tech-groups">
+        <div class="tech-group" *ngFor="let group of visibleGroups">
+          <div class="tech-group-title">{{ group.type }}</div>
+          <div class="tech-group-items">
+            <div class="work-item tech-item" *ngFor="let tech of group.items; trackBy: trackByKey">
+              <img [src]="tech.image" [alt]="tech.title + ' Logo'" class="img-tech">
+              <span class="tech-title">{{ tech.title }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
   </section>
 </div>
