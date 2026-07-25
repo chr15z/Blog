@@ -17,9 +17,8 @@
     <div class="hero-content">
       <h1>{{ section.title }}</h1>
       <p>{{ section.subtitle }}</p>
-      <button routerLink="{{ section.link }}" routerLinkActive="active" class="learn-more">Learn More</button>
     </div>
-    <div>
+    <div class="media-column">
       <!-- Bedingte Anzeige: Video oder Bild -->
       <ng-container *ngIf="isVideo(section.image); else imageTemplate">
         <div class="video-wrapper">
@@ -45,8 +44,9 @@
       <ng-template #imageTemplate>
         <img [src]="section.image" alt="Hero Bild">
       </ng-template>
+
+      <button routerLink="{{ section.link }}" routerLinkActive="active" class="learn-more">Learn More</button>
     </div>
   </section>
 
 </div>
-
