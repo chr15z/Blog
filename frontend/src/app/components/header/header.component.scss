@@ -3,6 +3,7 @@ header {
   justify-content: center;
   align-items: center;
   width: 100%;
+  flex-wrap: wrap;
 }
 .element {
   margin: 0.5em 4em;
@@ -23,3 +24,24 @@ header {
   color: var(--text-color-h1);
 }
 
+// Tablet: Abstände deutlich verringern, damit alles in eine Zeile passt
+@media (max-width: 768px) {
+  .element {
+    margin: 0.5em 1.5em;
+  }
+}
+
+// Smartphone: kompakter Abstand, kleinere Schrift, Umbruch erlaubt
+@media (max-width: 480px) {
+  header {
+    justify-content: space-evenly;
+    padding: 0.25em 0;
+  }
+  .element {
+    margin: 0.4em 0.6em;
+    font-size: 0.9rem;
+  }
+  .element i {
+    font-size: 1.1rem;
+  }
+}
