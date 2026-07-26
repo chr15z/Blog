@@ -11,12 +11,13 @@ export class HomeComponent {
   homePageContent = [];
 
   constructor(contentService: ContentService) {
+    const ctrl = contentService.getHomePageSection("ctrl")
     const boxMentalist = contentService.getHomePageSection("boxMentalist")
     const myJourney = contentService.getHomePageSection("myJourney")
     const ticketLine = contentService.getHomePageSection("ticketLine")
     const sudoku = contentService.getHomePageSection("sudoku")
 
-    this.homePageContent = [boxMentalist, myJourney, ticketLine, sudoku];
+    this.homePageContent = [ctrl, boxMentalist, myJourney, ticketLine, sudoku];
   }
   isMuted: boolean[] = [];
 

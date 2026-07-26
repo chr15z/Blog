@@ -4,7 +4,8 @@ export type HomePageSectionKey =
   | 'myJourney'
   | 'ticketLine'
   | 'sudoku'
-  | 'boxMentalist';
+  | 'boxMentalist'
+  | 'ctrl';
 
 export type TechnologieKey =
   | 'swift'
@@ -81,6 +82,14 @@ export class ContentService {
     boxMentalist.image = 'assets/videos/boxMentalist.mp4';
     boxMentalist.link = '/boxMentalist';
     this.homePageContent.set('boxMentalist', boxMentalist);
+
+    const ctrl = new HomePageSectionDTO();
+    ctrl.title = 'CTRL';
+    ctrl.subtitle =
+      'A social media platform built for conscious media consumption and full user control';
+    ctrl.image = 'assets/videos/ctrlHome.mp4';
+    ctrl.link = '/notFound';
+    this.homePageContent.set('ctrl', ctrl);
   }
 
   // --------------------
