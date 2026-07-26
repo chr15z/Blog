@@ -9,7 +9,8 @@ h2{
 .smooth {
   position: relative;
   width: 100%;
-  height: 100vh; /* Vollbildhöhe */
+  height: 100vh; /* Vollbildhöhe (Fallback) */
+  height: 100dvh; /* berücksichtigt mobile Adressleiste */
   overflow-y: scroll;
   scroll-snap-type: y mandatory; /* Snap-Scrolling aktivieren */
 }
@@ -18,9 +19,11 @@ h2{
 .snap-section {
   padding: 8em;
   scroll-behavior: smooth; /* Sanftes Scrollen aktivieren */
-  height: 100vh; /* Jeder Abschnitt hat die Höhe des Viewports */
+  height: 100vh; /* Jeder Abschnitt hat die Höhe des Viewports (Fallback) */
+  height: 100dvh;
   scroll-snap-align: start; /* Abschnitte "snappen" an den oberen Rand */
   scroll-snap-stop: always; /* Stoppen des Scrollens bei jedem Abschnitt */
+  box-sizing: border-box;
 }
 
 /* Beispiel für die Hero-Sektion */
@@ -159,4 +162,143 @@ video {
 
 .tech-item img {
   mix-blend-mode: multiply;
+}
+
+/* ==========================================================
+   Mobile / Responsive
+   ========================================================== */
+
+/* Tablet & kleiner (≤ 900px) */
+@media (max-width: 900px) {
+  .snap-section {
+    height: auto;
+    min-height: 100vh;
+    min-height: 100dvh;
+    padding: 6em 3em;
+  }
+
+  .hero-content {
+    max-width: 55%;
+  }
+
+  img {
+    height: 22em;
+    width: 22em;
+  }
+
+  video {
+    height: 24em;
+    width: 12em;
+  }
+}
+
+/* Smartphones (≤ 640px) */
+@media (max-width: 640px) {
+  .snap-section {
+    height: auto;
+    min-height: 100vh;
+    min-height: 100dvh;
+    padding: 4em 1.25em;
+  }
+
+  /* Hero-Sektionen: Bild/Video über den Text stapeln, unabhängig
+     von .reverse (das nur die Desktop-Reihenfolge steuert) */
+  .hero,
+  .hero.reverse {
+    flex-direction: column-reverse;
+    text-align: center;
+    gap: 1.5em;
+  }
+
+  .hero-content {
+    max-width: 100%;
+  }
+
+  h1 {
+    font-size: 1.9em;
+  }
+
+  p {
+    font-size: 1.05em;
+  }
+
+  .subtitle {
+    text-align: left; /* Blocksatz + Silbentrennung wirkt auf schmalen Spalten unruhig */
+  }
+
+  img {
+    height: auto;
+    width: 85%;
+    max-width: 320px;
+    margin: 0 auto;
+  }
+
+  video {
+    height: auto;
+    width: 55%;
+    max-width: 200px;
+    aspect-ratio: 1 / 2;
+    margin: 0 auto;
+  }
+
+  .video-wrapper {
+    display: block;
+    width: 100%;
+  }
+
+  .mute-btn {
+    right: 8px;
+    bottom: 8px;
+    padding: 6px 8px;
+    font-size: 0.9rem;
+  }
+
+  .tech-section {
+    padding: 30px 12px;
+  }
+
+  .tech-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    padding: 10px;
+  }
+
+  .tech-item img {
+    width: 56px;
+    height: 56px;
+  }
+
+  .tech-item span {
+    font-size: 0.85rem;
+  }
+
+  /* Hover funktioniert auf Touch-Geräten nicht zuverlässig:
+     Info-Text fest anzeigen statt beim Hover einzublenden */
+  .tech-item .tech-info {
+    display: block;
+    position: static;
+    background: transparent;
+    color: inherit;
+    padding: 6px 0 0;
+    font-size: 0.8rem;
+  }
+
+  .tech-item img {
+    opacity: 1;
+  }
+}
+
+/* Sehr kleine Screens (≤ 380px) */
+@media (max-width: 380px) {
+  h1 {
+    font-size: 1.5em;
+  }
+
+  .tech-grid {
+    grid-template-columns: 1fr;
+  }
+
+  img {
+    max-width: 260px;
+  }
 }
