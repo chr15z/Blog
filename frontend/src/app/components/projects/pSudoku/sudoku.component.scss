@@ -144,4 +144,85 @@ select {
   font-weight: bold;
 }
 
+/* ==========================================================
+   Mobile / Responsive
+   ========================================================== */
 
+/* Tablet & kleiner (≤ 900px): Board und Stats untereinander statt nebeneinander */
+@media (max-width: 900px) {
+  .content {
+    flex-direction: column;
+    height: auto;
+    min-height: 100vh;
+    align-items: center;
+    padding: 2em 0;
+  }
+
+  .sudoku,
+  .stats {
+    flex: none;
+    width: 100%;
+    max-width: 420px;
+    box-sizing: border-box;
+  }
+
+  .stats {
+    height: auto;
+    padding: 1.5em;
+  }
+
+  .sudoku {
+    padding: 1.5em;
+  }
+}
+
+/* Smartphones (≤ 640px) */
+@media (max-width: 640px) {
+  h1 {
+    font-size: 1.6em;
+  }
+
+  .option {
+    font-size: 1.05em;
+  }
+
+  /* Buttons als volle Tap-Ziele untereinander statt eng nebeneinander umbrechend */
+  button {
+    display: block;
+    width: 100%;
+    max-width: 260px;
+    margin: 0.5em auto;
+  }
+
+  #speedRange {
+    width: 100%;
+    max-width: 280px;
+  }
+
+  /* Verhindert Auto-Zoom auf iOS Safari beim Fokussieren der Zellen */
+  .board td input {
+    font-size: 16px;
+  }
+
+  /* Tooltip: Hover funktioniert auf Touch-Geräten nicht zuverlässig,
+     falls er doch getriggert wird, soll er zumindest nicht über den
+     Bildschirmrand hinausragen */
+  .info::after {
+    white-space: normal;
+    max-width: 200px;
+    text-align: center;
+  }
+}
+
+/* Sehr kleine Screens (≤ 380px) */
+@media (max-width: 380px) {
+  .sudoku,
+  .stats {
+    padding: 1em;
+  }
+
+  .board td {
+    width: calc(280px / 9);
+    height: calc(280px / 9);
+  }
+}
