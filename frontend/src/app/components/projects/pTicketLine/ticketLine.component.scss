@@ -9,7 +9,8 @@ h2{
 .smooth {
   position: relative;
   width: 100%;
-  height: 100vh; /* Vollbildhöhe */
+  height: 100vh; /* Vollbildhöhe (Fallback) */
+  height: 100dvh; /* berücksichtigt mobile Adressleiste */
   overflow-y: scroll;
   scroll-snap-type: y mandatory; /* Snap-Scrolling aktivieren */
 }
@@ -18,9 +19,11 @@ h2{
 .snap-section {
   padding: 8em;
   scroll-behavior: smooth; /* Sanftes Scrollen aktivieren */
-  height: 100vh; /* Jeder Abschnitt hat die Höhe des Viewports */
+  height: 100vh; /* Jeder Abschnitt hat die Höhe des Viewports (Fallback) */
+  height: 100dvh;
   scroll-snap-align: start; /* Abschnitte "snappen" an den oberen Rand */
   scroll-snap-stop: always; /* Stoppen des Scrollens bei jedem Abschnitt */
+  box-sizing: border-box;
 }
 
 /* Beispiel für die Hero-Sektion */
@@ -136,11 +139,11 @@ video {
 
 .tech-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 15px;
-  max-width: 1000px;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 10px;
+  max-width: 800px;
   margin: auto;
-  padding: 20px;
+  padding: 10px;
 }
 
 .tech-item {
@@ -148,7 +151,7 @@ video {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 20px;
+  padding: 12px;
   border-radius: 10px;
   position: relative;
   overflow: hidden;
@@ -157,30 +160,21 @@ video {
 }
 
 .tech-item img {
-  width: 80px;
-  height: 80px;
+  width: 60px;
+  height: 60px;
   opacity: 0.7;
   transition: opacity 0.3s ease-in-out;
 }
 
 .tech-item span {
-  margin-top: 8px;
-  font-size: 1rem;
+  margin-top: 6px;
+  font-size: 0.9rem;
   font-weight: bold;
 }
 
+/* tech.info wird bewusst nicht angezeigt */
 .tech-item .tech-info {
   display: none;
-  position: absolute;
-  bottom: 10px;
-  left: 10px;
-  right: 10px;
-  background: rgba(0, 0, 0, 0.7);
-  padding: 10px;
-  border-radius: 5px;
-  font-size: 0.9rem;
-  text-align: center;
-  color: white;
 }
 
 .tech-item:hover {
@@ -191,10 +185,6 @@ video {
   opacity: 1;
 }
 
-.tech-item:hover .tech-info {
-  display: block;
-}
-
 .subtitle {
   text-align: justify;
   hyphens: auto;
@@ -202,4 +192,167 @@ video {
 
 .tech-item img {
   mix-blend-mode: multiply;
+}
+
+/* ==========================================================
+   Mobile / Responsive
+   ========================================================== */
+
+/* Tablet & kleiner (≤ 900px) */
+@media (max-width: 900px) {
+  .snap-section {
+    height: auto;
+    min-height: 100vh;
+    min-height: 100dvh;
+    padding: 6em 3em;
+  }
+
+  .hero-content {
+    max-width: 55%;
+  }
+
+  img {
+    height: 22em;
+    width: 22em;
+  }
+
+  video {
+    height: 24em;
+    width: 12em;
+  }
+
+  .carousel {
+    width: 22em;
+    height: 22em;
+  }
+}
+
+/* Smartphones (≤ 640px) */
+@media (max-width: 640px) {
+  .snap-section {
+    height: auto;
+    min-height: 100vh;
+    min-height: 100dvh;
+    padding: 4em 1.25em;
+  }
+
+  /* Hero-Sektionen: Bild/Video/Carousel über den Text stapeln, unabhängig
+     von .reverse (das nur die Desktop-Reihenfolge steuert) */
+  .hero,
+  .hero.reverse {
+    flex-direction: column-reverse;
+    text-align: center;
+    gap: 1.5em;
+  }
+
+  .hero-content {
+    max-width: 100%;
+  }
+
+  h1 {
+    font-size: 1.9em;
+  }
+
+  p {
+    font-size: 1.05em;
+  }
+
+  .subtitle {
+    text-align: left; /* Blocksatz + Silbentrennung wirkt auf schmalen Spalten unruhig */
+  }
+
+  img {
+    height: auto;
+    width: 85%;
+    max-width: 320px;
+    margin: 0 auto;
+  }
+
+  video {
+    height: auto;
+    width: 55%;
+    max-width: 200px;
+    aspect-ratio: 1 / 2;
+    margin: 0 auto;
+  }
+
+  .video-wrapper {
+    display: block;
+    width: 100%;
+  }
+
+  .mute-btn {
+    right: 8px;
+    bottom: 8px;
+    padding: 6px 8px;
+    font-size: 0.9rem;
+  }
+
+  /* Carousel: quadratisch, aber innerhalb des Viewports bleiben.
+     Pfeile rutschen von "außen" (negativer Offset) auf das Bild,
+     damit sie kein horizontales Scrollen verursachen. */
+  .carousel {
+    width: 85%;
+    max-width: 320px;
+    height: auto;
+    aspect-ratio: 1 / 1;
+    margin: 0 auto;
+  }
+
+  .carousel-btn {
+    font-size: 1.1em;
+    width: 1.8em;
+    height: 1.8em;
+  }
+
+  .carousel-btn.left {
+    left: 4px;
+  }
+
+  .carousel-btn.right {
+    right: 4px;
+  }
+
+  .carousel-counter {
+    bottom: -1.4em;
+    font-size: 0.85em;
+  }
+
+  .tech-section {
+    padding: 30px 12px;
+  }
+
+  .tech-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    padding: 10px;
+  }
+
+  .tech-item {
+    padding: 8px;
+  }
+
+  .tech-item img {
+    width: 48px;
+    height: 48px;
+  }
+
+  .tech-item span {
+    font-size: 0.75rem;
+  }
+}
+
+/* Sehr kleine Screens (≤ 380px) */
+@media (max-width: 380px) {
+  h1 {
+    font-size: 1.5em;
+  }
+
+  .tech-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  img {
+    max-width: 260px;
+  }
 }

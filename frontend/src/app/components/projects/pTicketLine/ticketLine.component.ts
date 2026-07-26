@@ -29,7 +29,7 @@ export class TicketLineComponent {
 
   private readonly screenshotIndexBySection: Record<number, number> = {};
 
-  private readonly techKeys: TechnologieKey[] = ['angular', 'java', 'h2', 'gitlab'];
+  private readonly techKeys: TechnologieKey[] = ['angular', 'h2', 'gitlab', 'springBoot', 'junit', 'docker'];
 
   isMuted: Record<number, boolean> = {};
 
