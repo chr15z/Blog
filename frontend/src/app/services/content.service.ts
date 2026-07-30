@@ -88,7 +88,7 @@ export class ContentService {
     ctrl.subtitle =
       'A social media platform built for conscious media consumption and full user control';
     ctrl.image = 'assets/videos/ctrlHome.mp4';
-    ctrl.link = '/notFound';
+    ctrl.link = '/ctrl';
     this.homePageContent.set('ctrl', ctrl);
   }
 
@@ -298,6 +298,23 @@ export class ContentService {
       tech:
         'TicketLine was built with Angular, Java, H2 and GitLab CI/CD.',
       image: 'assets/images/sepm/sepm5.png',
+    });
+
+    this.detailContent.set('ctrl', {
+      explanation:
+        'CTRL is a web-based social media platform that replaces the classic infinite feed with clearly bounded content sessions. Instead of keeping users on the platform for as long as possible, CTRL hands control over content and usage time back to them.<br><br>' +
+        'Once a configured number of posts or a set time span is reached, a session ends deliberately - continuing to scroll becomes an active decision instead of an automatic default.<br><br>' +
+        'This makes CTRL a European counter-design to platforms like Instagram or TikTok, built around transparency, trustworthy content and conscious media consumption instead of maximizing screen time.',
+      features:
+        '• Fixed content sessions instead of an infinite feed, with a configurable length (time or number of posts)<br>' +
+        '• Public feed for verified creators and a private feed for mutual friends<br>' +
+        '• Configurable algorithm ranking (recency, source quality, topics) plus a "Why am I seeing this?" explanation<br>' +
+        '• Trust labels for posts and sources based on community voting<br>' +
+        '• ID-Austria identity verification mock for public posting, along with reporting and moderation tools<br>' +
+        '• Built-in chat for sharing posts and communicating directly with friends and much more!',
+      tech:
+        'The backend runs on Spring Boot with a PostgreSQL database, tested with JUnit and shipped as Docker containers through a GitLab CI/CD pipeline. The frontend is built with Angular.',
+      image: 'assets/videos/ctrlHome.mp4',
     });
   }
   // --------------------
