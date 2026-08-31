@@ -43,20 +43,14 @@ export class PublicTransitService {
     const rbls = uniqueRbls.map(r => `stopId=${r}`).join('&');
     const url = `${this.BASE}?${rbls}&activateTrafficInfo=stoerungkurz`;
 
-    console.log('[Transit] Request URL:', url);
-
     return new Observable(observer => {
       const xhr = new XMLHttpRequest();
       xhr.open('GET', url);
 
       xhr.onload = () => {
-        console.log('[Transit] HTTP Status:', xhr.status);
-        console.log('[Transit] Response (raw):', xhr.responseText.slice(0, 500));
 
         try {
           const json = JSON.parse(xhr.responseText);
-          console.log('[Transit] message:', json.message);
-          console.log('[Transit] monitors count:', json.data?.monitors?.length ?? 0);
 
           if (json.message?.messageCode !== 1 && !json.data?.monitors) {
             const reason = json.message?.value ?? 'API Fehler';
@@ -69,15 +63,8 @@ export class PublicTransitService {
           const returnedRbls = (json.data?.monitors ?? []).map(
             (m: any) => m.locationStop?.properties?.attributes?.rbl
           );
-          console.log('[Transit] Returned RBLs:', returnedRbls);
-          console.log('[Transit] Expected RBLs:', STOPS.map(s => s.rbl));
 
           const parsed = this.parse(json);
-          console.log('[Transit] Parsed stops:', parsed.map(s => ({
-            label: s.stopLabel,
-            departures: s.departures.length,
-            error: s.error,
-          })));
 
           observer.next(parsed);
           observer.complete();
@@ -88,13 +75,10 @@ export class PublicTransitService {
       };
 
       xhr.onerror = (e) => {
-        console.error('[Transit] XHR network error – CORS oder Proxy nicht aktiv?', e);
-        console.error('[Transit] Proxy läuft? → proxy.conf.json in angular.json eingetragen?');
         observer.error(new Error('Netzwerkfehler – Proxy prüfen'));
       };
 
       xhr.ontimeout = () => {
-        console.error('[Transit] Request timeout');
         observer.error(new Error('Timeout'));
       };
 
@@ -113,7 +97,6 @@ export class PublicTransitService {
       );
 
       if (!mon) {
-        console.warn(`[Transit] No monitor found for RBL ${stop.rbl} (${stop.stopLabel})`);
         result.push({
           stopName: String(stop.rbl),
           stopLabel: stop.stopLabel,

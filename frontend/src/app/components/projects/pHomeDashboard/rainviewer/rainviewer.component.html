@@ -12,19 +12,42 @@
     <span class="error-detail">{{ errorMsg }}</span>
   </div>
 
-  <!-- Karte -->
+  <!-- Karte: komplett statisch, keine Kartenbibliothek. Genau 4 Kacheln,
+       einmalig positioniert, nie wieder neu berechnet. -->
   <div class="rainviewer__map-wrap" [class.rainviewer__map-wrap--hidden]="loading || error">
-    <div #mapEl class="rainviewer__map"></div>
 
-    <button
-      class="recenter-btn"
-      type="button"
-      (click)="recenter()"
-      title="Auf Wien zentrieren"
-      aria-label="Auf Wien zentrieren"
+    <div
+      class="rainviewer__mosaic"
+      [style.margin-left.px]="-mosaicOffsetX"
+      [style.margin-top.px]="-mosaicOffsetY"
     >
-      📍
-    </button>
+      <img
+        *ngFor="let tile of tiles"
+        class="rainviewer__tile"
+        [src]="tile.url"
+        [style.left.px]="tile.left"
+        [style.top.px]="tile.top"
+        alt=""
+        loading="eager"
+      />
+
+      <div
+        *ngFor="let cell of cellPositions; let i = index"
+        class="rainviewer__cell"
+        [style.left.px]="cell.left"
+        [style.top.px]="cell.top"
+        [style.width.px]="cell.width"
+        [style.height.px]="cell.height"
+        [style.background-color]="activeColors[i]"
+        [style.opacity]="activeOpacities[i]"
+        [title]="activeTitles[i]"
+      ></div>
+    </div>
+
+    <div class="rainviewer__attribution">
+      © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a>-Mitwirkende
+      · Niederschlag: <a href="https://open-meteo.com" target="_blank" rel="noopener">Open-Meteo</a>
+    </div>
 
     <div class="rainviewer__slider" *ngIf="!loading && !error && frames.length">
       <span class="rainviewer__time">

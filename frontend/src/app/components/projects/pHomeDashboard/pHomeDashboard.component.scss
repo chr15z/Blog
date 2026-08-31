@@ -39,6 +39,12 @@
     grid-column: 3;
     grid-row: 2;
   }
+
+  // Regenprognose: volle Breite, dritte Reihe (Karte braucht mehr Platz als 220px)
+  .widget--rainviewer {
+    grid-column: 1 / 4;
+    grid-row: 3;
+  }
 }
 
 // ─── Widget Card ─────────────────────────────────────────────────────────────
@@ -103,7 +109,8 @@
     .widget--weather,
     .widget--transit,
     .widget--football,
-    .widget--quote {
+    .widget--quote,
+    .widget--rainviewer {
       grid-column: 1;
       grid-row: auto;
     }

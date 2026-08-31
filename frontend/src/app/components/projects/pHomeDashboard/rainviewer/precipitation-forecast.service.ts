@@ -12,6 +12,8 @@ export interface PrecipitationGrid {
   /** Kantenlänge einer Gitterzelle in Grad, für die Kartendarstellung. */
   cellSizeLat: number;
   cellSizeLon: number;
+  /** Gesamte Abdeckung des Gitters (Wien + Umgebungsradius) für den initialen Kartenausschnitt. */
+  bounds: { south: number; west: number; north: number; east: number };
   /** "Jetzt" bis +24h in 30-Minuten-Schritten (max. ~49 Frames). */
   frames: PrecipitationFrame[];
 }
@@ -28,6 +30,8 @@ const SUBSAMPLE = TARGET_STEP_MIN / RAW_STEP_MIN; // = 2
 const HORIZON_HOURS = 24;
 const STEPS_NEEDED = (HORIZON_HOURS * 60) / TARGET_STEP_MIN; // = 48
 
+const LOG = '[PrecipitationForecastService]';
+
 @Injectable({ providedIn: 'root' })
 export class PrecipitationForecastService {
   // Kostenlose, öffentliche API – kein Key nötig für nicht-kommerzielle Nutzung
@@ -35,6 +39,15 @@ export class PrecipitationForecastService {
 
   getGrid(): Observable<PrecipitationGrid> {
     const cells = this.buildGrid();
+    const bounds = this.buildBounds();
+
+    console.group(`${LOG} getGrid() – Anfrage vorbereiten`);
+    console.log('Gittergröße:', `${GRID_SIZE}x${GRID_SIZE}`, '=', cells.length, 'Punkte');
+    console.log('Erste Zelle:', cells[0]);
+    console.log('Letzte Zelle:', cells[cells.length - 1]);
+    console.log('Bounds (Wien + Radius):', bounds);
+    console.groupEnd();
+
     const lat = cells.map((c) => c.lat).join('%2C');
     const lon = cells.map((c) => c.lon).join('%2C');
 
@@ -47,42 +60,136 @@ export class PrecipitationForecastService {
       '&timezone=Europe%2FVienna',
     ].join('');
 
+    console.log(LOG, 'Request-URL:', url);
+    console.log(LOG, 'URL-Länge:', url.length, 'Zeichen');
+
     return new Observable((observer) => {
+      const startedAt = performance.now();
       const xhr = new XMLHttpRequest();
       xhr.open('GET', url);
+
       xhr.onload = () => {
+        const durationMs = Math.round(performance.now() - startedAt);
+
+        console.group(`${LOG} Antwort erhalten (${durationMs} ms)`);
+        console.log('HTTP-Status:', xhr.status, xhr.statusText);
+        console.log('Antwortgröße:', xhr.responseText.length, 'Zeichen');
+
         try {
           const raw = JSON.parse(xhr.responseText);
+          console.log('Rohdaten (geparst):', raw);
+
           // Bei mehreren Koordinaten liefert Open-Meteo direkt ein Array, ein Objekt pro Punkt
           const perLocation: any[] = Array.isArray(raw) ? raw : [raw];
+          console.log(
+            'Anzahl Locations in Antwort:',
+            perLocation.length,
+            '(erwartet:',
+            cells.length,
+            ')',
+          );
 
           if (perLocation.length !== cells.length || !perLocation[0]?.minutely_15?.time) {
+            console.error(LOG, 'Unerwartetes Antwortformat!', {
+              perLocationLength: perLocation.length,
+              expectedLength: cells.length,
+              firstLocation: perLocation[0],
+            });
+            console.groupEnd();
             observer.error(new Error('Unerwartetes Antwortformat der Open-Meteo-API'));
             return;
           }
 
           const times: string[] = perLocation[0].minutely_15.time;
+          console.log('Zeitpunkte insgesamt (minutely_15):', times.length);
+          console.log('Erster Zeitpunkt (roh, lokal):', times[0]);
+          console.log('Letzter Zeitpunkt (roh, lokal):', times[times.length - 1]);
+
           const now = Date.now();
+          console.log(
+            'Aktuelle Zeit laut Browser:',
+            new Date(now).toString(),
+            '/ ISO:',
+            new Date(now).toISOString(),
+          );
+
           let nowIndex = times.findIndex((t) => new Date(t).getTime() >= now);
-          if (nowIndex === -1) nowIndex = 0;
+          if (nowIndex === -1) {
+            console.warn(LOG, 'Kein Zeitpunkt >= jetzt gefunden – falle auf Index 0 zurück');
+            nowIndex = 0;
+          }
+          console.log('nowIndex:', nowIndex, '-> Zeitpunkt:', times[nowIndex]);
 
           const endIndex = Math.min(nowIndex + STEPS_NEEDED * SUBSAMPLE, times.length - 1);
+          console.log('endIndex:', endIndex, '-> Zeitpunkt:', times[endIndex]);
+          console.log(
+            'SUBSAMPLE:',
+            SUBSAMPLE,
+            `(jeder ${SUBSAMPLE}. 15-Min-Rohwert wird zu einem 30-Min-Frame)`,
+          );
 
           const frames: PrecipitationFrame[] = [];
           for (let i = nowIndex; i <= endIndex; i += SUBSAMPLE) {
-            frames.push({
-              time: times[i],
-              values: perLocation.map((loc) => loc.minutely_15.precipitation[i] ?? 0),
-            });
+            const values = perLocation.map((loc) => loc.minutely_15.precipitation[i] ?? 0);
+            frames.push({ time: times[i], values });
           }
 
-          observer.next({ cells, cellSizeLat: LAT_STEP, cellSizeLon: LON_STEP, frames });
+          console.log('Anzahl erzeugter Frames:', frames.length, '(erwartet: ~', STEPS_NEEDED + 1, ')');
+
+          if (frames.length > 0) {
+            const allValues: number[] = [];
+            frames.forEach((f) => allValues.push(...f.values));
+            const maxMm = Math.max(...allValues);
+            const nonZeroCount = allValues.filter((v) => v > 0).length;
+
+            console.log('Frame 0 (jetzt) – Rohwerte pro Zelle:', frames[0].values);
+            console.log(
+              'Maximaler Niederschlagswert über alle Frames/Zellen:',
+              maxMm,
+              'mm/15min',
+            );
+            console.log(
+              'Werte > 0 insgesamt:',
+              nonZeroCount,
+              'von',
+              allValues.length,
+              `(${((nonZeroCount / allValues.length) * 100).toFixed(1)}%)`,
+            );
+
+            console.table(
+              frames.map((f, idx) => ({
+                index: idx,
+                zeit: f.time,
+                maxInFrame: Math.max(...f.values).toFixed(2),
+                zellenMitRegen: f.values.filter((v) => v > 0).length,
+              })),
+            );
+          } else {
+            console.warn(LOG, 'Keine Frames erzeugt – nowIndex/endIndex prüfen!');
+          }
+
+          console.groupEnd();
+
+          observer.next({
+            cells,
+            cellSizeLat: LAT_STEP,
+            cellSizeLon: LON_STEP,
+            bounds,
+            frames,
+          });
           observer.complete();
         } catch (e) {
+          console.error(LOG, 'Fehler beim Parsen der Antwort:', e);
+          console.groupEnd();
           observer.error(e);
         }
       };
-      xhr.onerror = () => observer.error(new Error('Netzwerkfehler'));
+
+      xhr.onerror = () => {
+        console.error(LOG, 'Netzwerkfehler bei der Anfrage an:', url);
+        observer.error(new Error('Netzwerkfehler'));
+      };
+
       xhr.send();
     });
   }
@@ -99,6 +206,17 @@ export class PrecipitationForecastService {
       }
     }
     return cells;
+  }
+
+  /** Randkoordinaten des Gitters (Wien + Umgebungsradius), inkl. der halben Randzelle. */
+  private buildBounds(): { south: number; west: number; north: number; east: number } {
+    const half = Math.floor(GRID_SIZE / 2) + 0.5;
+    return {
+      south: VIENNA_LAT - half * LAT_STEP,
+      north: VIENNA_LAT + half * LAT_STEP,
+      west: VIENNA_LON - half * LON_STEP,
+      east: VIENNA_LON + half * LON_STEP,
+    };
   }
 
   static formatTime(iso: string): string {
