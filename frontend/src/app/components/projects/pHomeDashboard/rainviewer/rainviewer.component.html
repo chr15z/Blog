@@ -1,0 +1,48 @@
+<div class="rainviewer">
+
+  <!-- Loading -->
+  <div class="rainviewer__state" *ngIf="loading">
+    <span class="spinner"></span>
+    <span>Niederschlagsprognose laden…</span>
+  </div>
+
+  <!-- Error -->
+  <div class="rainviewer__state rainviewer__state--error" *ngIf="error">
+    <span>⚠️ Fehler beim Laden</span>
+    <span class="error-detail">{{ errorMsg }}</span>
+  </div>
+
+  <!-- Karte -->
+  <div class="rainviewer__map-wrap" [class.rainviewer__map-wrap--hidden]="loading || error">
+    <div #mapEl class="rainviewer__map"></div>
+
+    <button
+      class="recenter-btn"
+      type="button"
+      (click)="recenter()"
+      title="Auf Wien zentrieren"
+      aria-label="Auf Wien zentrieren"
+    >
+      📍
+    </button>
+
+    <div class="rainviewer__slider" *ngIf="!loading && !error && frames.length">
+      <span class="rainviewer__time">
+        {{ formatTime(frames[activeIndex].time) }}
+        <span class="badge" *ngIf="isNow(activeIndex)">Jetzt</span>
+        <span class="badge badge--muted" *ngIf="!isNow(activeIndex)">+{{ hoursAhead(activeIndex) }}h</span>
+      </span>
+      <input
+        type="range"
+        class="rainviewer__range"
+        min="0"
+        [max]="frames.length - 1"
+        step="1"
+        [value]="activeIndex"
+        (input)="onSlide($event)"
+        aria-label="Zeitpunkt der Niederschlagsprognose"
+      />
+    </div>
+  </div>
+
+</div>

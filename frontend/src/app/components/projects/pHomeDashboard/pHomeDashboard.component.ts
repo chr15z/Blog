@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { CalendarComponent } from './calendar/calendar.component';
 import { WeatherComponent } from './weather/weather.component';
 import { PublicTransitComponent } from './public-transit/public-transit.component';
+import { RainviewerComponent } from './rainviewer/rainviewer.component';
 
 @Component({
   selector: 'app-p-home-dashboard',
@@ -12,6 +13,7 @@ import { PublicTransitComponent } from './public-transit/public-transit.componen
     CalendarComponent,
     WeatherComponent,
     PublicTransitComponent,
+    RainviewerComponent,
     // FootballComponent,
     // DailyQuoteComponent,
   ],

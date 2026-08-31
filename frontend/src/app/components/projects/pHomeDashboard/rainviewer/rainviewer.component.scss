@@ -1,0 +1,152 @@
+// Hinweis: Leaflets eigenes Stylesheet muss global geladen werden, sonst sind
+// Kacheln/Controls falsch positioniert bzw. unstyled:
+//   angular.json -> "styles": ["node_modules/leaflet/dist/leaflet.css", ...]
+
+.rainviewer {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.rainviewer__state {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem;
+  font-size: 0.9rem;
+  color: var(--color-text-muted, #6b7280);
+
+  &--error {
+    flex-direction: column;
+    align-items: flex-start;
+    color: var(--color-error, #b91c1c);
+
+    .error-detail {
+      font-size: 0.8rem;
+      opacity: 0.85;
+    }
+  }
+}
+
+.rainviewer__map-wrap {
+  position: relative;
+  flex: 1;
+  min-height: 220px;
+  border-radius: var(--radius-md, 12px);
+  overflow: hidden;
+
+  &--hidden {
+    display: none;
+  }
+}
+
+.rainviewer__map {
+  position: absolute;
+  inset: 0;
+}
+
+.recenter-btn {
+  all: unset; // Reset gegen evtl. globale Button-Styles im Projekt
+  box-sizing: border-box;
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  z-index: 1000; // über den Leaflet-Panes
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+  font-size: 1rem;
+  line-height: 1;
+  cursor: pointer;
+
+  &:hover {
+    background: #fff;
+  }
+}
+
+.rainviewer__slider {
+  position: absolute;
+  left: 0.5rem;
+  right: 0.5rem;
+  bottom: 0.5rem;
+  z-index: 1000; // über den Leaflet-Panes
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.4rem 0.7rem;
+  border-radius: var(--radius-pill, 999px);
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(4px);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+}
+
+.rainviewer__time {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.75rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--color-text, #1f2937);
+  white-space: nowrap;
+  min-width: 3.4rem;
+}
+
+.badge {
+  padding: 0.05rem 0.35rem;
+  border-radius: var(--radius-pill, 999px);
+  background: rgba(0, 0, 0, 0.08);
+  font-size: 0.65rem;
+
+  &--muted {
+    background: rgba(47, 125, 209, 0.12);
+    color: var(--color-accent, #2f7dd1);
+  }
+}
+
+.rainviewer__range {
+  flex: 1;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 4px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+
+  &::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 0.9rem;
+    height: 0.9rem;
+    border-radius: 50%;
+    background: var(--color-accent, #2f7dd1);
+    cursor: pointer;
+  }
+
+  &::-moz-range-thumb {
+    width: 0.9rem;
+    height: 0.9rem;
+    border: none;
+    border-radius: 50%;
+    background: var(--color-accent, #2f7dd1);
+    cursor: pointer;
+  }
+}
+
+// Leaflet erzeugt seine DOM-Elemente nativ (nicht über Angulars Template-Engine) –
+// daher greifen normal gescopte Styles hier nicht, ::ng-deep ist nötig.
+::ng-deep {
+  .leaflet-control-attribution {
+    font-size: 0.65rem;
+  }
+
+  .rainviewer__tooltip {
+    font-size: 0.7rem;
+    padding: 0.1rem 0.4rem;
+  }
+}
