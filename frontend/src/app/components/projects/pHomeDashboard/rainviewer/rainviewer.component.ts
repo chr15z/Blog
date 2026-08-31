@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   PrecipitationForecastService,
@@ -52,7 +52,7 @@ interface CellPosition {
   templateUrl: './rainviewer.component.html',
   styleUrl: './rainviewer.component.scss',
 })
-export class RainviewerComponent implements OnInit {
+export class RainviewerComponent implements OnInit, OnDestroy {
   loading = true;
   error = false;
   errorMsg = '';
@@ -82,6 +82,19 @@ export class RainviewerComponent implements OnInit {
 
   private mosaicOriginPxX = 0;
   private mosaicOriginPxY = 0;
+
+  /**
+   * Trailing-Edge-Throttle für den Slider: Bei 49 Werten auf einem schmalen
+   * Mobile-Slider entsprechen wenige Pixel Fingerzittern schon einem Sprung
+   * zwischen zwei Nachbarwerten. Ohne Drosselung feuert JEDES Mini-Zucken
+   * sofort ein volles Repaint (81 Zellen + Uhrzeit-Text) -> sichtbares
+   * Zittern/Hin-und-her-Springen. Der native Thumb bleibt davon unberührt
+   * (der Browser trackt die Fingerposition selbst); wir drosseln nur, wie
+   * oft WIR daraus Karte+Uhrzeit neu zeichnen.
+   */
+  private readonly SLIDE_THROTTLE_MS = 80;
+  private slideThrottleTimer?: ReturnType<typeof setTimeout>;
+  private pendingSlideIndex?: number;
 
   constructor(private forecastService: PrecipitationForecastService) {}
 
@@ -115,6 +128,12 @@ export class RainviewerComponent implements OnInit {
     });
   }
 
+  ngOnDestroy(): void {
+    if (this.slideThrottleTimer !== undefined) {
+      clearTimeout(this.slideThrottleTimer);
+    }
+  }
+
   formatTime(iso: string): string {
     return PrecipitationForecastService.formatTime(iso);
   }
@@ -129,8 +148,22 @@ export class RainviewerComponent implements OnInit {
 
   onSlide(event: Event): void {
     const index = Number((event.target as HTMLInputElement).value);
-    this.activeIndex = index;
-    this.paintFrame(index);
+    this.pendingSlideIndex = index;
+
+    // Läuft schon ein Timer? Dann übernimmt der beim nächsten "Tick" ohnehin
+    // den neuesten pendingSlideIndex – nichts weiter zu tun (das ist der
+    // Unterschied zu Debounce: hier wird NICHT zurückgesetzt, sonst gäbe es
+    // während des Ziehens gar kein Live-Update mehr, sondern nur am Ende).
+    if (this.slideThrottleTimer !== undefined) {
+      return;
+    }
+
+    this.slideThrottleTimer = setTimeout(() => {
+      this.slideThrottleTimer = undefined;
+      if (this.pendingSlideIndex === undefined) return;
+      this.activeIndex = this.pendingSlideIndex;
+      this.paintFrame(this.activeIndex);
+    }, this.SLIDE_THROTTLE_MS);
   }
 
   /** Web-Mercator-Projektion: lat/lon -> Weltpixel-Koordinate bei gegebenem Zoom (Standardformel, identisch zu OSM/Google/Leaflet). */
